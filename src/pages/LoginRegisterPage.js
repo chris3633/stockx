@@ -11,23 +11,23 @@ import { AuthProvider } from "../contexts/AuthContext"
 function LoginRegisterPage() {
     return (
         <div>
-                <Container
-                    className="d-flex align-items-center justify-content-center"
-                    style={{ minHeight: "100vh" }}
-                    >
-                    <div className="w-100" style={{ maxWidth: "400px" }}>
-                        <Router>
+            <Container
+                className="d-flex align-items-center justify-content-center"
+                style={{ minHeight: "100vh" }}
+            >
+                <div className="w-100" style={{ maxWidth: "400px" }}>
+                    <Router>
                         <AuthProvider>
                             <Switch>
-                            <Route path="/RegisterPage" component={RegisterPage} />
-                            <Route path="/LoginPage" component={LoginPage} />
-                            <Route path="/forgot-password" component={ForgotPassword} />
+                                <Route path="/RegisterPage" component={RegisterPage} />
+                                <Route path="/LoginPage" component={LoginPage} />
+                                <Route path="/forgot-password" component={ForgotPassword} />
                             </Switch>
                         </AuthProvider>
-                        </Router>
-                    </div>
-                </Container> 
-                    </div>
+                    </Router>
+                </div>
+            </Container>
+        </div>
     )
 }
 

@@ -9,6 +9,7 @@ import { Link, Route } from 'react-router-dom'
 import MenuIcon from '@material-ui/icons/Menu'; */
 import AboutPage from '../pages/AboutPage'
 import RegisterPage from '../components/Register'
+
 import App from './App'
 
 const useStyles = makeStyles((theme) => ({
