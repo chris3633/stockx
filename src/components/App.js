@@ -9,6 +9,7 @@ import ContactPage from '../pages/ContactPage'
 import NavigationBar from './NavigationBar'
 import LoginRegisterPage from '../pages/LoginRegisterPage'
 import RegisterPage from '../components/Register'
+import HomePage from '../pages/HomePage'
 
 
 
@@ -20,6 +21,7 @@ function App() {
         {/* <Sidebar /> */}
           <NavigationBar/>
           <Switch>
+            <Route path='/' exact component={HomePage}/>
             <Route path='/AboutPage' exact component={AboutPage} />
             <Route path='/ContactPage' exact component={ContactPage} />
             <Route path='/LoginPage' exact component={LoginRegisterPage} />
