@@ -5,7 +5,7 @@
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size:cover;
 
   min-height: 100%;
   min-width: 100%;
@@ -21,11 +21,12 @@
 
   .title{
     font-family:'Times New Roman', Times, serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-style: oblique;
-    color: rgba(255, 255, 255, 0.986);
+    color: rgba(255, 255, 255, 1);
     font-size: xx-large;
     text-align: center;
-    margin-top: 2cm
+    margin-top: 2cm;
 }
 
 
