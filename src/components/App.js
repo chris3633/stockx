@@ -17,14 +17,14 @@ import ForgotPassword from './ForgotPassword'
 import Dashboard from './Dashboard'
 
 
+
 function App() {
 
   return (
     <>
       <Router>
         {/* <Sidebar /> */}
-         {/* <NavigationBar/> */}
-         <NavbarTop />
+          <NavbarTop />
           <Switch>
             <Route path='/' exact component={home} />
             <Route path='/about' exact component={about} />
