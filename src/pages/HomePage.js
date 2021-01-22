@@ -7,7 +7,7 @@ function Home() {
 
     return (
         <div className="container">
-            <h1 className="title"> Buy and sell stocks</h1>
+            <h1 className="title"> "Buy and sell stocks as you never did before!"</h1>
             <MediaCard>
 
             </MediaCard>
