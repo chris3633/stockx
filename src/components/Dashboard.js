@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import NavigationBar from "./NavigationBar"
+import Sidebar from "./Sidebar"
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -21,6 +23,7 @@ export default function Dashboard() {
 
   return (
     <>
+    <h1>Dashboard</h1>
       {/* <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>

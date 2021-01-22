@@ -12,6 +12,7 @@ import home from '../pages/HomePage'
 import Login from './Login'
 import Signup from './Register'
 import ForgotPassword from './ForgotPassword'
+import Dashboard from './Dashboard'
 
 
 function App() {
@@ -29,8 +30,8 @@ function App() {
             <Route path="/register" exact component={Signup} />
             <Route path="/login" exact component={Login} />
             <Route path="/forgot-password" exact component={ForgotPassword} />
+            <Route path="/dashboard" exact component={Dashboard}/>
           </Switch>
-          
       </Router> 
 
 
