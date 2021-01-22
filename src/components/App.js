@@ -4,15 +4,14 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 
 import Sidebar from "./Sidebar"
 
-import AboutPage from '../pages/AboutPage'
-import ContactPage from '../pages/ContactPage'
+import about from '../pages/AboutPage'
+import contacts from '../pages/ContactPage'
 import NavigationBar from './NavigationBar'
-import LoginRegisterPage from '../pages/LoginRegisterPage'
-import RegisterPage from '../components/Register'
-import HomePage from '../pages/HomePage'
+import home from '../pages/HomePage'
 
-import Test from '../pages/test'
-
+import Login from './Login'
+import Signup from './Register'
+import ForgotPassword from './ForgotPassword'
 
 
 function App() {
@@ -23,14 +22,18 @@ function App() {
         {/* <Sidebar /> */}
           <NavigationBar/>
           <Switch>
-            <Route path='/' exact component={HomePage}/>
-            <Route path='/AboutPage' exact component={AboutPage} />
-            <Route path='/ContactPage' exact component={ContactPage} />
-            <Route path='/LoginPage' exact component={LoginRegisterPage} />
-            <Route path='/RegisterPage' exact component={Test} />
+            <Route path='/' exact component={home} />
+            <Route path='/about' exact component={about} />
+            <Route path='/contacts' exact component={contacts} />
+
+            <Route path="/register" exact component={Signup} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/forgot-password" exact component={ForgotPassword} />
           </Switch>
           
       </Router> 
+
+
       
     </>
   )

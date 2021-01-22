@@ -4,13 +4,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 /* import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu'; */
-import AboutPage from '../pages/AboutPage'
-import RegisterPage from '../components/Register'
 
-import App from './App'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,12 +32,12 @@ export default function ButtonAppBar() {
       <AppBar className="bg-primary" position="static">
         <Toolbar>
           <Typography variant="h4" className={classes.title}>
-            STOCKX
+          <Link style={{ textDecoration: 'none' }} to="/"><Button style={{color: '#ffffff'}} disabled='true' >STOCKX</Button></Link>
           </Typography>
-          <Link style={{ textDecoration: 'none' }} to="/AboutPage"><Button style={{color: '#ffffff'}}>About us</Button></Link>
-          <Link style={{ textDecoration: 'none' }} to="/ContactPage"><Button style={{color: '#ffffff'}}>Contacts</Button></Link>
-          <Link style={{ textDecoration: 'none' }} to="/LoginPage"><Button style={{color: '#ffffff'}}>Login</Button></Link>
-          <Link style={{ textDecoration: 'none' }} to="/RegisterPage"><Button style={{color: '#ffffff'}}>Create account</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/about"><Button style={{color: '#ffffff'}}>About us</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/contacts"><Button style={{color: '#ffffff'}}>Contacts</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/login"><Button style={{color: '#ffffff'}}>Login</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/register"><Button style={{color: '#ffffff'}}>Create account</Button></Link>
         </Toolbar>
       </AppBar>
     </div>
