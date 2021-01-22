@@ -1,6 +1,7 @@
 import '../App.css'
 import React from "react"
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import PrivateRoute from "react"
 
 import Sidebar from "./Sidebar"
 
@@ -29,7 +30,7 @@ function App() {
             <Route path='/' exact component={home} />
             <Route path='/about' exact component={about} />
             <Route path='/contacts' exact component={contacts} />
-            <Route path='/dashboard' exact component={dashboard} />
+            {/* <Route path='/dashboard' exact component={dashboard} /> */}
 
             <Route path="/register" exact component={Signup} />
             <Route path="/login" exact component={Login} />
