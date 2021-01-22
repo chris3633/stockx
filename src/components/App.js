@@ -14,7 +14,7 @@ import NavbarTop from './NavbarTop'
 import Login from './Login'
 import Signup from './Register'
 import ForgotPassword from './ForgotPassword'
-import Dashboard from './Dashboard'
+import UpdateProfile from './UpdateProfile'
 
 
 
@@ -34,7 +34,7 @@ function App() {
             <Route path="/register" exact component={Signup} />
             <Route path="/login" exact component={Login} />
             <Route path="/forgot-password" exact component={ForgotPassword} />
-            <Route path="/dashboard" exact component={Dashboard}/>
+            <Route path="/update-profile" exact component={UpdateProfile}/>
           </Switch>
       </Router> 
 
