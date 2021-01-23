@@ -6,6 +6,9 @@ import * as AiIcons from 'react-icons/ai';
 import { SidebarData } from './SidebarData';
 import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
+import { Navbar } from 'react-bootstrap'
+import logo from '../assets/navbarlogo.png'
+import app from 'firebase'
 
 const Nav = styled.div`
   background: #15171c;
@@ -25,7 +28,7 @@ const NavIcon = styled(Link)`
 `;
 
 const SidebarNav = styled.nav`
-  background: #15171c;
+  background: #2F4050;
   width: 250px;
   height: 100vh;
   display: flex;
@@ -53,15 +56,28 @@ const Sidebar = () => {
           <NavIcon to='#'>
             <FaIcons.FaBars onClick={showSidebar} />
           </NavIcon>
+          <Navbar.Brand href="/">
+                        <img
+                            src={logo}
+                            width="45"
+                            height="45"
+                            className="d-inline-block align-top"
+                            alt="STOCKX"
+                        />
+                    </Navbar.Brand>
+                    <Navbar.Brand href="/">STOCKX</Navbar.Brand>
         </Nav>
         <SidebarNav sidebar={sidebar}>
           <SidebarWrap>
             <NavIcon to='#'>
               <AiIcons.AiOutlineClose onClick={showSidebar} />
+              <Link to='/'>
+              <button onClick={() => app.auth().signOut()}>Log Out</button></Link>
             </NavIcon>
             {SidebarData.map((item, index) => {
               return <SubMenu item={item} key={index} />;
             })}
+            
           </SidebarWrap>
         </SidebarNav>
       </IconContext.Provider>

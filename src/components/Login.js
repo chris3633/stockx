@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import { Container } from "react-bootstrap"
+import PrivateRoute from "./PrivateRoute"
 
 
 export default function Login() {

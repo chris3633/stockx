@@ -16,13 +16,17 @@ import Login from './Login'
 import Signup from './Register'
 import ForgotPassword from './ForgotPassword'
 import UpdateProfile from './UpdateProfile'
+import Dashboard from './Dashboard'
+import {AuthProvider, useAuth} from '../contexts/AuthContext'
 
 
 
 function App() {
+  const { currentUser } = useAuth()
 
   return (
     <>
+    <AuthProvider>
       <Router>
         {/* <Sidebar /> */}
           <NavbarTop />
@@ -36,8 +40,10 @@ function App() {
             <Route path="/login" exact component={Login} />
             <Route path="/forgot-password" exact component={ForgotPassword} />
             <Route path="/update-profile" exact component={UpdateProfile}/>
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
           </Switch>
       </Router> 
+      </AuthProvider>
 
 
       

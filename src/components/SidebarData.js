@@ -3,6 +3,9 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
+import {useAuth} from '../contexts/AuthContext';
+import firebase from 'react-dom';
+
 
 export const SidebarData = [
   {
@@ -14,6 +17,7 @@ export const SidebarData = [
 
     title: 'Logout',
     path: '/',
+    
     icon: <AiIcons.AiFillHome />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
@@ -60,7 +64,7 @@ export const SidebarData = [
   },
   {
     title: 'Products',
-    path: '/products',
+    path: '/',
     icon: <FaIcons.FaCartPlus />
   },
   {
