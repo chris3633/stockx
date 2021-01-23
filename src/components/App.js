@@ -3,7 +3,6 @@ import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import PrivateRoute from "react"
 
-import Sidebar from "./Sidebar"
 
 import about from '../pages/AboutPage'
 import contacts from '../pages/ContactPage'
@@ -17,14 +16,15 @@ import Signup from './Register'
 import ForgotPassword from './ForgotPassword'
 import UpdateProfile from './UpdateProfile'
 
-
+import Sidebarlf from '../components/Sidebarlf'
+import 'react-sidebar-ui/dist/index.css';
 
 function App() {
 
   return (
     <>
       <Router>
-        {/* <Sidebar /> */}
+        <Sidebarlf />
           <NavbarTop />
           <Switch>
             <Route path='/' exact component={home} />
