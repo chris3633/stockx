@@ -1,16 +1,14 @@
 import React, { useState } from "react"
-import { Navbar, Nav, Card, Button, Alert } from "react-bootstrap"
+import { Navbar, Nav, Card, Button, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import logo from '../assets/navbarlogo.png'
 
 
-//import {Sidebar, InputItem, DropdownItem, Icon, Item, Logo, LogoText} from 'react-sidebar-ui'
-//import 'react-sidebar-ui/dist/index.css';
-import { Container } from "@material-ui/core"
-import Sidebar from "./Sidebar"
+import Sidebar from '../components/Sidebar'
+import 'react-sidebar-ui/dist/index.css';
 
-export default function Dashboard() {
+function Dashboard() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const history = useHistory()
@@ -72,8 +70,8 @@ export default function Dashboard() {
         </Navbar.Collapse>
       </Navbar> 
 
-{/* <div>
-      <Sidebar bgColor='black' isCollapsed={false}>
+<div>
+      {/* <Sidebar bgColor='black' isCollapsed={false}>
         <Logo
           image='https://media2.giphy.com/media/eNAsjO55tPbgaor7ma/source.gif'
           imageName='react logo'/>
@@ -105,9 +103,14 @@ export default function Dashboard() {
           Blog
         </Item>
         <InputItem type='text' placeholder={'Search...'}/>
-      </Sidebar>
-    </div> */}
+      </Sidebar> */}
+
+
+      <Sidebar />
+    </div>
 
     </>
   )
 }
+
+export default Dashboard

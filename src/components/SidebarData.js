@@ -4,6 +4,8 @@ import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 import {useAuth} from '../contexts/AuthContext';
+import { AccountBalance } from '@material-ui/icons';
+
 
 
 export const SidebarData = [
@@ -43,7 +45,7 @@ export const SidebarData = [
 
   /*{
     title:"My Portfolio",
-    icon: <AccountBalanceIcon />,
+    icon: <AccountBalance  />,
     link: "/contacts"
   },*/
 

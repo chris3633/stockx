@@ -6,7 +6,6 @@ import PrivateRoute from "react"
 
 import about from '../pages/AboutPage'
 import contacts from '../pages/ContactPage'
-import NavigationBar from './OldNavigationBar'
 import home from '../pages/HomePage'
 
 import NavbarTop from './NavbarTop'
@@ -14,18 +13,18 @@ import Login from './Login'
 import Signup from './Register'
 import ForgotPassword from './ForgotPassword'
 import UpdateProfile from './UpdateProfile'
-import Dashboard from './Dashboard'
-import {AuthProvider, useAuth} from '../contexts/AuthContext'
+import Dashboard  from '../components/Dashboard'
+import { getBitcoinArticles } from '../NewsAPI'
+import News from './News'
 
-//import Sidebarlf from '../components/Sidebarlf'
-//import 'react-sidebar-ui/dist/index.css';
+import 'react-sidebar-ui/dist/index.css';
+
 
 function App() {
-  const { currentUser } = useAuth()
+
 
   return (
     <>
-    <AuthProvider>
       <Router>
         {/*<Sidebarlf />*/}
           <NavbarTop /> 
@@ -42,7 +41,6 @@ function App() {
             <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
       </Router> 
-      </AuthProvider>
     </>
   )
 }
