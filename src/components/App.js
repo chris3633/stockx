@@ -25,20 +25,21 @@ function App() {
   return (
     <>
       <Router>
-          <NavbarTop />
+        {/*<Sidebarlf />*/}
+          <NavbarTop /> 
           <Switch>
             <Route path='/' exact component={home} />
             <Route path='/about' exact component={about} />
             <Route path='/contacts' exact component={contacts} />
-            {/* <Route path='/dashboard' exact component={dashboard} /> */}
+            {/*<PrivateRoute path='/dashboard' exact component={Dashboard} />*/}
 
             <Route path="/register" exact component={Signup} />
             <Route path="/login" exact component={Login} />
             <Route path="/forgot-password" exact component={ForgotPassword} />
             <Route path="/update-profile" exact component={UpdateProfile}/>
-            {/* <PrivateRoute exact path="/dashboard" component={Dashboard} /> */}
+            <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
-      </Router>       
+      </Router> 
     </>
   )
 }

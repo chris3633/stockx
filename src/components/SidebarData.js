@@ -3,6 +3,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
+import {useAuth} from '../contexts/AuthContext';
 import { AccountBalance } from '@material-ui/icons';
 
 
@@ -42,11 +43,11 @@ export const SidebarData = [
     icon: <FaIcons.FaCartPlus />
   },
 
-  {
+  /*{
     title:"My Portfolio",
     icon: <AccountBalance  />,
     link: "/contacts"
-  },
+  },*/
 
 
 
