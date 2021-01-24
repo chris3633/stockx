@@ -12,7 +12,7 @@ import SubMenu from '../components/SubMenu'
 import app from 'firebase'
 
 const Nav = styled.div`
-  background: #15171c;
+  background: #353a3f;
   height: 80px;
   display: flex;
   justify-content: flex-start;
@@ -29,7 +29,7 @@ const NavIcon = styled(Link)`
 `;
 
 const SidebarNav = styled.nav`
-  background: #2F4050;
+  background: #353a3f;
   width: 250px;
   height: 100vh;
   display: flex;
@@ -73,8 +73,8 @@ const Sidebar = () => {
           <SidebarWrap>
             <NavIcon to='#'>
               <AiIcons.AiOutlineClose onClick={showSidebar} />
-              <Link to='/'>
-              <button onClick={() => app.auth().signOut()}>Log Out</button></Link>
+              {/*<Link to='/'>
+              <button onClick={() => app.auth().signOut()}>Log Out</button></Link>*/}
             </NavIcon>
             {SidebarData.map((item, index) => {
               return <SubMenu item={item} key={index} />;

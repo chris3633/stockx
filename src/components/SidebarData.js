@@ -4,7 +4,10 @@ import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 import {useAuth} from '../contexts/AuthContext';
-import { AccountBalance } from '@material-ui/icons';
+import { AccountBalance, ContactSupport } from '@material-ui/icons';
+import app from 'firebase'
+import { colors } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 
 
@@ -16,22 +19,22 @@ export const SidebarData = [
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />, */
 
-    title: 'Logout',
+    title: 'Dashboard',
     path: '/',
-    
     icon: <AiIcons.AiFillHome />,
+
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
 
     subNav: [
       {
         title: 'Users',
-        path: '/overview/users',
+        path: '/dashboard/users',
         icon: <IoIcons.IoIosPaper />
       },
       {
         title: 'Revenue',
-        path: '/overview/revenue',
+        path: '/dashboard/revenue',
         icon: <IoIcons.IoIosPaper />
       }
     ]
@@ -43,11 +46,23 @@ export const SidebarData = [
     icon: <FaIcons.FaCartPlus />
   },
 
-  /*{
+  {
     title:"My Portfolio",
     icon: <AccountBalance  />,
     link: "/contacts"
-  },*/
+  },
+
+  {
+    title: 'Contact us',
+    path: '/contacts',
+    icon: <ContactSupport />
+  },
+
+  {
+    title: <Link to='/' onClick={() => app.auth().signOut()}>Log Out</Link>,
+    icon: <IoIcons.IoIosLogOut  />,
+    link: '/login'
+  },
 
 
 

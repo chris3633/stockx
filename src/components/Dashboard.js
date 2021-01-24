@@ -10,6 +10,7 @@ import logo from '../assets/navbarlogo.png'
 import Sidebar from '../components/Sidebar'
 
 import 'react-sidebar-ui/dist/index.css'
+import '../components/Dashboard.css'
 
 function Dashboard() {
   const [error, setError] = useState("")
@@ -75,7 +76,7 @@ function Dashboard() {
       </Navbar> 
       <Sidebar />
  */}
-<div>
+<div className="box">
       {/* <Sidebar bgColor='black' isCollapsed={false}>
         <Logo
           image='https://media2.giphy.com/media/eNAsjO55tPbgaor7ma/source.gif'
@@ -109,7 +110,7 @@ function Dashboard() {
         </Item>
         <InputItem type='text' placeholder={'Search...'}/>
       </Sidebar> */}
-      <News />
+      <News className="box"/>
     </div>
     </>
   )

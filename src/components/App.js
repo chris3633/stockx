@@ -18,6 +18,8 @@ import {AuthProvider, useAuth} from '../contexts/AuthContext'
 
 
 import 'react-sidebar-ui/dist/index.css';
+import Sidebar from './Sidebar'
+import News from './News'
 
 
 function App() {
@@ -28,7 +30,7 @@ function App() {
       <AuthProvider>
       <Router>
         {/*<Sidebarlf />*/}
-          <NavbarTop /> 
+        <NavbarTop/>
           <Switch>
             <Route path='/' exact component={home} />
             <Route path='/about' exact component={about} />
