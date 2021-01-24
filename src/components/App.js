@@ -18,7 +18,7 @@ import { getBitcoinArticles } from '../NewsAPI'
 import News from './News'
 
 import 'react-sidebar-ui/dist/index.css';
-import ArticleList from './ArticleList'
+
 
 function App() {
 
@@ -27,7 +27,7 @@ function App() {
     <>
       <Router>
           <NavbarTop />
-          <News /> {/*Questo per ora causa problemi, il resto dell'implementazione News dovrebbe essere ok*/}
+          <News />
           <Switch>
             <Route path='/' exact component={home} />
             <Route path='/about' exact component={about} />

@@ -1,6 +1,7 @@
-import React, {ArticleList, Component} from "react";
+import React, {Component} from "react";
 import { Container, Header } from "semantic-ui-react";
 import { getBitcoinArticles } from "../NewsAPI";
+import ArticleList from './ArticleList'
 
  class News extends Component {
     state = {
