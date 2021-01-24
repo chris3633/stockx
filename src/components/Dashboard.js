@@ -2,11 +2,13 @@ import React, { useState } from "react"
 import { Navbar, Nav, Card, Button, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+
 import News from './News'
 import logo from '../assets/navbarlogo.png'
 
 
 import Sidebar from '../components/Sidebar'
+
 import 'react-sidebar-ui/dist/index.css'
 
 function Dashboard() {
@@ -27,7 +29,8 @@ function Dashboard() {
 
   return (
     <>
-      {/* <Container
+    <Sidebar />
+       {/* <Container
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}
       >
@@ -70,6 +73,7 @@ function Dashboard() {
           </Nav>
         </Navbar.Collapse>
       </Navbar> 
+      <Sidebar />
  */}
 <div>
       {/* <Sidebar bgColor='black' isCollapsed={false}>
@@ -105,10 +109,8 @@ function Dashboard() {
         </Item>
         <InputItem type='text' placeholder={'Search...'}/>
       </Sidebar> */}
-      <Sidebar />
       <News />
     </div>
-
     </>
   )
 }

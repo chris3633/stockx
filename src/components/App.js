@@ -14,6 +14,7 @@ import Signup from './Register'
 import ForgotPassword from './ForgotPassword'
 import UpdateProfile from './UpdateProfile'
 import Dashboard  from '../components/Dashboard'
+import {AuthProvider, useAuth} from '../contexts/AuthContext'
 
 
 import 'react-sidebar-ui/dist/index.css';
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <>
+      <AuthProvider>
       <Router>
         {/*<Sidebarlf />*/}
           <NavbarTop /> 
@@ -40,6 +42,7 @@ function App() {
             <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
       </Router> 
+      </AuthProvider>
     </>
   )
 }
