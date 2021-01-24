@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { SidebarData } from './SidebarData';
-//import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
 import { Navbar } from 'react-bootstrap'
 import logo from '../assets/navbarlogo.png'
 import { useAuth } from '../contexts/AuthContext'
+import SubMenu from '../components/SubMenu'
 
 const Nav = styled.div`
   background: #15171c;
@@ -76,7 +76,7 @@ const Sidebar = () => {
                 <button onClick>Log Out</button></Link>
             </NavIcon>
             {SidebarData.map((item, index) => {
-              //return <SubMenu item={item} key={index} />;
+              return <SubMenu item={item} key={index} />;
             })}
 
           </SidebarWrap>

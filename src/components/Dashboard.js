@@ -2,11 +2,8 @@ import React, { useState } from "react"
 import { Navbar, Nav, Card, Button, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
-<<<<<<< HEAD
 import News from './News'
-=======
 import logo from '../assets/navbarlogo.png'
->>>>>>> 03fa22721f152315bd528ff1ecadcd33e009bfd9
 
 
 import Sidebar from '../components/Sidebar'
@@ -30,7 +27,7 @@ function Dashboard() {
 
   return (
     <>
-      <Container
+      {/* <Container
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}
       >
@@ -73,7 +70,7 @@ function Dashboard() {
           </Nav>
         </Navbar.Collapse>
       </Navbar> 
-
+ */}
 <div>
       {/* <Sidebar bgColor='black' isCollapsed={false}>
         <Logo
