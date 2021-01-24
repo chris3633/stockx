@@ -4,10 +4,10 @@ import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 
 
-import {Sidebar, InputItem, DropdownItem, Icon, Item, Logo, LogoText} from 'react-sidebar-ui'
+import Sidebar from '../components/Sidebar'
 import 'react-sidebar-ui/dist/index.css';
 
-export default function Dashboard() {
+function Dashboard() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const history = useHistory()
@@ -71,7 +71,7 @@ export default function Dashboard() {
       </Navbar> */}
 
 <div>
-      <Sidebar bgColor='black' isCollapsed={false}>
+      {/* <Sidebar bgColor='black' isCollapsed={false}>
         <Logo
           image='https://media2.giphy.com/media/eNAsjO55tPbgaor7ma/source.gif'
           imageName='react logo'/>
@@ -103,9 +103,14 @@ export default function Dashboard() {
           Blog
         </Item>
         <InputItem type='text' placeholder={'Search...'}/>
-      </Sidebar>
+      </Sidebar> */}
+
+
+      <Sidebar />
     </div>
 
     </>
   )
 }
+
+export default Dashboard

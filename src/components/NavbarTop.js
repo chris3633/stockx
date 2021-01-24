@@ -37,7 +37,7 @@ function NavbarTop() {
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown> */}
                         </Nav>
-                        <Nav >
+                        <Nav>
                             <Nav.Link href="/login">Login</Nav.Link>
                             <Nav.Link href="/register">Create account</Nav.Link>
                         </Nav>
@@ -51,7 +51,6 @@ function NavbarTop() {
                 <Dashboard />
             </div>
         )
-
     }
 }
 
