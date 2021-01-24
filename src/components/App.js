@@ -14,8 +14,7 @@ import Signup from './Register'
 import ForgotPassword from './ForgotPassword'
 import UpdateProfile from './UpdateProfile'
 import Dashboard  from '../components/Dashboard'
-import { getBitcoinArticles } from '../NewsAPI'
-import News from './News'
+
 
 import 'react-sidebar-ui/dist/index.css';
 
@@ -27,7 +26,6 @@ function App() {
     <>
       <Router>
           <NavbarTop />
-          <News />
           <Switch>
             <Route path='/' exact component={home} />
             <Route path='/about' exact component={about} />

@@ -2,10 +2,11 @@ import React, { useState } from "react"
 import { Navbar, Nav, Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import News from './News'
 
 
 import Sidebar from '../components/Sidebar'
-import 'react-sidebar-ui/dist/index.css';
+import 'react-sidebar-ui/dist/index.css'
 
 function Dashboard() {
   const [error, setError] = useState("")
@@ -104,9 +105,8 @@ function Dashboard() {
         </Item>
         <InputItem type='text' placeholder={'Search...'}/>
       </Sidebar> */}
-
-
       <Sidebar />
+      <News />
     </div>
 
     </>
