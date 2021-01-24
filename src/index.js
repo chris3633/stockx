@@ -6,7 +6,6 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import { AuthProvider } from './contexts/AuthContext'
 
 ReactDOM.render(
-  
     <AuthProvider>
     <App />
     </AuthProvider>,

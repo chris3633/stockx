@@ -2,18 +2,18 @@ import { Button } from '@material-ui/core'
 import React from 'react'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import logo from '../assets/navbarlogo.png'
-import {useAuth} from '../contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext'
 import Dashboard from './Dashboard'
 
 
 function NavbarTop() {
-    const {currentUser} = useAuth()
+
+    const { currentUser } = useAuth()
 
     if (!currentUser) {
         return (
             <div>
-                <Navbar fixed="top" />
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
                     <Navbar.Brand href="/">
                         <img
                             src={logo}

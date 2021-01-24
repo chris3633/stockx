@@ -8,7 +8,6 @@ import about from '../pages/AboutPage'
 import contacts from '../pages/ContactPage'
 import NavigationBar from './OldNavigationBar'
 import home from '../pages/HomePage'
-import dashboard from './Dashboard'
 
 import NavbarTop from './NavbarTop'
 import Login from './Login'
@@ -18,8 +17,8 @@ import UpdateProfile from './UpdateProfile'
 import Dashboard from './Dashboard'
 import {AuthProvider, useAuth} from '../contexts/AuthContext'
 
-import Sidebarlf from '../components/Sidebarlf'
-import 'react-sidebar-ui/dist/index.css';
+//import Sidebarlf from '../components/Sidebarlf'
+//import 'react-sidebar-ui/dist/index.css';
 
 function App() {
   const { currentUser } = useAuth()
@@ -28,25 +27,22 @@ function App() {
     <>
     <AuthProvider>
       <Router>
-        <Sidebarlf />
-          <NavbarTop />
+        {/*<Sidebarlf />*/}
+          <NavbarTop /> 
           <Switch>
             <Route path='/' exact component={home} />
             <Route path='/about' exact component={about} />
             <Route path='/contacts' exact component={contacts} />
-            {/* <Route path='/dashboard' exact component={dashboard} /> */}
+            {/*<PrivateRoute path='/dashboard' exact component={Dashboard} />*/}
 
             <Route path="/register" exact component={Signup} />
             <Route path="/login" exact component={Login} />
             <Route path="/forgot-password" exact component={ForgotPassword} />
             <Route path="/update-profile" exact component={UpdateProfile}/>
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
       </Router> 
       </AuthProvider>
-
-
-      
     </>
   )
 }

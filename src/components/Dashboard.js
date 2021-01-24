@@ -2,10 +2,13 @@ import React, { useState } from "react"
 import { Navbar, Nav, Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import logo from '../assets/navbarlogo.png'
 
 
-import {Sidebar, InputItem, DropdownItem, Icon, Item, Logo, LogoText} from 'react-sidebar-ui'
-import 'react-sidebar-ui/dist/index.css';
+//import {Sidebar, InputItem, DropdownItem, Icon, Item, Logo, LogoText} from 'react-sidebar-ui'
+//import 'react-sidebar-ui/dist/index.css';
+import { Container } from "@material-ui/core"
+import Sidebar from "./Sidebar"
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -25,7 +28,7 @@ export default function Dashboard() {
 
   return (
     <>
-      {/* <Container
+      <Container
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}
       >
@@ -44,10 +47,9 @@ export default function Dashboard() {
             Log Out
         </Button>
         </div>
-      </Container> */}
+      </Container> 
 
-      {/* <Navbar fixed="top" />
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="/">
           <img
             src={logo}
@@ -68,9 +70,9 @@ export default function Dashboard() {
             <Nav.Link onClick={handleLogout}> Log Out</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Navbar> */}
+      </Navbar> 
 
-<div>
+{/* <div>
       <Sidebar bgColor='black' isCollapsed={false}>
         <Logo
           image='https://media2.giphy.com/media/eNAsjO55tPbgaor7ma/source.gif'
@@ -104,7 +106,7 @@ export default function Dashboard() {
         </Item>
         <InputItem type='text' placeholder={'Search...'}/>
       </Sidebar>
-    </div>
+    </div> */}
 
     </>
   )
