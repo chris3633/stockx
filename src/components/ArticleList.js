@@ -1,14 +1,15 @@
+import { Container } from "@material-ui/core";
 import React from "react";
-import { List } from "semantic-ui-react";
+import MediaCard from "./MediaCard";
 
-const ArticleList = (props) => {
+const MediaCards = (props) => {
   return (
-    <List divided style={{ maxWidth: 900, margin: "0 auto" }}>
-      {props.articles.map((article) => (
-        <List.Item key={article.title}>{article.title}</List.Item>
+    <Container>
+      {props.articles.map((article,index) => (
+        <MediaCard article={article} key={article.title+index}/>
       ))}
-    </List>
+    </Container>
   );
 };
 
-export default ArticleList;
+export default MediaCards;

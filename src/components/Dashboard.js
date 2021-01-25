@@ -30,7 +30,7 @@ function Dashboard() {
 
   return (
     <>
-    <Sidebar />
+    <div>
        {/* <Container
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}
@@ -76,7 +76,7 @@ function Dashboard() {
       </Navbar> 
       <Sidebar />
  */}
-<div className="box">
+{/* <div className="box"> */}
       {/* <Sidebar bgColor='black' isCollapsed={false}>
         <Logo
           image='https://media2.giphy.com/media/eNAsjO55tPbgaor7ma/source.gif'

@@ -13,7 +13,7 @@ function NavbarTop() {
     if (!currentUser) {
         return (
             <div>
-                <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar position="sticky" fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
                     <Navbar.Brand href="/">
                         <img
                             src={logo}
