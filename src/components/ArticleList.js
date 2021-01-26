@@ -5,6 +5,7 @@ import MediaCard from "./MediaCard";
 const MediaCards = (props) => {
   return (
     <Container>
+      
       {props.articles.map((article,index) => (
         <MediaCard article={article} key={article.title+index}/>
       ))}

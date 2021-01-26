@@ -1,10 +1,10 @@
 .container{
     background-image: url(../assets/bg.jpg);
-      height: 100%; 
+      height: auto; 
 
   /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
+  background-position:inherit;
+  background-repeat: repeat;
   background-size:cover;
 
   min-height: 100%;
@@ -12,21 +12,23 @@
 	
   /* Set up proportionate scaling */
   width: 100%;
-  height: auto;
+  height: 100%;
 	
   /* Set up positioning */
-  position: fixed;
-
+  position: sticky;
   }
 
   .title{
     font-family:'Times New Roman', Times, serif;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-style: oblique;
-    color: rgba(255, 255, 255, 1);
+    color: rgba(0,0,0,1);/*rgba(255, 255, 255, 1)*/
     font-size: xx-large;
     text-align: center;
     margin-top: 2cm;
+}
+.box{
+  position: relative;
 }
 
 

@@ -7,25 +7,31 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import { Tab } from 'bootstrap';
+import { rgbToHex, TableCell, TableRow } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
 
 
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    width: '49%',
+    height:'100%',
+    display: 'inline-block',
+    margin: 5,
   },
   media: {
-    height: 140,
+    height: 300,
   },
 });
 
 const MediaCard = (props)=> {
   const {article}=props;
   const classes = useStyles();
-  console.info(article);
   return (
+    
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea >
         <CardMedia
           className={classes.media}
           image={article.urlToImage}
@@ -43,11 +49,12 @@ const MediaCard = (props)=> {
         <Typography >
           {article.publishedAt.split("T")[0]}
         </Typography>
-        <Link to={article.url}>
+        <Link target='_blank' to={article.url}>
           Learn More
         </Link>
       </CardActions>
     </Card>
+    
   );
   
 }

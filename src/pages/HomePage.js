@@ -11,11 +11,9 @@ function Home() {
     const { currentUser } = useAuth()
 
     return (
-        <div>
-            <div className="box">
+        <div className='container'>
             <h1 className="title"> "Buy and sell stocks as you never did before!"</h1>
-            <News/>
-            </div>
+            <News className='box'/>
         </div>
     )
 }
