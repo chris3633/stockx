@@ -12,7 +12,10 @@ import Text from 'react'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    width: '49%',
+    height:'100%',
+    display: 'inline-block',
+    margin: 5,
   },
   media: {
     height: 180,
@@ -53,6 +56,7 @@ const MediaCard = (props) => {
         <a href={article.url} target="_blank" > Read article </a>
       </CardActions>
     </Card>
+    
   );
 
 }
