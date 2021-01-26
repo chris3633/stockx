@@ -61,7 +61,7 @@ const Sidebar = () => {
           <NavIcon to='#'>
             <FaIcons.FaBars onClick={showSidebar} />
           </NavIcon>
-          <Navbar.Brand href="/" className="navbar-brand">
+          <Navbar.Brand href="/" className="navigation-brand ">
             <img
               src={logo}
               width="50"
