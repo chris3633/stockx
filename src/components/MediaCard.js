@@ -12,10 +12,7 @@ import Text from 'react'
 
 const useStyles = makeStyles({
   root: {
-    width: '49%',
-    height:'100%',
-    display: 'inline-block',
-    margin: 5,
+    maxWidth: 345,
   },
   media: {
     height: 180,
@@ -30,8 +27,6 @@ const useStyles = makeStyles({
 const MediaCard = (props) => {
   const { article } = props;
   const classes = useStyles();
-  console.info(article);
-
 
   return (
     <Card className={classes.root}  >
