@@ -6,7 +6,8 @@ import * as RiIcons from 'react-icons/ri';
 import {useAuth} from '../contexts/AuthContext';
 import { AccountBalance, ContactSupport } from '@material-ui/icons';
 import app from 'firebase'
-import { colors } from '@material-ui/core';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
+import { BsNewspaper } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 
 
@@ -19,14 +20,14 @@ export const SidebarData = [
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />, */
 
-    title: 'Dashboard',
+    title: 'Latest News',
     path: '/',
-    icon: <AiIcons.AiFillHome />,
+    icon: <BsNewspaper/>,
 
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
 
-    subNav: [
+/*     subNav: [
       {
         title: 'Users',
         path: '/dashboard/users',
@@ -37,13 +38,14 @@ export const SidebarData = [
         path: '/dashboard/revenue',
         icon: <IoIcons.IoIosPaper />
       }
-    ]
+    ] */
   },
+  
 
   {
-    title: 'Products',
+    title: 'Trading Area',
     path: '/',
-    icon: <FaIcons.FaCartPlus />
+    icon: <ShowChartIcon/>
   },
 
   {
@@ -59,7 +61,7 @@ export const SidebarData = [
   },
 
   {
-    title: <Link to='/' onClick={() => app.auth().signOut()}>Log Out</Link>,
+    title: <Link to='/'  onClick={() => app.auth().signOut()} style={{color: '#ffffff'}}>Log Out</Link>,
     icon: <IoIcons.IoIosLogOut  />,
     link: '/login'
   },
