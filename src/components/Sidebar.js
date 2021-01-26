@@ -10,6 +10,7 @@ import logo from '../assets/navbarlogo.png'
 import { useAuth } from '../contexts/AuthContext'
 import SubMenu from '../components/SubMenu'
 import app from 'firebase'
+import '../App.css'
 
 const Nav = styled.div`
   background: #353a3f;
@@ -45,6 +46,8 @@ const SidebarWrap = styled.div`
   width: 100%;
 `;
 
+
+
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
   const { currentUser } = useAuth()
@@ -58,16 +61,15 @@ const Sidebar = () => {
           <NavIcon to='#'>
             <FaIcons.FaBars onClick={showSidebar} />
           </NavIcon>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="/" className="navbar-brand">
             <img
               src={logo}
-              width="45"
-              height="45"
+              width="50"
+              height="50"
               className="d-inline-block align-top"
-              alt="STOCKX"
             />
           </Navbar.Brand>
-          <Navbar.Brand href="/">STOCKX</Navbar.Brand>
+          <Navbar.Brand href="/"></Navbar.Brand>
         </Nav>
         <SidebarNav sidebar={sidebar}>
           <SidebarWrap>

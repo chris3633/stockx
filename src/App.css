@@ -19,12 +19,8 @@
   font-size: 3rem;
 }
 
- /* .App{
-  width: 100vw;
-  height: 100%;
+.navbar-brand {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
 }
-
-body{
-  margin: 0;
-  padding: 0;
-}  */

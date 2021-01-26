@@ -1,12 +1,13 @@
-import { Grid } from "@material-ui/core";
-import React, {Component} from "react";
+import React, { Component } from "react";
+import { CardGroup } from "react-bootstrap";
 import { Container, Header } from "semantic-ui-react";
-import { getBitcoinArticles } from "../NewsAPI";
+import { getLatestArticles } from "../NewsAPI";
 import MediaCards from './ArticleList'
 
 
- class News extends Component {
-    state = {
+
+class News extends Component {
+  state = {
     articles: [],
     apiError: "",
   };
@@ -14,19 +15,22 @@ import MediaCards from './ArticleList'
 
   render() {
     const { articles, apiError } = this.state;
-  return (
-    <div  >
-      <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
-        Bitcoin articles
+    return (
+      <div>
+        <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
+          Latest news
       </Header>
-      {articles.length > 0 && <MediaCards articles={articles} />}
-      {apiError && <p>Could not fetch any articles. Please try again.</p>}
-    </div>
-  );  
+      <div>
+        {articles.length > 0 && <MediaCards articles={articles} />}
+        {apiError && <p>Could not fetch any articles. Please try again.</p>}
+        </div>
+
+      </div>
+    );
   }
   async componentDidMount() {
     try {
-      const response = await getBitcoinArticles();
+      const response = await getLatestArticles();
       this.setState({ articles: response.articles });
     } catch (error) {
       this.setState({ apiError: "Could not find any articles" });
