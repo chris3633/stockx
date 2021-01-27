@@ -10,9 +10,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
-
 const MediaCards = (props) => {
   const classes = useStyles();
   return (

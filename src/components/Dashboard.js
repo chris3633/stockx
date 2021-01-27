@@ -11,6 +11,8 @@ import Sidebar from '../components/Sidebar'
 
 import 'react-sidebar-ui/dist/index.css'
 import '../components/Dashboard.css'
+import Stocks from './Stocks'
+import { getStockInfo } from "../StockAPI"
 
 function Dashboard() {
   const [error, setError] = useState("")
@@ -110,7 +112,7 @@ function Dashboard() {
         </Item>
         <InputItem type='text' placeholder={'Search...'}/>
       </Sidebar> */}
-      <News className="box"/>
+      <Stocks/>
     </div>
     </>
   )

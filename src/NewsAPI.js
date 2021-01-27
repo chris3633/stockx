@@ -22,7 +22,4 @@ export const getLatestArticles = async () => {
   console.log(json);
   return json; 
 
-
-
-
 };
