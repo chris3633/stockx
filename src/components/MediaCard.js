@@ -33,20 +33,20 @@ const MediaCard = (props) => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={article.urlToImage}
+          image={article.promoImage.url}
         />
         <CardContent>
           <Typography noWrap className={classes.heading} gutterBottom variant="h5" component="h2" >
-            {article.title}
+            {article.shorterHeadline}
           </Typography>
           <Typography className={classes.text} variant="body2" color="textSecondary" component="p">
-            {article.description}
+            {article.headline}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Typography >
-          {article.publishedAt.split("T")[0]}
+          {article.dateLastPublished.split("T")[0]}
         </Typography>
         <a href={article.url} target="_blank" > Read article </a>
       </CardActions>
