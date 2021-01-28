@@ -62,8 +62,9 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Box, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
-import { Collapse } from 'bootstrap';
+//import { Collapse } from 'bootstrap';
 import PropTypes from 'prop-types';
+import Collapse from '@material-ui/core/Collapse';
 
 
 const useRowStyles = makeStyles({
@@ -74,23 +75,9 @@ const useRowStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      { date: '2020-01-05', customerId: '11091700', amount: 3 },
-      { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
-    ],
-  };
-}
-
-function StockRow(props) {
-  const { key, row } = props;
+const StockRow=(props)=> {
+  const { stock } = props;
+  console.log(stock);
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -103,44 +90,52 @@ function StockRow(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+        {stock.quote.companyName}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell align="right">{stock.quote.primaryExchange}</TableCell>
+        <TableCell align="right">{stock.quote.sector}</TableCell>
+        <TableCell align="right">{stock.quote.symbol}</TableCell>
+        <TableCell align="right">{stock.quote.iexBidPrice} $</TableCell>
+        <TableCell align="right">{stock.quote.iexAskPrice} $</TableCell>
+        <TableCell align="right">{stock.quote.marketCap}</TableCell>
+        <TableCell align="right">{stock.quote.week52High} $</TableCell>
+        <TableCell align="right">{stock.quote.week52Low} $</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
-              {/*<Typography variant="h6" gutterBottom component="div">    sotto menù che si apre con freccia
+              <Typography variant="h6" gutterBottom component="div">    
                 History
               </Typography>
-               <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
+                <Table size='small' aria-label='details'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>
+                        campo1
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
+                      <TableCell>
+                        campo2
+                      </TableCell>
+                      <TableCell>
+                        campo3
                       </TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table> */}
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                    <TableCell>
+                        camporiga1
+                      </TableCell>
+                      <TableCell>
+                      camporiga2
+                      </TableCell>
+                      <TableCell>
+                      camporiga3
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
             </Box>
           </Collapse>
         </TableCell>
@@ -148,23 +143,5 @@ function StockRow(props) {
     </React.Fragment>
   );
 }
-
-StockRow.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
 
 export default StockRow;

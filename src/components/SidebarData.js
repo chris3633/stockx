@@ -44,7 +44,7 @@ export const SidebarData = [
 
   {
     title: 'Trading Area',
-    path: '/',
+    path: '/dashboard',
     icon: <ShowChartIcon/>
   },
 
