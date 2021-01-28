@@ -95,8 +95,8 @@ const StockRow=(props)=> {
         <TableCell align="right">{stock.quote.primaryExchange}</TableCell>
         <TableCell align="right">{stock.quote.sector}</TableCell>
         <TableCell align="right">{stock.quote.symbol}</TableCell>
-        <TableCell align="right">{stock.quote.iexBidPrice} $</TableCell>
-        <TableCell align="right">{stock.quote.iexAskPrice} $</TableCell>
+        <TableCell align="right">{stock.quote.delayedPrice} $</TableCell>
+        <TableCell align="right">{stock.quote.delayedPrice} $</TableCell>
         <TableCell align="right">{stock.quote.marketCap}</TableCell>
         <TableCell align="right">{stock.quote.week52High} $</TableCell>
         <TableCell align="right">{stock.quote.week52Low} $</TableCell>
