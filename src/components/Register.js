@@ -3,10 +3,15 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import { Container } from "react-bootstrap"
+import firebase from 'firebase'
 
 export default function Signup() {
   const nameRef = useRef()
   const surnameRef = useRef()
+  const addressRef=useRef()
+  const zipCodeRef=useRef()
+  const cityRef=useRef();
+  const ssnRef=useRef();
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
@@ -14,10 +19,12 @@ export default function Signup() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
+  var userRef=firebase.database().ref('users');
 
   async function handleSubmit(e) {
     e.preventDefault()
 
+  
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
@@ -26,12 +33,25 @@ export default function Signup() {
       setError("")
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
+      saveUser(ssnRef.current.value,nameRef.current.value,surnameRef.current.value,zipCodeRef.current.value,addressRef.current.value,cityRef.current.value)
       history.push("/dashboard")
     } catch {
       setError("Failed to create an account")
     }
 
     setLoading(false)
+  }
+
+  function saveUser(ssnRef,nameRef,surnameRef,zipCodeRef,addressRef,cityRef){
+    var newUserRef=userRef.push();
+    newUserRef.set({
+      id: ssnRef,
+      name: nameRef,
+      surname: surnameRef,
+      zipCode: zipCodeRef,
+      address: addressRef,
+      city: cityRef
+    })
   }
   
 
@@ -54,6 +74,22 @@ export default function Signup() {
                 <Form.Group id="surname">
                   <Form.Label>Surname</Form.Label>
                   <Form.Control type="surname" ref={surnameRef} required />
+                </Form.Group>
+                <Form.Group id="ssn">
+                  <Form.Label>SSN</Form.Label>
+                  <Form.Control type="ssn" ref={ssnRef} required />
+                </Form.Group>
+                <Form.Group id="address">
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control type="address" ref={addressRef} required />
+                </Form.Group>
+                <Form.Group id="zipCode">
+                  <Form.Label>ZIP code</Form.Label>
+                  <Form.Control type="zipcode" ref={zipCodeRef} required />
+                </Form.Group>
+                <Form.Group id="city">
+                  <Form.Label>City</Form.Label>
+                  <Form.Control type="city" ref={cityRef} required />
                 </Form.Group>
                 <Form.Group id="email">
                   <Form.Label>Email</Form.Label>

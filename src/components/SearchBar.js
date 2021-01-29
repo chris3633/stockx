@@ -1,36 +1,34 @@
 import React from "react";
-import { Button, Form } from "semantic-ui-react";
+import {  Form } from "semantic-ui-react";
 import searchForStock from './Stocks';
+import {Button} from "@material-ui/core";
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { searchStock: "" };
+    this.state = {  };
   }
 
   handleChange = event => {
-    this.setState({ searchStock: event.target.value });
+    this.props.onChange(event.target.value);
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    searchForStock(this.state.searchStock);
+    
   };
 
   render() {
     return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ display: "flex", justifyContent: "left" }}>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Input
-              placeholder="Search a stock"
+              placeholder="Search a company name"
               name="stock"
-              value={this.state.searchStock}
+              value={this.props.searchStock}
               onChange={this.handleChange}
             />
-            <Button type="submit" color="green">
-              Search
-            </Button>
           </Form.Group>
         </Form>
       </div>

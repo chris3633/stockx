@@ -1,4 +1,4 @@
-import { Button, TableCell, TableContainer } from "@material-ui/core";
+import { Box, Button,   TableCell, TableContainer } from "@material-ui/core";
 import TableHead from '@material-ui/core/TableHead';
 import { Component } from "react";
 import { Container, Header, Table, TableBody, TableRow } from "semantic-ui-react";
@@ -25,7 +25,7 @@ class Stocks extends Component {
             pageIndex: 0,
             stocks: [],
             error : "",
-            temp_array : []
+            searchParam: null,
         }
         this.prevPage = this.prevPage.bind(this);
         this.nextPage = this.nextPage.bind(this);
@@ -61,18 +61,22 @@ class Stocks extends Component {
         }
     }
 
-    searchForStock = async stock => {
+    handleChangeSearch = ricerca =>{
+        this.setState({searchParam:ricerca},()=>this.searchForStock(ricerca));
+    }
+
+    searchForStock = stock => {
         try {
+          let temp_array=[];
           this.setState({ loading: true });
-          const array = this.state.stocksInfo;
-          for( let element of array){
-              if (element.quote.companyName.includes(stock))
+          for( let element of this.state.stocksInfo){
+              if (element.quote.companyName.toLowerCase().includes(stock.toLowerCase()))
               {
-                  this.state.temp_array.push(element);
+                  temp_array.push(element);
               }
           }
           this.setState({
-            stocks: this.state.temp_array,
+            stocks: temp_array,
             searchStock: stock,
             //totalResults: response.totalResults
           });
@@ -82,9 +86,11 @@ class Stocks extends Component {
         this.setState({ loading: false });
       };
 
+
+
     render() {
-        const { stocksInfo, apiError, pageIndex } = this.state;
-        const page = stocksInfo.slice(pageIndex * 10, pageIndex * 10 + 10);
+        const { stocksInfo, apiError, pageIndex, stocks, searchParam} = this.state;
+        const page = searchParam!==null ? stocks.slice(pageIndex * 10, pageIndex * 10 + 10) : stocksInfo.slice(pageIndex * 10, pageIndex * 10 + 10);
         return (
             <div>
                 <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
@@ -95,14 +101,14 @@ class Stocks extends Component {
                     Search for a topic
                 </Header>
                 
-                <SearchBar />
+                
          
                 <div style={divStyle}>
-                    <TableContainer component={Paper}>
+                    <TableContainer component={Paper} >
                         <Table aria-label="collapsible table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell />
+                                    <TableCell><SearchBar onChange={this.handleChangeSearch}/></TableCell>
                                     <TableCell>Company name</TableCell>
                                     <TableCell align="right">Primary exchange</TableCell>
                                     <TableCell align="right">Sector</TableCell>
@@ -115,25 +121,8 @@ class Stocks extends Component {
                                 </TableRow>
                             </TableHead>
 
-
-                            {/* {this.state.loading ? <p>Loading...</p> : <StockRows stocksInfo={page} />}
-                            {apiError && <p>Could not fetch any stock. Please try again.</p>} */}
-
-
-                            {this.state.loading ? <p>Loading...</p> : (this.state.loading!=true && this.state.stocks!=null) ? <StockRows stocksInfo={this.state.stocks} />
-                            : <StockRows stocksInfo={page} />}
+                            {this.state.loading ? <p>Loading...</p> : <StockRows stocksInfo={page} />}
                             {apiError && <p>Could not fetch any stock. Please try again.</p>}
-
-                            {/* {if (this.state.loading)
-                            
-                                <p>Loading...</p>
-                            else if (this.state.loading == false && temp_array!=null)
-                            
-                                <StockRows stocksInfo={temp_array} />
-                            else 
-                                <StockRows stocksInfo={page}
-                            }
- */}
 
                         </Table>
 
@@ -141,12 +130,10 @@ class Stocks extends Component {
 
                     {pageIndex > 0 ? <Button onClick={this.prevPage}>Indietro</Button> : null}
                     {(pageIndex + 1) * 10 < stocksInfo.length ? <Button onClick={this.nextPage}>Avanti</Button> : null}
-
+                    
 
                 </div>
             </div>
-
-
         );
     }
 
