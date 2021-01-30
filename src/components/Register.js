@@ -10,9 +10,9 @@ export default function Signup() {
   const surnameRef = useRef()
   const addressRef=useRef()
   const zipCodeRef=useRef()
-  const cityRef=useRef();
-  const ssnRef=useRef();
+  const cityRef=useRef()
   const emailRef = useRef()
+  const ssnRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const { signup } = useAuth()
@@ -20,6 +20,7 @@ export default function Signup() {
   const [loading, setLoading] = useState(false)
   const history = useHistory()
   var userRef=firebase.database().ref('users');
+
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -32,9 +33,11 @@ export default function Signup() {
     try {
       setError("")
       setLoading(true)
+      if(saveUser(ssnRef.current.value,nameRef.current.value,surnameRef.current.value,zipCodeRef.current.value,addressRef.current.value,cityRef.current.value))
+      {
       await signup(emailRef.current.value, passwordRef.current.value)
-      saveUser(ssnRef.current.value,nameRef.current.value,surnameRef.current.value,zipCodeRef.current.value,addressRef.current.value,cityRef.current.value)
       history.push("/dashboard")
+      }
     } catch {
       setError("Failed to create an account")
     }
@@ -43,15 +46,28 @@ export default function Signup() {
   }
 
   function saveUser(ssnRef,nameRef,surnameRef,zipCodeRef,addressRef,cityRef){
-    var newUserRef=userRef.push();
+
+    var newUserRef=userRef.child('users')
+    var executed = true
+    
+    if(userRef.child('users').equalTo(ssnRef)){
+      console.log("lulutente ceggia")
+      executed=false
+    }else{
+ /*    if(userRef.child('users').equalTo(ssnRef)){
+      setError("User already registered")
+      executed=false;
+    }else{ */
     newUserRef.set({
-      id: ssnRef,
       name: nameRef,
       surname: surnameRef,
       zipCode: zipCodeRef,
       address: addressRef,
       city: cityRef
     })
+     executed=true;
+   }
+  return executed;
   }
   
 
@@ -75,10 +91,6 @@ export default function Signup() {
                   <Form.Label>Surname</Form.Label>
                   <Form.Control type="surname" ref={surnameRef} required />
                 </Form.Group>
-                <Form.Group id="ssn">
-                  <Form.Label>SSN</Form.Label>
-                  <Form.Control type="ssn" ref={ssnRef} required />
-                </Form.Group>
                 <Form.Group id="address">
                   <Form.Label>Address</Form.Label>
                   <Form.Control type="address" ref={addressRef} required />
@@ -95,6 +107,13 @@ export default function Signup() {
                   <Form.Label>Email</Form.Label>
                   <Form.Control type="email" ref={emailRef} required />
                 </Form.Group>
+
+                <Form.Group id="ssn">
+                  <Form.Label>SSN</Form.Label>
+                  <Form.Control type="ssn" ref={ssnRef} required />
+                </Form.Group>
+
+
                 <Form.Group id="password">
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" ref={passwordRef} required />

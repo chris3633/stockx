@@ -14,7 +14,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Box, Button, FormControlLabel, IconButton, Radio, RadioGroup, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Collapse from '@material-ui/core/Collapse';
-
+import { useAuth } from "../contexts/AuthContext"
 
 const useRowStyles = makeStyles({
   root: {
@@ -24,11 +24,24 @@ const useRowStyles = makeStyles({
   },
 });
 
+//var userRef=firebase.database().ref('users');
+
+
+
 const StockRow = (props) => {
   const { stock } = props;
   console.log(stock);
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
+  //var user = firebase.auth().currentUser;
+
+  //var email = user.email
+
+/*   function getUserSSNByEmail(emailAddress, callback ) {
+    userRef.child('emails_to_ids/'+emailToKey(emailAddress)).once('value', function(snap) {
+        callback( snap.val() );
+    });
+ } */
 
   return (
     <React.Fragment>
@@ -46,7 +59,7 @@ const StockRow = (props) => {
         <TableCell align="right">{stock.quote.symbol}</TableCell>
         <TableCell align="right">{stock.quote.delayedPrice} $</TableCell>
         <TableCell align="right">{stock.quote.delayedPrice} $</TableCell>
-        <TableCell align="right">{stock.quote.marketCap}</TableCell>
+        <TableCell align="right">{stock.quote.marketCap} $</TableCell>
         <TableCell align="right">{stock.quote.week52High} $</TableCell>
         <TableCell align="right">{stock.quote.week52Low} $</TableCell>
       </TableRow>
@@ -97,7 +110,7 @@ const StockRow = (props) => {
                       <label style={{ fontSize:'20px' }}>label</label>
                       </TableCell>
                     <TableCell align="center" style={{ verticalAlign: 'middle' }}>
-                      <Button >Confirm</Button>
+                      <Button>Confirm</Button>
                     </TableCell>
                   </TableRow>
                 </TableBody>

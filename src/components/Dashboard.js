@@ -19,6 +19,7 @@ function Dashboard() {
   const { currentUser, logout } = useAuth()
   const history = useHistory()
 
+
   async function handleLogout() {
     setError("")
 
