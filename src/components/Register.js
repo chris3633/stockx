@@ -8,9 +8,9 @@ import firebase from 'firebase'
 export default function Signup() {
   const nameRef = useRef()
   const surnameRef = useRef()
-  const addressRef=useRef()
-  const zipCodeRef=useRef()
-  const cityRef=useRef()
+  const addressRef = useRef()
+  const zipCodeRef = useRef()
+  const cityRef = useRef()
   const emailRef = useRef()
   const ssnRef = useRef()
   const passwordRef = useRef()
@@ -19,13 +19,13 @@ export default function Signup() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
-  var userRef=firebase.database().ref('users');
 
+  var userRef = firebase.database().ref('users');
 
   async function handleSubmit(e) {
     e.preventDefault()
 
-  
+
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
@@ -33,10 +33,9 @@ export default function Signup() {
     try {
       setError("")
       setLoading(true)
-      if(saveUser(ssnRef.current.value,nameRef.current.value,surnameRef.current.value,zipCodeRef.current.value,addressRef.current.value,cityRef.current.value))
-      {
-      await signup(emailRef.current.value, passwordRef.current.value)
-      history.push("/dashboard")
+      if (await signup(emailRef.current.value, passwordRef.current.value)) {
+        saveUser(emailRef.current.value, nameRef.current.value, surnameRef.current.value, zipCodeRef.current.value, addressRef.current.value, cityRef.current.value)
+        history.push("/dashboard")
       }
     } catch {
       setError("Failed to create an account")
@@ -45,31 +44,37 @@ export default function Signup() {
     setLoading(false)
   }
 
-  function saveUser(ssnRef,nameRef,surnameRef,zipCodeRef,addressRef,cityRef){
+  function saveUser(emailRef, nameRef, surnameRef, zipCodeRef, addressRef, cityRef) {
 
-    var newUserRef=userRef.child('users')
-    var executed = true
-    
-    if(userRef.child('users').equalTo(ssnRef)){
-      console.log("lulutente ceggia")
-      executed=false
-    }else{
- /*    if(userRef.child('users').equalTo(ssnRef)){
-      setError("User already registered")
-      executed=false;
-    }else{ */
-    newUserRef.set({
-      name: nameRef,
-      surname: surnameRef,
-      zipCode: zipCodeRef,
-      address: addressRef,
-      city: cityRef
-    })
-     executed=true;
-   }
-  return executed;
+    var newUserRef = userRef.child(window.btoa(emailRef))
+    //var found = false;
+
+/*     var query = userRef.orderByKey();
+
+    query.once("value")
+      .then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+          var key = childSnapshot.key;
+          if (key == window.btoa(emailRef)) {
+            found = true;
+          }
+        });
+
+      });
+
+    if (found == false) { */
+      newUserRef.set({
+        name: nameRef,
+        surname: surnameRef,
+        zipCode: zipCodeRef,
+        address: addressRef,
+        city: cityRef
+      })
+    //}
+    //console.log(found)
+    //return found;
   }
-  
+
 
   return (
     <>
@@ -107,13 +112,6 @@ export default function Signup() {
                   <Form.Label>Email</Form.Label>
                   <Form.Control type="email" ref={emailRef} required />
                 </Form.Group>
-
-                <Form.Group id="ssn">
-                  <Form.Label>SSN</Form.Label>
-                  <Form.Control type="ssn" ref={ssnRef} required />
-                </Form.Group>
-
-
                 <Form.Group id="password">
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" ref={passwordRef} required />

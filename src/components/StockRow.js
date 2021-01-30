@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useReducer, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -15,6 +15,7 @@ import { Box, Button, FormControlLabel, IconButton, Radio, RadioGroup, Table, Ta
 import PropTypes from 'prop-types';
 import Collapse from '@material-ui/core/Collapse';
 import { useAuth } from "../contexts/AuthContext"
+import firebase from '../firebase'
 
 const useRowStyles = makeStyles({
   root: {
@@ -29,19 +30,30 @@ const useRowStyles = makeStyles({
 
 
 const StockRow = (props) => {
+  var currentUser = useAuth()
+  var email = currentUser.email
+
+  const quantity = useRef()
+  const operationType = useRef()
+  
+
   const { stock } = props;
   console.log(stock);
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-  //var user = firebase.auth().currentUser;
 
-  //var email = user.email
+  function addOperation(userEmail, symbol, operationType, date, totalOperation){
+    userEmail=email;
+    symbol=stock.quote.symbol;
 
-/*   function getUserSSNByEmail(emailAddress, callback ) {
-    userRef.child('emails_to_ids/'+emailToKey(emailAddress)).once('value', function(snap) {
-        callback( snap.val() );
-    });
- } */
+    //date=date()
+    totalOperation=stock.quote.delayedPrice*quantity
+
+    console.log(operationType)
+    console.log(userEmail)
+    console.log(symbol)
+    console.log(totalOperation)
+  }
 
   return (
     <React.Fragment>
@@ -58,7 +70,7 @@ const StockRow = (props) => {
         <TableCell align="right">{stock.quote.sector}</TableCell>
         <TableCell align="right">{stock.quote.symbol}</TableCell>
         <TableCell align="right">{stock.quote.delayedPrice} $</TableCell>
-        <TableCell align="right">{stock.quote.delayedPrice} $</TableCell>
+        <TableCell align="right">{stock.quote.delayedPrice-0.25} $</TableCell>
         <TableCell align="right">{stock.quote.marketCap} $</TableCell>
         <TableCell align="right">{stock.quote.week52High} $</TableCell>
         <TableCell align="right">{stock.quote.week52Low} $</TableCell>
@@ -87,10 +99,10 @@ const StockRow = (props) => {
                 <TableBody >
                   <TableRow align="center" style={{ verticalAlign: 'middle' }}>
                     <TableCell align="left" style={{ verticalAlign: 'middle' }}>
-                      <TextField id="standard-basic" label="stock quantity" />
+                      <TextField type="number" id="standard-basic" label="stock quantity"  required ref={quantity}/>
                     </TableCell>
                     <TableCell align="left" style={{ verticalAlign: 'bottom' }}>
-                    <RadioGroup row aria-label="position" name="position" defaultValue="top" align="center" style={{ verticalAlign: 'middle' }}>
+                    <RadioGroup row aria-label="position" name="position" defaultValue="top" align="center" style={{ verticalAlign: 'middle' }} required ref={operationType}>
                       <FormControlLabel
                         align="left"
                         value="buy"
@@ -110,7 +122,7 @@ const StockRow = (props) => {
                       <label style={{ fontSize:'20px' }}>label</label>
                       </TableCell>
                     <TableCell align="center" style={{ verticalAlign: 'middle' }}>
-                      <Button>Confirm</Button>
+                      <Button onClick={addOperation} type="submit"> Confirm</Button>
                     </TableCell>
                   </TableRow>
                 </TableBody>
