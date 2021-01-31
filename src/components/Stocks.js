@@ -1,12 +1,12 @@
-import { Box, Button,   TableCell, TableContainer } from "@material-ui/core";
+import { Box, Button, TableCell, TableContainer } from "@material-ui/core";
 import TableHead from '@material-ui/core/TableHead';
 import { Component } from "react";
 import { Container, Header, Table, TableBody, TableRow } from "semantic-ui-react";
 import getStockInfo from "../StockAPI";
-import StockTable from "./StockTable";
 import Paper from '@material-ui/core/Paper';
 import StockRows from './StockRows'
 import SearchBar from "./SearchBar";
+import LinearIndeterminate from './LoadingBar'
 
 
 
@@ -24,7 +24,7 @@ class Stocks extends Component {
             loading: true,
             pageIndex: 0,
             stocks: [],
-            error : "",
+            error: "",
             searchParam: null,
         }
         this.prevPage = this.prevPage.bind(this);
@@ -61,36 +61,33 @@ class Stocks extends Component {
         }
     }
 
-    handleChangeSearch = ricerca =>{
-        this.setState({searchParam:ricerca},()=>this.searchForStock(ricerca));
+    handleChangeSearch = ricerca => {
+        this.setState({ searchParam: ricerca }, () => this.searchForStock(ricerca));
     }
 
     searchForStock = stock => {
         try {
-          let temp_array=[];
-          this.setState({ loading: true });
-          for( let element of this.state.stocksInfo){
-              if (element.quote.companyName.toLowerCase().includes(stock.toLowerCase()))
-              {
-                  temp_array.push(element);
-              }
-          }
-          this.setState({
-            stocks: temp_array,
-            searchStock: stock,
-            //totalResults: response.totalResults
-          });
+            let temp_array = [];
+            this.setState({ loading: true });
+            for (let element of this.state.stocksInfo) {
+                if (element.quote.companyName.toLowerCase().includes(stock.toLowerCase())) {
+                    temp_array.push(element);
+                }
+            }
+            this.setState({
+                stocks: temp_array,
+                searchStock: stock,
+                //totalResults: response.totalResults
+            });
         } catch (error) {
-          this.setState({ error: "No stocks found!" });
+            this.setState({ error: "No stocks found!" });
         }
         this.setState({ loading: false });
-      };
-
-
+    }
 
     render() {
-        const { stocksInfo, apiError, pageIndex, stocks, searchParam} = this.state;
-        const page = searchParam!==null ? stocks.slice(pageIndex * 10, pageIndex * 10 + 10) : stocksInfo.slice(pageIndex * 10, pageIndex * 10 + 10);
+        const { stocksInfo, apiError, pageIndex, stocks, searchParam } = this.state;
+        const page = searchParam !== null ? stocks.slice(pageIndex * 10, pageIndex * 10 + 10) : stocksInfo.slice(pageIndex * 10, pageIndex * 10 + 10);
         return (
             <div>
                 <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
@@ -100,29 +97,28 @@ class Stocks extends Component {
                 <Header as="h4" style={{ textAlign: "left", margin: 20 }}>
                     Search for a topic
                 </Header>
-                
-                
-         
+
+
+
                 <div style={divStyle}>
                     <TableContainer component={Paper} >
                         <Table aria-label="collapsible table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell><SearchBar onChange={this.handleChangeSearch}/></TableCell>
+                                    <TableCell><SearchBar onChange={this.handleChangeSearch} /></TableCell>
                                     <TableCell>Company name</TableCell>
                                     <TableCell align="right">Primary exchange</TableCell>
                                     <TableCell align="right">Sector</TableCell>
                                     <TableCell align="right">Symbol</TableCell>
-                                    <TableCell align="right">Bid price</TableCell>
-                                    <TableCell align="right">Ask price</TableCell>
+                                    <TableCell align="right">Price</TableCell>
                                     <TableCell align="right">Market cap</TableCell>
                                     <TableCell align="right">52 week high</TableCell>
                                     <TableCell align="right">52 week low</TableCell>
                                 </TableRow>
                             </TableHead>
 
-                            {this.state.loading ? <p>Loading...</p> : <StockRows stocksInfo={page} />}
-                            {apiError && <p>Could not fetch any stock. Please try again.</p>}
+                            {this.state.loading ? <LinearIndeterminate />/*<p>Loading...</p>*/ : <StockRows stocksInfo={page} />}
+                                {apiError && <p>Could not fetch any stock. Please try again.</p>}
 
                         </Table>
 
@@ -130,8 +126,8 @@ class Stocks extends Component {
 
                     {pageIndex > 0 ? <Button onClick={this.prevPage}>Indietro</Button> : null}
                     {(pageIndex + 1) * 10 < stocksInfo.length ? <Button onClick={this.nextPage}>Avanti</Button> : null}
-                    
 
+                    
                 </div>
             </div>
         );
