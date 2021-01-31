@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react'
+import React, { useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -11,11 +11,12 @@ import Text from 'react'
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import { Box, Button, FormControlLabel, IconButton, Radio, RadioGroup, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@material-ui/core';
+import { Box, Button, FormControlLabel, FormGroup, IconButton, Radio, RadioGroup, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Collapse from '@material-ui/core/Collapse';
 import { useAuth } from "../contexts/AuthContext"
 import firebase from '../firebase'
+import addOperation from './NewOperation'
 
 const useRowStyles = makeStyles({
   root: {
@@ -25,35 +26,35 @@ const useRowStyles = makeStyles({
   },
 });
 
+
+
 //var userRef=firebase.database().ref('users');
 
 
 
 const StockRow = (props) => {
-  var currentUser = useAuth()
-  var email = currentUser.email
-
-  const quantity = useRef()
+  const currentUser = useAuth();
+  let quantity = useRef();
   const operationType = useRef()
-  
 
   const { stock } = props;
-  console.log(stock);
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
+  const symbol=stock.quote.symbol;
+  const date=new Date().toLocaleString();
 
-  function addOperation(userEmail, symbol, operationType, date, totalOperation){
-    userEmail=email;
-    symbol=stock.quote.symbol;
+  //addOperation(currentUser,symbol,date,quantity,operationType,stock);
+    /* const userEmail=currentUser.currentUser.email;
+    const symbol=stock.quote.symbol;
 
-    //date=date()
-    totalOperation=stock.quote.delayedPrice*quantity
-
-    console.log(operationType)
+    const date=new Date().toLocaleString();
+    //const totalOperation=stock.quote.delayedPrice*quantity.current.value
+    console.log(date)
     console.log(userEmail)
     console.log(symbol)
-    console.log(totalOperation)
-  }
+    //console.log(totalOperation) */
+    
+    
 
   return (
     <React.Fragment>
@@ -82,6 +83,7 @@ const StockRow = (props) => {
               <Typography variant="h6" gutterBottom component="div">
                 Trade
               </Typography>
+              <FormGroup>
               <Table size='small' aria-label='details'>
                 <TableHead>
                   <TableRow>
@@ -99,20 +101,20 @@ const StockRow = (props) => {
                 <TableBody >
                   <TableRow align="center" style={{ verticalAlign: 'middle' }}>
                     <TableCell align="left" style={{ verticalAlign: 'middle' }}>
-                      <TextField type="number" id="standard-basic" label="stock quantity"  required ref={quantity}/>
+                      <TextField type="number" id="quantity" label="stock quantity"  required ref={quantity}/>
                     </TableCell>
                     <TableCell align="left" style={{ verticalAlign: 'bottom' }}>
-                    <RadioGroup row aria-label="position" name="position" defaultValue="top" align="center" style={{ verticalAlign: 'middle' }} required ref={operationType}>
+                    <RadioGroup row  aria-label="position" name="position" defaultValue="top" align="center" style={{ verticalAlign: 'middle' }} required >
                       <FormControlLabel
                         align="left"
                         value="buy"
-                        control={<Radio color="primary" align="center" style={{ verticalAlign: 'middle' }}/>}
+                        control={<Radio id='buy' color="primary" align="center" style={{ verticalAlign: 'middle' }}/>}
                         label="Buy"
                         labelPlacement="start"
                       />
                       <FormControlLabel
                         value="sell"
-                        control={<Radio color='secondary'/>}
+                        control={<Radio id='sell' color='secondary'/>}
                         label="Sell"
                         labelPlacement="start"
                       />
@@ -122,11 +124,12 @@ const StockRow = (props) => {
                       <label style={{ fontSize:'20px' }}>label</label>
                       </TableCell>
                     <TableCell align="center" style={{ verticalAlign: 'middle' }}>
-                      <Button onClick={addOperation} type="submit"> Confirm</Button>
+                      <Button onClick={()=>addOperation(currentUser,document.getElementById("quantity").value,document.getElementById('buy').value,stock)} type="submit"> Confirm</Button>
                     </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
+              </FormGroup>
             </Box>
           </Collapse>
         </TableCell>

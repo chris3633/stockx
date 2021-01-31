@@ -12,7 +12,6 @@ export default function Signup() {
   const zipCodeRef = useRef()
   const cityRef = useRef()
   const emailRef = useRef()
-  const ssnRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const { signup } = useAuth()

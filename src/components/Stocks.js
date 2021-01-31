@@ -3,7 +3,6 @@ import TableHead from '@material-ui/core/TableHead';
 import { Component } from "react";
 import { Container, Header, Table, TableBody, TableRow } from "semantic-ui-react";
 import getStockInfo from "../StockAPI";
-import StockTable from "./StockTable";
 import Paper from '@material-ui/core/Paper';
 import StockRows from './StockRows'
 import SearchBar from "./SearchBar";
