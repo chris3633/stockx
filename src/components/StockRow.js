@@ -7,13 +7,15 @@ import { Box, FormControlLabel, FormGroup, IconButton, Radio, RadioGroup, Table,
 import Collapse from '@material-ui/core/Collapse';
 import { useAuth } from "../contexts/AuthContext"
 import addOperation from './NewOperation'
-import { Button } from 'react-bootstrap'
+import { Alert, Button } from 'react-bootstrap'
+import { Form } from 'semantic-ui-react';
 
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
       borderBottom: 'unset',
     },
+    whiteSpace: 'pre',
   },
 });
 
@@ -31,7 +33,7 @@ const StockRow = (props) => {
   const date = new Date().toLocaleString();
 
   const [value, setValue] = React.useState("default")
-  const [size, setSize] = React.useState(0)
+  const [size, setSize] = React.useState(0);
 
   //addOperation(currentUser,symbol,date,quantity,operationType,stock);
   /* const userEmail=currentUser.currentUser.email;
@@ -52,12 +54,12 @@ const StockRow = (props) => {
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
-          <TableCell component="th" scope="row">
+          <TableCell >
             {stock.quote.companyName}
           </TableCell>
-          <TableCell align="right">{stock.quote.primaryExchange}</TableCell>
-          <TableCell align="right">{stock.quote.sector}</TableCell>
-          <TableCell align="right">{stock.quote.symbol}</TableCell>
+          <TableCell align="left">{stock.quote.primaryExchange}</TableCell>
+          <TableCell align="left">{stock.quote.sector}</TableCell>
+          <TableCell align="left">{stock.quote.symbol}</TableCell>
           <TableCell align="right">{stock.quote.delayedPrice} $</TableCell>
           <TableCell align="right">{stock.quote.marketCap} $</TableCell>
           <TableCell align="right">{stock.quote.week52High} $</TableCell>
@@ -95,15 +97,14 @@ const StockRow = (props) => {
                             <FormControlLabel
                               align="left"
                               value="buy"
-                              control={<Radio id='buy' color="primary" align="center" style={{ verticalAlign: 'middle' }} />}
+                              control={<Radio id='buy' name='radioButton' color="primary" align="center" style={{ verticalAlign: 'middle' }}/>}
                               label="Buy"
                               labelPlacement="start"
-                              onChange={() => setValue("buy")}   
-                              checked="checked" 
+                              onChange={() => setValue("buy")}
                             />
                             <FormControlLabel
                               value="sell"
-                              control={<Radio id='sell' color='secondary' align="center" style={{ verticalAlign: 'middle' }}/>}
+                              control={<Radio id='sell' name='radioButton' color='secondary' align="center" style={{ verticalAlign: 'middle' }}/>}
                               label="Sell"
                               labelPlacement="start"                         
                               onChange={() => setValue("sell")}                                             
@@ -115,6 +116,7 @@ const StockRow = (props) => {
                         </TableCell>
                         <TableCell align="center" style={{ verticalAlign: 'middle' }}>
                           <Button variant="success" onClick={() => addOperation(currentUser, document.getElementById("quantity").value, value, stock)} type="submit"> Confirm</Button>
+                          
                         </TableCell>
                       </TableRow>
                     </TableBody>

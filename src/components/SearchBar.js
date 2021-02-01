@@ -24,7 +24,7 @@ class SearchBar extends React.Component {
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Input
-              placeholder="Search a company name"
+              placeholder="Search"
               name="stock"
               value={this.props.searchStock}
               onChange={this.handleChange}

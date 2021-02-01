@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     '& > * + *': {
       marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
+      /* marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2), */
     },
   },
 }));
@@ -17,7 +20,7 @@ export default function LinearIndeterminate() {
   return (
     <div className={classes.root}>
       <LinearProgress />
-      <LinearProgress color="secondary" />
+      <LinearProgress color="secondary" /> 
     </div>
   );
 }

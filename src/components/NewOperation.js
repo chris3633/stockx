@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import { Alert } from 'react-bootstrap';
 
 export default async function addOperation(currentUser,quantity,operationType,stock) {
     const userEmail = currentUser.currentUser.email;
@@ -11,7 +12,7 @@ export default async function addOperation(currentUser,quantity,operationType,st
     console.log(quantity)
     console.log(operationType)
     console.log(totalOperation)
-
+    
     var userRef = firebase.database().ref('users/'+ window.btoa(userEmail) + "/orders");
     //console.log('users/'+ window.btoa(userEmail) + "/orders")
 
@@ -24,5 +25,5 @@ export default async function addOperation(currentUser,quantity,operationType,st
         date: date,
         totalOperation: totalOperation
       })
-
+    
 }

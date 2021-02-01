@@ -1,4 +1,4 @@
-import { Box, Button, TableCell, TableContainer } from "@material-ui/core";
+import { Box, Button, TableCell, TableContainer, withStyles } from "@material-ui/core";
 import TableHead from '@material-ui/core/TableHead';
 import { Component } from "react";
 import { Container, Header, Table, TableBody, TableRow } from "semantic-ui-react";
@@ -11,9 +11,11 @@ import LinearIndeterminate from './LoadingBar'
 
 
 const divStyle = {
-    marginLeft: '15px',
-    marginRight: '15px',
+    marginLeft: '10px',
+    marginRight: '10px',
+    
 };
+
 
 class Stocks extends Component {
     constructor(props) {
@@ -94,22 +96,22 @@ class Stocks extends Component {
                     Trading area
                 </Header>
 
-                <Header as="h4" style={{ textAlign: "left", margin: 20 }}>
-                    Search for a topic
-                </Header>
-
-
 
                 <div style={divStyle}>
                     <TableContainer component={Paper} >
                         <Table aria-label="collapsible table">
-                            <TableHead>
+                            <TableHead >
                                 <TableRow>
-                                    <TableCell><SearchBar onChange={this.handleChangeSearch} /></TableCell>
+                                    <TableCell>
+                                        <p style={{ textAlign: "left", margin: 0 }}>
+                                            Search a company name
+                                        </p>
+                                        <SearchBar onChange={this.handleChangeSearch} />
+                                    </TableCell>
                                     <TableCell>Company name</TableCell>
-                                    <TableCell align="right">Primary exchange</TableCell>
-                                    <TableCell align="right">Sector</TableCell>
-                                    <TableCell align="right">Symbol</TableCell>
+                                    <TableCell align="left">Primary exchange</TableCell>
+                                    <TableCell align="left">Sector</TableCell>
+                                    <TableCell align="left">Symbol</TableCell>
                                     <TableCell align="right">Price</TableCell>
                                     <TableCell align="right">Market cap</TableCell>
                                     <TableCell align="right">52 week high</TableCell>
@@ -117,17 +119,18 @@ class Stocks extends Component {
                                 </TableRow>
                             </TableHead>
 
-                            {this.state.loading ? <LinearIndeterminate />/*<p>Loading...</p>*/ : <StockRows stocksInfo={page} />}
-                                {apiError && <p>Could not fetch any stock. Please try again.</p>}
+                            {!this.state.loading ? <StockRows stocksInfo={page} /> : null}
+                            {apiError && <p>Could not fetch any stock. Please try again.</p>}
 
                         </Table>
+                        {this.state.loading ? <LinearIndeterminate /> : null}
 
                     </TableContainer>
 
                     {pageIndex > 0 ? <Button onClick={this.prevPage}>Indietro</Button> : null}
                     {(pageIndex + 1) * 10 < stocksInfo.length ? <Button onClick={this.nextPage}>Avanti</Button> : null}
 
-                    
+
                 </div>
             </div>
         );
