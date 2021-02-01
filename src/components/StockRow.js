@@ -8,7 +8,7 @@ import Collapse from '@material-ui/core/Collapse';
 import { useAuth } from "../contexts/AuthContext"
 import addOperation from './NewOperation'
 import { Alert, Button } from 'react-bootstrap'
-import { Form } from 'semantic-ui-react';
+import { Form, Grid } from 'semantic-ui-react';
 
 const useRowStyles = makeStyles({
   root: {
@@ -33,7 +33,7 @@ const StockRow = (props) => {
   const date = new Date().toLocaleString();
 
   const [value, setValue] = React.useState("default")
-  const [size, setSize] = React.useState(0);
+  const [size, setSize] = React.useState(0.1);
 
   //addOperation(currentUser,symbol,date,quantity,operationType,stock);
   /* const userEmail=currentUser.currentUser.email;
@@ -90,10 +90,10 @@ const StockRow = (props) => {
                     <TableBody >
                       <TableRow align="center" style={{ verticalAlign: 'middle' }}>
                         <TableCell align="left" style={{ verticalAlign: 'middle' }}>
-                          <TextField value={size} onChange={(e) => setSize(e.target.value)} type="number" id="quantity" label="stock quantity" InputProps={{ inputProps: { min: 0 } }} required ref={quantity} />
+                          <TextField value={size} onChange={(e) => setSize(e.target.value)} type="number" id="quantity" label="stock quantity" InputProps={{ inputProps: { min: 0.1 } }} required ref={quantity} />
                         </TableCell>
                         <TableCell align="left" style={{ verticalAlign: 'bottom' }}>
-                          <RadioGroup row aria-label="position" name="position" defaultValue="top" align="center" style={{ verticalAlign: 'middle' }} required >
+                          <RadioGroup row aria-label="position"  defaultValue="buy" align="center" style={{ verticalAlign: 'middle' }} required >
                             <FormControlLabel
                               align="left"
                               value="buy"
