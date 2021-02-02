@@ -32,7 +32,7 @@ const StockRow = (props) => {
   const symbol = stock.quote.symbol;
   const date = new Date().toLocaleString();
 
-  const [value, setValue] = React.useState("default")
+  const [value, setValue] = React.useState("buy")
   const [size, setSize] = React.useState(0.1);
 
   //addOperation(currentUser,symbol,date,quantity,operationType,stock);

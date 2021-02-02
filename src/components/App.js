@@ -13,6 +13,7 @@ import Signup from './Register'
 import ForgotPassword from './ForgotPassword'
 import UpdateProfile from './UpdateProfile'
 import Dashboard from '../components/Dashboard'
+import AddFunds from './AddFunds'
 import { AuthProvider, useAuth } from '../contexts/AuthContext'
 
 
@@ -39,6 +40,7 @@ function App() {
               <Route path="/login" exact component={Login} />
               <Route path="/forgot-password" exact component={ForgotPassword} />
               <Route path="/update-profile" exact component={UpdateProfile} />
+              <Route path="/add-funds" exact component={AddFunds} />
               <Route exact path="/dashboard" component={Dashboard} />
             </Switch>
 

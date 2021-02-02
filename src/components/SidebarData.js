@@ -15,23 +15,23 @@ import { Link } from 'react-router-dom';
 export const SidebarData = [
   {
     title: 'User',
-    path: '/update-profile',
+    //path: '/update-profile',
     icon: <IoIcons.IoMdPerson/>,
 
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
-    /* subNav: [
+    subNav: [
       {
-        title: 'My data',
-        path: '/dashboard/my-data',
+        title: 'Add funds',
+        path: '/add-funds',
         icon: <IoIcons.IoIosPaper />
       },
       {
         title: 'Update profile',
-        path: '/dashboard/update-profile',
+        path: '/update-profile',
         icon: <IoIcons.IoIosPaper />
       }
-    ] */
+    ]
   },
   {
 /*     title: 'Overview',
