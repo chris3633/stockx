@@ -13,7 +13,6 @@ import LinearIndeterminate from './LoadingBar'
 const divStyle = {
     marginLeft: '10px',
     marginRight: '10px',
-    
 };
 
 
@@ -123,7 +122,7 @@ class Stocks extends Component {
                             {apiError && <p>Could not fetch any stock. Please try again.</p>}
 
                         </Table>
-                        {this.state.loading ? <LinearIndeterminate /> : null}
+                        {this.state.loading ? <div><p>Loading...</p><LinearIndeterminate /></div> : null}
 
                     </TableContainer>
 

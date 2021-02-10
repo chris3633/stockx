@@ -58,7 +58,7 @@ const Sidebar = () => {
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
         <Nav>
-          <NavIcon to='#'>
+          <NavIcon >{/*to='#' serve per reindirizzare alla pagina corrente*/}
             <FaIcons.FaBars onClick={showSidebar} />
           </NavIcon>
           <Navbar.Brand href="/" className="navigation-brand ">
@@ -73,7 +73,7 @@ const Sidebar = () => {
         </Nav>
         <SidebarNav sidebar={sidebar}>
           <SidebarWrap>
-            <NavIcon to='#'>
+            <NavIcon >{/*to='#'*/}
               <AiIcons.AiOutlineClose onClick={showSidebar} />
               {/*<Link to='/'>
               <button onClick={() => app.auth().signOut()}>Log Out</button></Link>*/}

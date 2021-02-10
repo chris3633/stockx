@@ -1,7 +1,6 @@
 import React, { useState } from "react"
-import { Navbar, Nav, Card, Button, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 import News from './News'
 import logo from '../assets/navbarlogo.png'
@@ -12,7 +11,6 @@ import Sidebar from '../components/Sidebar'
 import 'react-sidebar-ui/dist/index.css'
 import '../components/Dashboard.css'
 import Stocks from './Stocks'
-import { getStockInfo } from "../StockAPI"
 
 function Dashboard() {
   const [error, setError] = useState("")

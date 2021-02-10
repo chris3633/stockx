@@ -23,11 +23,10 @@ import Sidebar from './Sidebar'
 
 function App() {
   const { currentUser } = useAuth();
-
   if (currentUser) {
     return (
       <>
-        <AuthProvider>
+        <AuthProvider >
           <Router>
 
             <Sidebar />
@@ -43,7 +42,7 @@ function App() {
               <Route path="/add-funds" exact component={AddFunds} />
               <Route exact path="/dashboard" component={Dashboard} />
             </Switch>
-
+            
           </Router>
         </AuthProvider>
       </>

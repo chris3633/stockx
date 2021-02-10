@@ -4,78 +4,62 @@ import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import firebase from 'firebase'
 import handleUpdate from './HandleUpdateProfile'
+import UpdateForm from './UpdateForm'
+import { Component } from "react"
+import { render } from "@testing-library/react"
+
 
 
 export default function UpdateProfile() {
-  const passwordRef = useRef()
-  const passwordConfirmRef = useRef()
-  const addressRef = useRef()
-  const cityRef = useRef()
-  const zipCodeRef = useRef()
 
-  const { currentUser, updatePassword } = useAuth()
+  //console.log(props.value.email)
+  //const userEmail=props.value.email
+
   const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const history = useHistory()
 
-  var name
-  var surname
-  var address
-  var city
-  var zipCode
-  var operations
-  var userRef = firebase.database().ref('users/' + window.btoa(currentUser.email))
+  const { currentUser } = useAuth()
 
-  userRef.child('name').on('value', (snapshot) => {
-    name = snapshot.val();
+  const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email))
+  var userData = { name: '', surname: '', address: '', city: '', zipCode: '', orders: {} }
+  //console.log(userEmail)
+  /*userRef.child('name').on('value', (snapshot) => {
+    userData.name = snapshot.val();
+    document.getElementById('name').defaultValue=snapshot.val();
   });
   userRef.child('surname').on('value', (snapshot) => {
-    surname = snapshot.val();
+    userData.surname = snapshot.val();
+    document.getElementById("surname").defaultValue=snapshot.val();
   });
   userRef.child('address').on('value', (snapshot) => {
-    address = snapshot.val();
+    userData.address = snapshot.val();
+    document.getElementById("address").defaultValue=snapshot.val();
   });
   userRef.child('city').on('value', (snapshot) => {
-    city = snapshot.val();
+    userData.city = snapshot.val();
+    document.getElementById("city").defaultValue=snapshot.val();
   });
   userRef.child('zipCode').on('value', (snapshot) => {
-    zipCode = snapshot.val();
+    userData.zipCode = snapshot.val();
+    document.getElementById("zipCode").defaultValue=snapshot.val();
   });
   userRef.child('orders').on('value', (snapshot) => {
-    operations = snapshot.val();
-  });
+    userData.orders = snapshot.val();
+  });*/
 
-  function handleSubmit() {
-    //e.preventDefault()
-    console.log(addressRef.current.value)
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
-    } 
-    
-    const promises = []
-    setLoading(true)
-    setError("")
+  userRef.on('value', (snapshot) => {
+    userData.name = snapshot.exportVal().name;
+    userData.surname = snapshot.exportVal().surname;
+    userData.address = snapshot.exportVal().address;
+    userData.city = snapshot.exportVal().city;
+    userData.zipCode = snapshot.exportVal().zipCode;
+    userData.orders = snapshot.exportVal().orders;
+    document.getElementById('name').defaultValue = snapshot.exportVal().name;
+    document.getElementById("surname").defaultValue = snapshot.exportVal().surname;
+    document.getElementById("address").defaultValue = snapshot.exportVal().address;
+    document.getElementById("city").defaultValue = snapshot.exportVal().city;
+    document.getElementById("zipCode").defaultValue = snapshot.exportVal().zipCode;
 
-    if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value))
-    }
-    if(addressRef.current.value && cityRef.current.value && zipCodeRef.current.value){
-      promises.push(handleUpdate(currentUser.email,name,surname,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations))
-    }
-
-    Promise.all(promises)
-      .then(() => {
-        history.push("/")
-      })
-      .catch(() => {
-        setError("Failed to update account")
-      })
-      .finally(() => {
-        setLoading(false)
-      }) 
-      setLoading(false)
-  }
-
+  })
 
   return (
     <>
@@ -84,48 +68,49 @@ export default function UpdateProfile() {
         <Card className="w-100" style={{ maxWidth: "400px" }}>
           <Card.Body>
             <h2 className="text-center mb-4">Update Profile</h2>
+            <UpdateForm value={userData} />
             {error && <Alert variant="danger">{error}</Alert>}
-            <Form >
+            {/* <Form >
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
                   disabled={true}
-                  value={currentUser.email}
+                  defaultValue={currentUser.email}
                 />
               </Form.Group>
               <Form.Group id="name">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                   disabled={true}
-                  defaultValue={name}
+                  value={userData.name}
                 />
               </Form.Group>
               <Form.Group id="surname">
                 <Form.Label>Surname</Form.Label>
                 <Form.Control
                   disabled={true}
-                  defaultValue={surname}
+                  defaultValue={userData.surname}
                 />
               </Form.Group>
               <Form.Group id="address">
                 <Form.Label>Address</Form.Label>
                 <Form.Control
-                  defaultValue={address}
+                  defaultValue={userData.address}
                   ref={addressRef}
                 />
               </Form.Group>
               <Form.Group id="city">
                 <Form.Label>City</Form.Label>
                 <Form.Control
-                  defaultValue={city}
+                  defaultValue={userData.city}
                   ref={cityRef}
                 />
               </Form.Group>
               <Form.Group id="zipCode">
                 <Form.Label>Zip code</Form.Label>
                 <Form.Control
-                  defaultValue={zipCode}
+                  defaultValue={userData.zipCode}
                   ref={zipCodeRef}
                 />
               </Form.Group>
@@ -146,9 +131,9 @@ export default function UpdateProfile() {
                 />
               </Form.Group>
               <Button onClick={()=>handleSubmit()} disabled={loading} className="w-100" >{/*={() => handleUpdate(currentUser,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations,passwordRef,passwordConfirmRef)}*/}
-                Update
+            {/*Update
             </Button>
-            </Form>
+            </Form> */}
             <div className="w-100 text-center mt-2">
               <Link to="/dashboard">Cancel</Link>
             </div>
@@ -157,5 +142,6 @@ export default function UpdateProfile() {
 
       </div>
     </>
-  )
+  );
+
 }

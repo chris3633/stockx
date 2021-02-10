@@ -15,7 +15,6 @@ export default function handleUpdate(userEmail, name, surname, addressRef, cityR
             zipCode: zipCodeRef,
             orders: operations
         })
-
     }
 
     return true
