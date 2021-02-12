@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
@@ -15,12 +15,14 @@ export default function UpdateProfile() {
   //console.log(props.value.email)
   //const userEmail=props.value.email
 
+
   const [error, setError] = useState("")
 
   const { currentUser } = useAuth()
-
+  console.log(currentUser)
   const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email))
   var userData = { name: '', surname: '', address: '', city: '', zipCode: '', orders: {} }
+  //const [userData,setUserdata] =useState({ name: '', surname: '', address: '', city: '', zipCode: '', orders: {} })
   //console.log(userEmail)
   /*userRef.child('name').on('value', (snapshot) => {
     userData.name = snapshot.val();
@@ -46,20 +48,25 @@ export default function UpdateProfile() {
     userData.orders = snapshot.val();
   });*/
 
-  userRef.on('value', (snapshot) => {
+  var loadForm = (snapshot) => {
     userData.name = snapshot.exportVal().name;
     userData.surname = snapshot.exportVal().surname;
     userData.address = snapshot.exportVal().address;
     userData.city = snapshot.exportVal().city;
     userData.zipCode = snapshot.exportVal().zipCode;
     userData.orders = snapshot.exportVal().orders;
-    document.getElementById('name').defaultValue = snapshot.exportVal().name;
-    document.getElementById("surname").defaultValue = snapshot.exportVal().surname;
-    document.getElementById("address").defaultValue = snapshot.exportVal().address;
-    document.getElementById("city").defaultValue = snapshot.exportVal().city;
-    document.getElementById("zipCode").defaultValue = snapshot.exportVal().zipCode;
+    //setUserdata({name: name, surname: surname, address: address, city: city, zipCode: zipCode, orders: orders })
+    document.getElementById('name').defaultValue = userData.name;
+    document.getElementById("surname").defaultValue = userData.surname;
+    document.getElementById("address").defaultValue = userData.address;
+    document.getElementById("city").defaultValue = userData.city;
+    document.getElementById("zipCode").defaultValue = userData.zipCode;
 
-  })
+  }
+
+  useEffect(() => {
+    userRef.on('value', (snapshot) => loadForm(snapshot))
+  });
 
   return (
     <>
@@ -68,8 +75,8 @@ export default function UpdateProfile() {
         <Card className="w-100" style={{ maxWidth: "400px" }}>
           <Card.Body>
             <h2 className="text-center mb-4">Update Profile</h2>
-            <UpdateForm value={userData} />
             {error && <Alert variant="danger">{error}</Alert>}
+            <UpdateForm value={userData} />
             {/* <Form >
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>

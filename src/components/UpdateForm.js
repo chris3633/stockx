@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect} from "react"
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import firebase from 'firebase'
 import handleUpdate from './HandleUpdateProfile'
 import { TextField } from "@material-ui/core"
+
 
 const UpdateForm = (props) => {
     const passwordRef = useRef()
@@ -17,13 +18,18 @@ const UpdateForm = (props) => {
     const [loading, setLoading] = useState(false)
     const history = useHistory()
     
+/* useEffect(()=>{
+    addressRef.current=props.value.address
+  }); */
+    
 
     function handleSubmit() {
         console.log('3')
         //e.preventDefault()
         console.log(addressRef.current.value)
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            return setError("Passwords do not match")
+            setError("Passwords do not match")
+            return false
         }
 
         const promises = []
@@ -40,7 +46,7 @@ const UpdateForm = (props) => {
         Promise.all(promises)
             .then(() => {
                 history.push("/update-profile")
-                alert("Update with success")
+                alert("Updated with success")
             })
             .catch(() => {
                 setError("Failed to update account")
@@ -53,7 +59,7 @@ const UpdateForm = (props) => {
 
     return (
         <>
-            <Form >
+            <Form onSubmit={() => handleSubmit()}>
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -118,7 +124,8 @@ const UpdateForm = (props) => {
                         placeholder="Leave blank to keep the same"
                     />
                 </Form.Group>
-                <Button onClick={() => handleSubmit()} disabled={loading} className="w-100" >{/*={() => handleUpdate(currentUser,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations,passwordRef,passwordConfirmRef)}*/}
+                {error && <Alert variant="danger">{error}</Alert>}
+                <Button type='submit' disabled={loading} className="w-100" >{/*={() => handleUpdate(currentUser,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations,passwordRef,passwordConfirmRef)}*/}
                 Update
             </Button>
             </Form>

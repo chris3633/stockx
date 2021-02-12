@@ -4,6 +4,7 @@ import { Alert } from 'react-bootstrap';
 
 export default function handleUpdate(userEmail, name, surname, addressRef, cityRef, zipCodeRef, operations) {
 
+  try{
     var userRef = firebase.database().ref('users/' + window.btoa(userEmail))
   
     if (addressRef !== '' && cityRef !== '' && zipCodeRef !== '') {
@@ -15,9 +16,13 @@ export default function handleUpdate(userEmail, name, surname, addressRef, cityR
             zipCode: zipCodeRef,
             orders: operations
         })
+        return true
     }
-
-    return true
+  }
+  catch(e){
+    console.log(e)
+    return false
+  }
 }
 
 /* const handleSubmit(addressRef, cityRef, zipCodeRef,operations)=> {
