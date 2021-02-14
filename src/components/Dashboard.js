@@ -31,8 +31,8 @@ function Dashboard() {
 
   return (
     <>
-    <div>
-       {/* <Container
+      <div>
+        {/* <Container
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}
       >
@@ -77,8 +77,8 @@ function Dashboard() {
       </Navbar> 
       <Sidebar />
  */}
-{/* <div className="box"> */}
-      {/* <Sidebar bgColor='black' isCollapsed={false}>
+        {/* <div className="box"> */}
+        {/* <Sidebar bgColor='black' isCollapsed={false}>
         <Logo
           image='https://media2.giphy.com/media/eNAsjO55tPbgaor7ma/source.gif'
           imageName='react logo'/>
@@ -111,8 +111,8 @@ function Dashboard() {
         </Item>
         <InputItem type='text' placeholder={'Search...'}/>
       </Sidebar> */}
-      <Stocks/>
-    </div>
+        <Stocks />
+      </div>
     </>
   )
 }

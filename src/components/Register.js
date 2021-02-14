@@ -48,27 +48,27 @@ export default function Signup() {
     var newUserRef = userRef.child(window.btoa(emailRef))
     //var found = false;
 
-/*     var query = userRef.orderByKey();
-
-    query.once("value")
-      .then(function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-          var key = childSnapshot.key;
-          if (key == window.btoa(emailRef)) {
-            found = true;
-          }
-        });
-
-      });
-
-    if (found == false) { */
-      newUserRef.set({
-        name: nameRef,
-        surname: surnameRef,
-        zipCode: zipCodeRef,
-        address: addressRef,
-        city: cityRef
-      })
+    /*     var query = userRef.orderByKey();
+    
+        query.once("value")
+          .then(function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+              var key = childSnapshot.key;
+              if (key == window.btoa(emailRef)) {
+                found = true;
+              }
+            });
+    
+          });
+    
+        if (found == false) { */
+    newUserRef.set({
+      name: nameRef,
+      surname: surnameRef,
+      zipCode: zipCodeRef,
+      address: addressRef,
+      city: cityRef
+    })
     //}
     //console.log(found)
     //return found;

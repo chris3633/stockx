@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    fontSize:30,
+    fontSize: 30,
   },
   title: {
     flexGrow: 1,
@@ -30,12 +30,12 @@ export default function ButtonAppBar() {
       <AppBar className="bg-primary" position="static">
         <Toolbar>
           <Typography variant="h4" className={classes.title}>
-          <Link style={{ textDecoration: 'none'}} to="/"><Button className={classes.menuButton} style={{color: '#ffffff'}} disabled='true' >STOCKX</Button></Link>
+            <Link style={{ textDecoration: 'none' }} to="/"><Button className={classes.menuButton} style={{ color: '#ffffff' }} disabled='true' >STOCKX</Button></Link>
           </Typography>
-          <Link style={{ textDecoration: 'none' }} to="/about"><Button style={{color: '#ffffff'}}>About us</Button></Link>
-          <Link style={{ textDecoration: 'none' }} to="/contacts"><Button style={{color: '#ffffff'}}>Contacts</Button></Link>
-          <Link style={{ textDecoration: 'none' }} to="/login"><Button style={{color: '#ffffff'}}>Login</Button></Link>
-          <Link style={{ textDecoration: 'none' }} to="/register"><Button style={{color: '#ffffff'}}>Create account</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/about"><Button style={{ color: '#ffffff' }}>About us</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/contacts"><Button style={{ color: '#ffffff' }}>Contacts</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/login"><Button style={{ color: '#ffffff' }}>Login</Button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/register"><Button style={{ color: '#ffffff' }}>Create account</Button></Link>
         </Toolbar>
       </AppBar>
     </div>

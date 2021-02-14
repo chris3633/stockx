@@ -1,12 +1,9 @@
 import '../App.css'
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-
-
 import about from '../pages/AboutPage'
 import contacts from '../pages/ContactPage'
 import home from '../pages/HomePage'
-
 import NavbarTop from './NavbarTop'
 import Login from './Login'
 import Signup from './Register'
@@ -15,8 +12,6 @@ import UpdateProfile from './UpdateProfile'
 import Dashboard from '../components/Dashboard'
 import AddFunds from './AddFunds'
 import { AuthProvider, useAuth } from '../contexts/AuthContext'
-
-
 import 'react-sidebar-ui/dist/index.css';
 import Sidebar from './Sidebar'
 
@@ -42,7 +37,7 @@ function App() {
               <Route path="/add-funds" exact component={AddFunds} />
               <Route exact path="/dashboard" component={Dashboard} />
             </Switch>
-            
+
           </Router>
         </AuthProvider>
       </>

@@ -33,7 +33,7 @@ const StockRow = (props) => {
   const date = new Date().toLocaleString();
 
   const [value, setValue] = React.useState("buy")
-  const [size, setSize] = React.useState(0.1);
+  const [size, setSize] = React.useState(1);
 
   //addOperation(currentUser,symbol,date,quantity,operationType,stock);
   /* const userEmail=currentUser.currentUser.email;
@@ -45,6 +45,9 @@ const StockRow = (props) => {
   console.log(userEmail)
   console.log(symbol)
   //console.log(totalOperation) */
+  function handleConfirm(){
+    Alert('are you sure?')
+  }
 
     return (
       <React.Fragment>
@@ -72,7 +75,7 @@ const StockRow = (props) => {
                 <Typography variant="h6" gutterBottom component="div">
                   Trade
               </Typography>
-                <FormGroup>
+                <Form>
                   <Table size='small' aria-label='details'>
                     <TableHead>
                       <TableRow>
@@ -90,7 +93,7 @@ const StockRow = (props) => {
                     <TableBody >
                       <TableRow align="center" style={{ verticalAlign: 'middle' }}>
                         <TableCell align="left" style={{ verticalAlign: 'middle' }}>
-                          <TextField value={size} onChange={(e) => setSize(e.target.value)} type="number" id="quantity" label="stock quantity" InputProps={{ inputProps: { min: 0.1 } }} required ref={quantity} />
+                          <TextField value={size} onChange={(e) => setSize(e.target.value)} type="number" id="quantity" label="stock quantity" InputProps={{ inputProps: { min: 1,step: 1 } }} required ref={quantity} />
                         </TableCell>
                         <TableCell align="left" style={{ verticalAlign: 'bottom' }}>
                           <RadioGroup row aria-label="position"  defaultValue="buy" align="center" style={{ verticalAlign: 'middle' }} required >
@@ -115,13 +118,13 @@ const StockRow = (props) => {
                           <label style={{ fontSize: '20px' }}> {(size*stock.quote.delayedPrice).toFixed(2)} $</label>
                         </TableCell>
                         <TableCell align="center" style={{ verticalAlign: 'middle' }}>
-                          <Button variant="success" onClick={() => addOperation(currentUser, document.getElementById("quantity").value, value, stock)} type="submit"> Confirm</Button>
+                          <Button variant="success" onClick={() => {if(window.confirm('Are you sure?'))addOperation(currentUser, document.getElementById("quantity").value, value, stock)}} type="submit"> Confirm</Button>
                           
                         </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
-                </FormGroup>
+                </Form>
               </Box>
             </Collapse>
           </TableCell>

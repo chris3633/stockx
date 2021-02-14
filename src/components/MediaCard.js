@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   media: {
     height: 180,
   },
-  text:{
+  text: {
     height: 100,
   },
 
@@ -51,7 +51,7 @@ const MediaCard = (props) => {
         <a href={article.url} target="_blank" > Read article </a>
       </CardActions>
     </Card>
-    
+
   );
 
 }

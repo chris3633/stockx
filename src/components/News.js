@@ -20,9 +20,9 @@ class News extends Component {
         <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
           Latest news
       </Header>
-      <div>
-        {articles.length > 0 && <MediaCards articles={articles} />}
-        {apiError && <p>Could not fetch any articles. Please try again.</p>}
+        <div>
+          {articles.length > 0 && <MediaCards articles={articles} />}
+          {apiError && <p>Could not fetch any articles. Please try again.</p>}
         </div>
 
       </div>
@@ -31,7 +31,7 @@ class News extends Component {
   async componentDidMount() {
     try {
       const response = await getLatestArticles();
-      this.setState({ articles: response.data.mostPopular.assets});  
+      this.setState({ articles: response.data.mostPopular.assets });
       console.log(response.data.mostPopular.assets);
     } catch (error) {
       this.setState({ apiError: "Could not find any articles" });
