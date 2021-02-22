@@ -21,7 +21,7 @@ const UpdateForm = (props) => {
 /* useEffect(()=>{
     addressRef.current=props.value.address
   }); */
-    
+    console.log(currentUser)
 
     function handleSubmit() {
         console.log('3')
@@ -35,8 +35,8 @@ const UpdateForm = (props) => {
         const promises = []
         setLoading(true)
         setError("")
-
-        if (passwordRef.current.value) {
+        console.log(passwordRef.current.value)
+        if (passwordRef.current.value!=="") {
             promises.push(updatePassword(passwordRef.current.value))
         }
         if (addressRef.current.value && cityRef.current.value && zipCodeRef.current.value) {
@@ -59,7 +59,7 @@ const UpdateForm = (props) => {
 
     return (
         <>
-            <Form onSubmit={() => handleSubmit()}>
+            <Form >
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -125,7 +125,7 @@ const UpdateForm = (props) => {
                     />
                 </Form.Group>
                 {error && <Alert variant="danger">{error}</Alert>}
-                <Button type='submit' disabled={loading} className="w-100" >{/*={() => handleUpdate(currentUser,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations,passwordRef,passwordConfirmRef)}*/}
+                <Button type='submit' onSubmit={() => handleSubmit()} disabled={loading} className="w-100" >{/*={() => handleUpdate(currentUser,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations,passwordRef,passwordConfirmRef)}*/}
                 Update
             </Button>
             </Form>

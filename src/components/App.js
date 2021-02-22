@@ -14,6 +14,7 @@ import AddFunds from './AddFunds'
 import { AuthProvider, useAuth } from '../contexts/AuthContext'
 import 'react-sidebar-ui/dist/index.css';
 import Sidebar from './Sidebar'
+import Portfolio from './Portfolio'
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
               <Route path="/update-profile" exact component={UpdateProfile} />
               <Route path="/add-funds" exact component={AddFunds} />
               <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/portfolio" component={Portfolio}/>
             </Switch>
 
           </Router>

@@ -49,6 +49,7 @@ export default function UpdateProfile() {
   });*/
 
   var loadForm = (snapshot) => {
+    console.log(snapshot.exportVal())
     userData.name = snapshot.exportVal().name;
     userData.surname = snapshot.exportVal().surname;
     userData.address = snapshot.exportVal().address;

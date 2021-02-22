@@ -71,7 +71,7 @@ export const SidebarData = [
   {
     title:"My Portfolio",
     icon: <AccountBalance  />,
-    link: "/contacts"
+    path: "/portfolio"
   },
 
   {
