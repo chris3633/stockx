@@ -5,22 +5,40 @@ const stocksList = ['aapl', 'msft', 'intc', 'goog', 'amzn', 'tsla', 'fb', 'baba'
 let lista = [];
 let json;
 
-async function getStockInfo(){
-    for( let element of stocksList) {
-        const response = await fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/" + element + "/book", {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-key": process.env.REACT_APP_STOCK_API_KEY,
-                "x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com"
-            }
-        })
-        json=await response.json();
-        lista.push(json);
-        console.log("check Api1");
+async function getStockInfo(stocks) {
+    if (!stocks) {
+        for (let element of stocksList) {
+            const response = await fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/" + element + "/book", {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-key": process.env.REACT_APP_STOCK_API_KEY,
+                    "x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com"
+                }
+            })
+            json = await response.json();
+            lista.push(json);
+            console.log("check Api1");
+        }
+        console.log('return');
+        return lista;
     }
-console.log('return');
-   return lista;
-    
+    else {
+        for (let element of stocks) {
+            const response = await fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/" + element + "/book", {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-key": process.env.REACT_APP_STOCK_API_KEY,
+                    "x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com"
+                }
+            })
+            json = await response.json();
+            lista.push(json);
+            console.log("check Api1");
+        }
+        console.log('return');
+        return lista;
+    }
+
 
 };
 export default getStockInfo;

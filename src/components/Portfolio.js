@@ -1,11 +1,12 @@
-import React,{useEffect,useState} from 'react'
-import {  TableCell, TableContainer } from "@material-ui/core";
+import React, { useEffect, useState,useRef } from 'react'
+import { TableCell, TableContainer } from "@material-ui/core";
 import TableHead from '@material-ui/core/TableHead';
 import { Table, TableRow } from "semantic-ui-react";
 import Paper from '@material-ui/core/Paper';
 import firebase from 'firebase'
 import { useAuth } from "../contexts/AuthContext"
 import StocksHeld from './StocksHeld'
+import getStockInfo from "../StockAPI";
 
 
 export default function Portfolio() {
@@ -14,31 +15,47 @@ export default function Portfolio() {
         marginRight: '10px',
     };
     const { currentUser } = useAuth()
-    const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email)+'/orders')
-    const [orders,setOrders]=useState()
-    const [loading,setLoading]=useState(true)
+    const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email) + '/orders')
+    const [orders, setOrders] = useState()
+    const [loading, setLoading] = useState(true)
     const [pageIndex, setPageIndex] = useState(0)
-
-    useEffect(() => {
-        userRef.once('value').then(snapshot=>
-            setOrders(snapshot.exportVal())
-            
-    ) 
-    setLoading(false)
-    console.log(orders)
+    const symbol=[];
+    const dataArray=[];
+    var response=useRef();
+    console.log('1')
+    /* useEffect(() => {
+        setLoading(true)
         
-      },[userRef])
+        userRef.once('value', snap=>{if(snap.val())dataArray.push(snap.val());})
+        .then(function() {
+            setOrders(dataArray);
+        })
+        setLoading(false)
+        console.log(dataArray)
+console.log('2')
+    },[userRef,dataArray]) */
 
+useEffect(()=>{userRef.on('value',(snapshot)=>{
+    console.log(snapshot.exportVal())
+    snapshot.forEach(element => {
+        dataArray.push(element.val())
+        symbol.push(element.val().symbol)
+        console.log(symbol)
+        console.log(dataArray)
+    });
 
-      
+    response=getStockInfo(symbol);
+console.log(response)
     
+})})
 
-    /*var getOrders=(snapshot)=>{
+console.log('3')
+    /* var getOrders=(snapshot)=>{
         setOrders(snapshot.exportVal())
         setLoading(false)
         //orders=snapshot.exportVal()
         
-    }*/
+    } */
     //console.log(orders)
     //const page = searchParam !== null ? stocks.slice(pageIndex * 10, pageIndex * 10 + 10) : orders.slice(pageIndex * 10, pageIndex * 10 + 10);
 
@@ -81,35 +98,37 @@ export default function Portfolio() {
         }
         this.setState({ loading: false });
     } */
+    const buildtable=(dataArray)=>{
+        
+        return <StocksHeld operations={dataArray} currentInfo={response}/>
+    }
 
     return (
         <div>
             <div style={divStyle}>
-                    <TableContainer component={Paper} >
-                        <Table aria-label="collapsible table">
-                            <TableHead >
-                                <TableRow>
+                <TableContainer component={Paper} >
+                    <Table >
+                        <TableHead >
+                            <TableRow>
 
-                                    <TableCell>Company name</TableCell>   
-                                    <TableCell align="left">Sector</TableCell>
-                                    <TableCell align="left">Symbol</TableCell>
-                                    <TableCell align="right">Purchase date</TableCell>
-                                    <TableCell align="right">Purchase quantity</TableCell>
-                                    <TableCell align="right">Purchase price</TableCell>
-                                    <TableCell align="right">Actual price</TableCell>
-                                    <TableCell align="right">Profit/Loss</TableCell>
+                                <TableCell align='left'>Company name</TableCell>
+                                <TableCell align="left">Symbol</TableCell>
+                                <TableCell align="left">Sector</TableCell>
+                                <TableCell align='left'>Purchase date</TableCell>
+                                <TableCell align='center'>Purchase quantity</TableCell>
+                                <TableCell align='left'>Purchase price</TableCell>
+                                <TableCell align='left'>Actual price</TableCell>
+                                <TableCell align='left'>Profit/Loss</TableCell>
 
-                                    </TableRow>
-                                    </TableHead>
-                                    
-                                    
-                                    {!loading? <StocksHeld operations={orders}/> : <p>You don't have any stock</p>}
+                            </TableRow>
+                        </TableHead>
 
-                                    </Table>
-                                    </TableContainer>
+
+                        {loading ? buildtable(dataArray) : <p>You don't have any stock</p>}
+
+                    </Table>
+                </TableContainer>
             </div>
-
-            
         </div>
     )
 }

@@ -3,7 +3,9 @@ import { Alert } from 'react-bootstrap';
 
 export default async function addOperation(currentUser, quantity, operationType, stock) {
   const userEmail = currentUser.currentUser.email;
+  const companyName=stock.quote.companyName;
   const symbol = stock.quote.symbol;
+  const sector=stock.quote.sector;
   const date = new Date().toLocaleString();
   const totalOperation = stock.quote.delayedPrice * quantity
   console.log(date)
@@ -18,7 +20,9 @@ export default async function addOperation(currentUser, quantity, operationType,
 
   // inserisco l'ordine, ognugno avrà una chiave univoca
   userRef.push().set({
+    companyName: companyName,
     symbol: symbol,
+    sector:sector,
     quantity: quantity,
     price: stock.quote.delayedPrice,
     operationType: operationType,
