@@ -95,7 +95,6 @@ class Stocks extends Component {
                     Trading area
                 </Header>
 
-
                 <div style={divStyle}>
                     <TableContainer component={Paper} >
                         <Table aria-label="collapsible table">

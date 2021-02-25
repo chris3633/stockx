@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useRef } from 'react'
 import { TableCell, TableContainer } from "@material-ui/core";
 import TableHead from '@material-ui/core/TableHead';
-import { Table, TableRow } from "semantic-ui-react";
+import { Table, TableRow,Header } from "semantic-ui-react";
 import Paper from '@material-ui/core/Paper';
 import firebase from 'firebase'
 import { useAuth } from "../contexts/AuthContext"
@@ -21,7 +21,7 @@ export default function Portfolio() {
     const [pageIndex, setPageIndex] = useState(0)
     const symbol=[];
     const dataArray=[];
-    var response=useRef();
+    var [response,setResponse]=useState()
     console.log('1')
     /* useEffect(() => {
         setLoading(true)
@@ -39,13 +39,8 @@ useEffect(()=>{userRef.on('value',(snapshot)=>{
     console.log(snapshot.exportVal())
     snapshot.forEach(element => {
         dataArray.push(element.val())
-        symbol.push(element.val().symbol)
-        console.log(symbol)
         console.log(dataArray)
-    });
-
-    response=getStockInfo(symbol);
-console.log(response)
+    })
     
 })})
 
@@ -100,11 +95,14 @@ console.log('3')
     } */
     const buildtable=(dataArray)=>{
         
-        return <StocksHeld operations={dataArray} currentInfo={response}/>
+        return <StocksHeld operations={dataArray} />
     }
 
     return (
         <div>
+            <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
+                    My Portfolio
+            </Header>
             <div style={divStyle}>
                 <TableContainer component={Paper} >
                     <Table >
