@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from 'react-bootstrap';
 import getStockInfo from "../StockAPI";
+import { useAuth } from "../contexts/AuthContext"
+import closePosition from  './ClosePosition'
 
 const useRowStyles = makeStyles({
     root: {
@@ -13,43 +15,42 @@ const useRowStyles = makeStyles({
     },
 });
 
+
 const StocksHeldRow = (props) => {
     const [orders, setOrders] = useState(props.data)
-    //const [actualPrice,setPrice]=useState()
-    console.log(orders.symbol)
-    const currentInfo = useRef()
-    var actualPrice = { 'AAPL': 0 }
-    console.log('1')
-    
+    const [rtPrice, setRtPrice] = useState([])
+    var currentInfo 
+    var actualPrice = {}
+    const currentUser = useAuth();
+
+
+    const fetchData = async () => {
+        currentInfo = await getStockInfo([orders.symbol]);
+        currentInfo && currentInfo.map((element) => {
+            actualPrice[element.quote.symbol] = element.quote.delayedPrice
+            console.log(actualPrice[element.quote.symbol]-orders.price)        
+            setRtPrice(actualPrice[element.quote.symbol])
+            //setRtPrice((Math.random()*1000).toFixed(2))
+        })
+
+        console.log(rtPrice)
+        console.log(orders)
+    }
 
     useEffect(() => {
-        const fetchData = async () => {
-            currentInfo.current = await getStockInfo([orders.symbol])
-            console.log('2')
-            currentInfo.current.map((element) => {
-
-                actualPrice[element.quote.symbol] = element.quote.delayedPrice
-                console.log(actualPrice)
-            })
+        const interval = setInterval(() => {
+            fetchData();
+            
+        }, 1000);
+        return () => {
+            window.clearInterval(interval);
         }
-        fetchData();
-        
-    }, [orders,actualPrice])
+    }, [rtPrice])
 
     const classes = useRowStyles();
 
-    function setPrice(symbol) {
-        console.log(currentInfo.current)
-        
-        return actualPrice[symbol]
-    } 
 
-    console.log(actualPrice)
-    console.log('3')
-    console.log(currentInfo)
-    
     return (
-
         <TableRow className={classes.root}>
             <TableCell align='left'>
                 {orders.companyName}
@@ -70,13 +71,13 @@ const StocksHeldRow = (props) => {
                 {orders.price} $
                 </TableCell>
             <TableCell align='left'>
-                {setPrice(orders.symbol)} $
+                {rtPrice} $
                 </TableCell>
-            <TableCell align='left'>
-                {(actualPrice[orders.symbol] - orders.price).toFixed(2)} $
+            <TableCell style={{color: (rtPrice - orders.price).toFixed(2) >= 0 ? "green" : "red"}} align='left'>
+                {(rtPrice*orders.quantity - orders.price*orders.quantity).toFixed(2)} $ 
                 </TableCell>
             <TableCell>
-                <Button>Close position</Button>
+                <Button onClick={closePosition(currentUser, orders.symbol, orders.date)}>Close position</Button>
             </TableCell>
         </TableRow>
 
