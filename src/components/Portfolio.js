@@ -20,7 +20,7 @@ export default function Portfolio() {
     const [loading, setLoading] = useState(true)
     const [pageIndex, setPageIndex] = useState(0)
     const symbol=[];
-    const dataArray=[];
+    var dataArray=[];
     var [response,setResponse]=useState()
     console.log('1')
     /* useEffect(() => {
@@ -35,14 +35,25 @@ export default function Portfolio() {
 console.log('2')
     },[userRef,dataArray]) */
 
-useEffect(()=>{userRef.on('value',(snapshot)=>{
+useEffect(()=>{
+    userRef.on('value',(snapshot)=>{
     console.log(snapshot.exportVal())
+    dataArray=[]
     snapshot.forEach(element => {
         dataArray.push(element.val())
         console.log(dataArray)
     })
+    return  buildtable(dataArray)
+    /* const interval = setInterval(() => {
+        buildtable(dataArray)
+        console.log('ciao')
+    }, 3000);
+    return () => {
+        window.clearInterval(interval);
+    } */
+    })
     
-})})
+},[dataArray])
 
 console.log('3')
     /* var getOrders=(snapshot)=>{
@@ -93,9 +104,16 @@ console.log('3')
         }
         this.setState({ loading: false });
     } */
-    const buildtable=(dataArray)=>{
-        
-        return <StocksHeld operations={dataArray} />
+    const buildtable=()=>{
+        userRef.on('value',(snapshot)=>{
+            console.log(snapshot.exportVal())
+            
+            snapshot.forEach(element => {
+                dataArray.push(element.val())
+                console.log(dataArray)
+            })
+        })
+        return [<StocksHeld operations={dataArray} />, dataArray=[]]
     }
 
     return (

@@ -15,7 +15,6 @@ const useRowStyles = makeStyles({
     },
 });
 
-
 const StocksHeldRow = (props) => {
     const [orders, setOrders] = useState(props.data)
     const [rtPrice, setRtPrice] = useState([])
@@ -23,12 +22,12 @@ const StocksHeldRow = (props) => {
     var actualPrice = {}
     const currentUser = useAuth();
 
-
+console.log(orders)
     const fetchData = async () => {
         currentInfo = await getStockInfo([orders.symbol]);
         currentInfo && currentInfo.map((element) => {
             actualPrice[element.quote.symbol] = element.quote.delayedPrice
-            console.log(actualPrice[element.quote.symbol]-orders.price)        
+            //console.log(actualPrice[element.quote.symbol]-orders.price)        
             setRtPrice(actualPrice[element.quote.symbol])
             //setRtPrice((Math.random()*1000).toFixed(2))
         })
@@ -77,7 +76,7 @@ const StocksHeldRow = (props) => {
                 {(rtPrice*orders.quantity - orders.price*orders.quantity).toFixed(2)} $ 
                 </TableCell>
             <TableCell>
-                <Button onClick={closePosition(currentUser, orders.symbol, orders.date)}>Close position</Button>
+                <Button onClick={()=>closePosition(currentUser, orders.symbol, orders.date)}>Close position</Button>
             </TableCell>
         </TableRow>
 
