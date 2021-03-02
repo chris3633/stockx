@@ -11,7 +11,7 @@ export default function closePosition(currentUser, symbol, date) {
         snapshot.forEach(element => {
             console.log(element.val())
             console.log(element)
-            console.log(element.date)
+            console.log(element.val().date)
                 console.log(date)
                 console.log(element.val().symbol)
                 console.log(symbol)

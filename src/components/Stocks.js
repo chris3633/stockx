@@ -36,6 +36,7 @@ class Stocks extends Component {
 
     async componentDidMount() {
         this.setState({ loading: true });
+        this.setState({stocksInfo:[]})
         try {
             const response = await getStockInfo();
 

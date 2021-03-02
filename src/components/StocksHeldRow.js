@@ -18,11 +18,11 @@ const useRowStyles = makeStyles({
 const StocksHeldRow = (props) => {
     const [orders, setOrders] = useState(props.data)
     const [rtPrice, setRtPrice] = useState([])
-    var currentInfo 
+    var currentInfo =null
     var actualPrice = {}
     const currentUser = useAuth();
 
-console.log(orders)
+//console.log(orders)
     const fetchData = async () => {
         currentInfo = await getStockInfo([orders.symbol]);
         currentInfo && currentInfo.map((element) => {
@@ -32,8 +32,8 @@ console.log(orders)
             //setRtPrice((Math.random()*1000).toFixed(2))
         })
 
-        console.log(rtPrice)
-        console.log(orders)
+        //console.log(rtPrice)
+        //console.log(orders)
     }
 
     useEffect(() => {

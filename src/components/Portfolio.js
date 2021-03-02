@@ -7,7 +7,6 @@ import firebase from 'firebase'
 import { useAuth } from "../contexts/AuthContext"
 import StocksHeld from './StocksHeld'
 import getStockInfo from "../StockAPI";
-import { AirlineSeatFlatAngledSharp } from '@material-ui/icons';
 
 
 export default function Portfolio() {
@@ -24,7 +23,7 @@ export default function Portfolio() {
     var dataArray = []
     const [array,setArray]=useState([])
     var [response, setResponse] = useState()
-    console.log(dataArray)
+    //console.log(dataArray)
     /* useEffect(() => {
         setLoading(true)
         
@@ -54,6 +53,7 @@ console.log('2')
 
 
     useEffect(() => {
+        dataArray=[]
         setArray([])
         userRef.on('value', (snapshot) => fetchData(snapshot))
 
@@ -66,23 +66,23 @@ console.log('2')
         } */
 
 
-    })
+    },[])
 
     var fetchData = (snapshot) => {
         //buildtable(dataArray)
         
 
-        console.log(snapshot.exportVal())
+        //console.log(snapshot.exportVal())
 
         snapshot.forEach((element) => {
             dataArray.push(element.val())
-            console.log(dataArray)
+            //console.log(dataArray)
         })
         setArray(dataArray)
         setLoading(false)
     }
 
-    console.log(dataArray)
+   //console.log(dataArray)
     /* var getOrders=(snapshot)=>{
         setOrders(snapshot.exportVal())
         setLoading(false)
@@ -158,7 +158,7 @@ console.log('2')
                         </TableHead>
 
 
-                        {!loading ? <StocksHeld operations={array} /> : <p>You don't have any stock</p>}
+                        {!loading ?  <StocksHeld operations={array} />  : <p>You don't have any stock</p>}
 
                     </Table>
                 </TableContainer>
