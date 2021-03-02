@@ -1,12 +1,13 @@
-import React, { useEffect, useState,useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { TableCell, TableContainer } from "@material-ui/core";
 import TableHead from '@material-ui/core/TableHead';
-import { Table, TableRow,Header } from "semantic-ui-react";
+import { Table, TableRow, Header } from "semantic-ui-react";
 import Paper from '@material-ui/core/Paper';
 import firebase from 'firebase'
 import { useAuth } from "../contexts/AuthContext"
 import StocksHeld from './StocksHeld'
 import getStockInfo from "../StockAPI";
+import { AirlineSeatFlatAngledSharp } from '@material-ui/icons';
 
 
 export default function Portfolio() {
@@ -19,10 +20,11 @@ export default function Portfolio() {
     const [orders, setOrders] = useState()
     const [loading, setLoading] = useState(true)
     const [pageIndex, setPageIndex] = useState(0)
-    const symbol=[];
-    var dataArray=[];
-    var [response,setResponse]=useState()
-    console.log('1')
+    const symbol = [];
+    var dataArray = []
+    const [array,setArray]=useState([])
+    var [response, setResponse] = useState()
+    console.log(dataArray)
     /* useEffect(() => {
         setLoading(true)
         
@@ -35,27 +37,52 @@ export default function Portfolio() {
 console.log('2')
     },[userRef,dataArray]) */
 
-useEffect(()=>{
-    userRef.on('value',(snapshot)=>{
-    console.log(snapshot.exportVal())
-    dataArray=[]
-    snapshot.forEach(element => {
-        dataArray.push(element.val())
-        console.log(dataArray)
-    })
-    return  buildtable(dataArray)
-    /* const interval = setInterval(() => {
-        buildtable(dataArray)
-        console.log('ciao')
-    }, 3000);
-    return () => {
-        window.clearInterval(interval);
-    } */
-    })
-    
-},[dataArray])
+    /* const buildtable=(dataArray)=>{
+            
+            userRef.on('value',(snapshot)=>{
+                console.log(snapshot.exportVal())
+                
+                snapshot.forEach(element => {
+                    dataArray.push(element.val())
+                    console.log(dataArray)
+                })
+            }) 
+            
+            return [<StocksHeld operations={dataArray} />]
+        
+        }; */
 
-console.log('3')
+
+    useEffect(() => {
+        setArray([])
+        userRef.on('value', (snapshot) => fetchData(snapshot))
+
+        /* const interval = setInterval(() => {
+            buildtable(dataArray)
+            console.log('ciao')
+        }, 3000);
+        return () => {
+            window.clearInterval(interval);
+        } */
+
+
+    })
+
+    var fetchData = (snapshot) => {
+        //buildtable(dataArray)
+        
+
+        console.log(snapshot.exportVal())
+
+        snapshot.forEach((element) => {
+            dataArray.push(element.val())
+            console.log(dataArray)
+        })
+        setArray(dataArray)
+        setLoading(false)
+    }
+
+    console.log(dataArray)
     /* var getOrders=(snapshot)=>{
         setOrders(snapshot.exportVal())
         setLoading(false)
@@ -104,22 +131,13 @@ console.log('3')
         }
         this.setState({ loading: false });
     } */
-    const buildtable=()=>{
-        userRef.on('value',(snapshot)=>{
-            console.log(snapshot.exportVal())
-            
-            snapshot.forEach(element => {
-                dataArray.push(element.val())
-                console.log(dataArray)
-            })
-        })
-        return [<StocksHeld operations={dataArray} />, dataArray=[]]
-    }
+
 
     return (
+
         <div>
             <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
-                    My Portfolio
+                My Portfolio
             </Header>
             <div style={divStyle}>
                 <TableContainer component={Paper} >
@@ -140,7 +158,7 @@ console.log('3')
                         </TableHead>
 
 
-                        {loading ? buildtable(dataArray) : <p>You don't have any stock</p>}
+                        {!loading ? <StocksHeld operations={array} /> : <p>You don't have any stock</p>}
 
                     </Table>
                 </TableContainer>

@@ -33,7 +33,7 @@ const StockRow = (props) => {
   const date = new Date().toLocaleString();
 
   const [value, setValue] = React.useState("buy")
-  const [size, setSize] = React.useState(1);
+  const [size, setSize] = React.useState(0.1);
 
   //addOperation(currentUser,symbol,date,quantity,operationType,stock);
   /* const userEmail=currentUser.currentUser.email;
@@ -93,7 +93,7 @@ const StockRow = (props) => {
                     <TableBody >
                       <TableRow align="center" style={{ verticalAlign: 'middle' }}>
                         <TableCell align="left" style={{ verticalAlign: 'middle' }}>
-                          <TextField value={size} onChange={(e) => setSize(e.target.value)} type="number" id="quantity" label="stock quantity" InputProps={{ inputProps: { min: 1,step: 1 } }} required ref={quantity} />
+                          <TextField value={size} onChange={(e) => setSize(e.target.value)} type="number" id="quantity" label="stock quantity" InputProps={{ inputProps: { min: 0.1,step: 0.1 } }} required ref={quantity} />
                         </TableCell>
                         <TableCell align="left" style={{ verticalAlign: 'bottom' }}>
                           <RadioGroup row aria-label="position"  defaultValue="buy" align="center" style={{ verticalAlign: 'middle' }} required >

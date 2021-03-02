@@ -37,7 +37,7 @@ function App() {
               <Route path="/update-profile" exact component={UpdateProfile} />
               <Route path="/add-funds" exact component={AddFunds} />
               <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/portfolio" component={Portfolio}/>
+              <Route path="/portfolio" component={Portfolio}/>
             </Switch>
 
           </Router>

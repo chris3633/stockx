@@ -8,17 +8,18 @@ function StocksHeld(props) {
     const [orders, setOrders] = useState(props.operations)
     const [currentInfo,setCurrentInfo]=useState()
 
-    
+    console.log(orders)
 
 useEffect(()=>{
-    const interval = setInterval(async () => {
+    /* const interval = setInterval(async () => {
         await newRow();
         
     }, 3000);
     return () => {
         window.clearInterval(interval);
-    }
-},[])
+    } */
+    newRow()
+},[orders])
     /*const newRow = (orders) => {
         orders.map((stock) => {
             setCurrentInfo(getStockInfo([stock.symbol]))
