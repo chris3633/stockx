@@ -9,12 +9,12 @@ export default function closePosition(currentUser, symbol, date) {
     userRef.on('value',(snapshot)=>{
         console.log(snapshot.exportVal())
         snapshot.forEach(element => {
-            console.log(element.val())
+            /*console.log(element.val())
             console.log(element)
             console.log(element.val().date)
                 console.log(date)
                 console.log(element.val().symbol)
-                console.log(symbol)
+                console.log(symbol)*/
             if(element.val().date === date && element.val().symbol === symbol){
                 userRef.child(element.key).remove()
                 console.log('entrato')
