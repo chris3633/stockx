@@ -21,8 +21,16 @@ export default function Portfolio() {
     const [pageIndex, setPageIndex] = useState(0)
     const symbol = [];
     var dataArray = []
-    const [array,setArray]=useState([])
-    var [response, setResponse] = useState()
+    //var arrayPrezzi = []
+
+    var dataSymbol = []
+    const [array, setArray] = useState([])
+
+    const [arrayPrezzi, setArrayPrezzi] = useState([])
+
+    const [rtPrice, setRtPrice] = useState([])
+    var actualPrice = []
+    var currentInfo = []
     //console.log(dataArray)
     /* useEffect(() => {
         setLoading(true)
@@ -53,36 +61,59 @@ console.log('2')
 
 
     useEffect(() => {
-        dataArray=[]
+    
+
+
+        const interval = setInterval(async () => {
+            setLoading(true)
+            dataArray = []
         setArray([])
         userRef.on('value', (snapshot) => fetchData(snapshot))
-
-        /* const interval = setInterval(() => {
-            buildtable(dataArray)
-            console.log('ciao')
-        }, 3000);
+        //fetchPrice(dataSymbol)
+        setLoading(false)
+    
+        }, 1000);
         return () => {
             window.clearInterval(interval);
-        } */
+        }
+
+    }, [loading])
 
 
-    },[])
+    const fetchPrice = async(simbolo) => {   
 
-    var fetchData = (snapshot) => {
-        //buildtable(dataArray)
-        
-
-        //console.log(snapshot.exportVal())
-
-        snapshot.forEach((element) => {
-            dataArray.push(element.val())
-            //console.log(dataArray)
+        currentInfo = await getStockInfo(simbolo)
+        currentInfo && currentInfo.map((azione) => {
+            actualPrice[azione.quote.symbol] = azione.quote.delayedPrice
+            setArrayPrezzi(actualPrice)
         })
-        setArray(dataArray)
-        setLoading(false)
+        //console.log(arrayPrezzi)
     }
 
-   //console.log(dataArray)
+    var fetchData = (snapshot) => {
+        snapshot.forEach((element) => {
+            dataArray.push(element.val())
+            console.log(dataArray)
+            dataSymbol.push(element.val().symbol)
+        })
+        setArray(dataArray)
+        fetchPrice(dataSymbol)
+    }
+    /*const fetchData = async () => {
+        currentInfo = await getStockInfo([array.symbol]);
+        currentInfo && currentInfo.map((element) => {
+            actualPrice[element.quote.symbol] = element.quote.delayedPrice
+            //console.log(actualPrice[element.quote.symbol]-orders.price)        
+            setRtPrice(actualPrice[element.quote.symbol])
+            //setRtPrice((Math.random()*1000).toFixed(2))
+        })
+
+        //console.log(rtPrice)
+        //console.log(orders)
+    }*/
+
+
+    //console.log(dataArray)
     /* var getOrders=(snapshot)=>{
         setOrders(snapshot.exportVal())
         setLoading(false)
@@ -156,10 +187,7 @@ console.log('2')
 
                             </TableRow>
                         </TableHead>
-
-
-                        {!loading ?  <StocksHeld operations={array} />  : <p>You don't have any stock</p>}
-
+                        {!loading ? <StocksHeld operations={array} valori={arrayPrezzi}/> : <p>You don't have any stock</p>}
                     </Table>
                 </TableContainer>
             </div>

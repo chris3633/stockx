@@ -17,13 +17,13 @@ const useRowStyles = makeStyles({
 
 const StocksHeldRow = (props) => {
     const [orders, setOrders] = useState(props.data)
+    const [prezzo, setPrezzo] = useState(props.prezzo)
     const [rtPrice, setRtPrice] = useState([])
-    var currentInfo =null
+    var currentInfo = null
     var actualPrice = {}
     const currentUser = useAuth();
 
-//console.log(orders)
-    const fetchData = async () => {
+    /*const fetchData = async () => {
         currentInfo = await getStockInfo([orders.symbol]);
         currentInfo && currentInfo.map((element) => {
             actualPrice[element.quote.symbol] = element.quote.delayedPrice
@@ -35,19 +35,22 @@ const StocksHeldRow = (props) => {
         //console.log(rtPrice)
         //console.log(orders)
     }
+    */
 
     useEffect(() => {
-        const interval = setInterval(() => {
+            //fetchData();
+        /*const interval = setInterval(() => {
             fetchData();
             
         }, 1000);
         return () => {
             window.clearInterval(interval);
-        }
-    }, [rtPrice])
+        }*/
+    }, [prezzo,orders])
+
+    console.log(orders)
 
     const classes = useRowStyles();
-
 
     return (
         <TableRow className={classes.root}>
@@ -70,10 +73,10 @@ const StocksHeldRow = (props) => {
                 {orders.price} $
                 </TableCell>
             <TableCell align='left'>
-                {rtPrice} $
+                {prezzo} $
                 </TableCell>
-            <TableCell style={{color: (rtPrice - orders.price).toFixed(2) >= 0 ? "green" : "red"}} align='left'>
-                {(rtPrice*orders.quantity - orders.price*orders.quantity).toFixed(2)} $ 
+            <TableCell style={{color: (prezzo - orders.price).toFixed(2) >= 0 ? "green" : "red"}} align='left'>
+                {(prezzo*orders.quantity - orders.price*orders.quantity).toFixed(2)} $ 
                 </TableCell>
             <TableCell>
                 <Button onClick={()=>closePosition(currentUser, orders.symbol, orders.date)}>Close position</Button>
