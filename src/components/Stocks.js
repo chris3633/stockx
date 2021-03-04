@@ -37,11 +37,10 @@ class Stocks extends Component {
     async componentDidMount() {
         this.setState({ loading: true });
         this.setState({stocksInfo:[]})
+
         try {
             const response = await getStockInfo();
-
             this.setState({ stocksInfo: response, loading: false });
-
         } catch (error) {
             this.setState({ apiError: "Could not find any stock" });
         }
@@ -89,6 +88,8 @@ class Stocks extends Component {
 
     render() {
         const { stocksInfo, apiError, pageIndex, stocks, searchParam } = this.state;
+        console.log(stocksInfo)
+        console.log(stocks)
         const page = searchParam !== null ? stocks.slice(pageIndex * 10, pageIndex * 10 + 10) : stocksInfo.slice(pageIndex * 10, pageIndex * 10 + 10);
         return (
             <div>

@@ -2,12 +2,13 @@ const stocksList = ['aapl', 'msft', 'intc', 'goog', 'amzn', 'tsla', 'fb', 'baba'
     'ma', 'dis', 'hd', 'pypl', 'bac', 'nflx', 'vz', 'adbe', 'dal', 'luv', 'ual', 'ko', 't',
     'nke', 'pfe', 'xom', 'pep', 'orcl', 'csco', 'cvx', 'acn', 'azn', 'wfc'];
 
-let lista = [];
-let json;
+var lista = [];
+var json;
 
 async function getStockInfo(stocks) {
     if (!stocks) {
-        for (let element of stocksList) {
+        lista = []
+        for (var element of stocksList) {
             const response = await fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/" + element + "/book", {
                 "method": "GET",
                 "headers": {
@@ -17,13 +18,14 @@ async function getStockInfo(stocks) {
             })
             json = await response.json();
             lista.push(json);
-            console.log("check Api1");
+            console.log("check API trading area");
         }
-        console.log('return');
+        console.log(json);
+        console.log(lista)
         return lista;
     }
     else {
-        for (let element of stocks) {
+        for (var element of stocks) {
             const response = await fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/" + element + "/book", {
                 "method": "GET",
                 "headers": {
@@ -33,7 +35,7 @@ async function getStockInfo(stocks) {
             })
             json = await response.json();
             lista.push(json);
-            console.log("check Api1");
+            console.log("check API trading area");
         }
         console.log('return');
         return lista;

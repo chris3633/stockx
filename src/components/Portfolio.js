@@ -6,7 +6,13 @@ import Paper from '@material-ui/core/Paper';
 import firebase from 'firebase'
 import { useAuth } from "../contexts/AuthContext"
 import StocksHeld from './StocksHeld'
-import getStockInfo from "../StockAPI";
+//import getStockInfo from "../StockAPI";
+
+import getStockInfo from "../stockAPIPortfolio";
+
+
+
+
 
 
 export default function Portfolio() {
@@ -19,7 +25,6 @@ export default function Portfolio() {
     const [orders, setOrders] = useState()
     const [loading, setLoading] = useState(true)
     const [pageIndex, setPageIndex] = useState(0)
-    const symbol = [];
     var dataArray = []
     //var arrayPrezzi = []
 
