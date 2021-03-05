@@ -69,13 +69,16 @@ const StocksHeldRow = (props) => {
             <TableCell align='center'>
                 {orders.quantity}
             </TableCell>
+            <TableCell align='center'>
+                {orders.operationType}
+            </TableCell>
             <TableCell align='left'>
                 {orders.price} $
                 </TableCell>
             <TableCell align='left'>
                 {prezzo} $
                 </TableCell>
-            <TableCell style={{color: (prezzo - orders.price).toFixed(2) >= 0 ? "green" : "red"}} align='left'>
+            <TableCell style={{color: ((orders.operationType==="buy")?((prezzo-orders.price>=0)?"green" : "red"):(prezzo-orders.price>=0)?"red":"green") }} align='left'>
                 {(prezzo*orders.quantity - orders.price*orders.quantity).toFixed(2)} $ 
                 </TableCell>
             <TableCell>

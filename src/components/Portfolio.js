@@ -36,6 +36,7 @@ export default function Portfolio() {
     const [rtPrice, setRtPrice] = useState([])
     var actualPrice = []
     var currentInfo = []
+    const [portfolioValue,setPortfolioValue]=useState(0)
     //console.log(dataArray)
     /* useEffect(() => {
         setLoading(true)
@@ -103,6 +104,16 @@ console.log('2')
         })
         setArray(dataArray)
         fetchPrice(dataSymbol)
+/* array.forEach(operation => {
+    actualPrice.map((prezzo)=>{
+        if(operation.operationType==="buy"){
+            console.log(prezzo*operation.quantity-operation.price*operation.quantity)
+        }
+        else{
+
+        }
+    }) 
+}); */
     }
     /*const fetchData = async () => {
         currentInfo = await getStockInfo([array.symbol]);
@@ -174,11 +185,12 @@ console.log('2')
         <div>
             <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
                 My Portfolio
+                <div>prova</div>
             </Header>
             <div style={divStyle}>
                 <TableContainer component={Paper} >
                     <Table >
-                        <TableHead >
+                        <TableHead style={{backgroundColor:"orange"}}>
                             <TableRow>
 
                                 <TableCell align='left'>Company name</TableCell>
@@ -186,9 +198,11 @@ console.log('2')
                                 <TableCell align="left">Sector</TableCell>
                                 <TableCell align='left'>Purchase date</TableCell>
                                 <TableCell align='center'>Purchase quantity</TableCell>
+                                <TableCell align='center'>Operation type</TableCell>
                                 <TableCell align='left'>Purchase price</TableCell>
                                 <TableCell align='left'>Actual price</TableCell>
                                 <TableCell align='left'>Profit/Loss</TableCell>
+                                <TableCell></TableCell>
 
                             </TableRow>
                         </TableHead>

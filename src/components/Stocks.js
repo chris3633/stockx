@@ -100,7 +100,7 @@ class Stocks extends Component {
                 <div style={divStyle}>
                     <TableContainer component={Paper} >
                         <Table aria-label="collapsible table">
-                            <TableHead >
+                            <TableHead style={{backgroundColor:"orange"}}>
                                 <TableRow>
                                     <TableCell>
                                         <p style={{ textAlign: "left", margin: 0 }}>

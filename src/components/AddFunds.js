@@ -40,7 +40,8 @@ export default function AddFunds() {
             <Form class="form-inline" onSubmit={() => updateCredit()}>
               <Form.Group class="form-group">
                 <Form.Label >Current funds: </Form.Label>
-                <Form.Label > {currentCredit !== null ? currentCredit : 0}$</Form.Label>
+                {"  "}
+                <Form.Label >{currentCredit !== null ? currentCredit.toFixed(2) : 0}$</Form.Label>
               </Form.Group>
               <div class="form-group mx-sm-3" align="center">
                 <Form.Label >Select quantity to add</Form.Label>
