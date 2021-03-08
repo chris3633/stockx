@@ -36,7 +36,8 @@ export default function Portfolio() {
     const [rtPrice, setRtPrice] = useState([])
     var actualPrice = []
     var currentInfo = []
-    const [portfolioValue,setPortfolioValue]=useState(0)
+    var acquisti=[]
+    const [portfolioValue, setPortfolioValue] = useState(0)
     //console.log(dataArray)
     /* useEffect(() => {
         setLoading(true)
@@ -67,17 +68,15 @@ console.log('2')
 
 
     useEffect(() => {
-    
-
 
         const interval = setInterval(async () => {
             setLoading(true)
             dataArray = []
-        setArray([])
-        userRef.on('value', (snapshot) => fetchData(snapshot))
-        //fetchPrice(dataSymbol)
-        setLoading(false)
-    
+            setArray([])
+            userRef.on('value', (snapshot) => fetchData(snapshot))
+            //fetchPrice(dataSymbol)
+            setLoading(false)
+
         }, 1000);
         return () => {
             window.clearInterval(interval);
@@ -86,14 +85,15 @@ console.log('2')
     }, [loading])
 
 
-    const fetchPrice = async(simbolo) => {   
+    const fetchPrice = async (simbolo) => {
 
         currentInfo = await getStockInfo(simbolo)
         currentInfo && currentInfo.map((azione) => {
             actualPrice[azione.quote.symbol] = azione.quote.delayedPrice
             setArrayPrezzi(actualPrice)
+            
         })
-        //console.log(arrayPrezzi)
+        
     }
 
     var fetchData = (snapshot) => {
@@ -101,20 +101,34 @@ console.log('2')
             dataArray.push(element.val())
             console.log(dataArray)
             dataSymbol.push(element.val().symbol)
+            acquisti.push(element.val().quantity*element.val().price)
+            console.log(acquisti)
         })
         setArray(dataArray)
+        //setRtPrice(acquisti)
         fetchPrice(dataSymbol)
-/* array.forEach(operation => {
-    actualPrice.map((prezzo)=>{
-        if(operation.operationType==="buy"){
-            console.log(prezzo*operation.quantity-operation.price*operation.quantity)
-        }
-        else{
-
-        }
-    }) 
-}); */
+        //getPortfolioValue()
     }
+
+    const getPortfolioValue=()=>{
+        console.log(rtPrice)
+    
+        /* array.forEach(operation => {
+            
+            arrayPrezzi.map((prezzo) => {
+                
+                //console.log(prezzo)
+                if (operation.operationType === "buy") {
+                    console.log("qui")
+                    //console.log(prezzo * operation.quantity - operation.price * operation.quantity)
+                }
+                else {
+
+                }
+            })
+        }); */ 
+    }
+
     /*const fetchData = async () => {
         currentInfo = await getStockInfo([array.symbol]);
         currentInfo && currentInfo.map((element) => {
@@ -185,12 +199,12 @@ console.log('2')
         <div>
             <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
                 My Portfolio
-                <div>prova</div>
+                <div>prova:{portfolioValue}</div>
             </Header>
             <div style={divStyle}>
                 <TableContainer component={Paper} >
                     <Table >
-                        <TableHead style={{backgroundColor:"orange"}}>
+                        <TableHead style={{ backgroundColor: "orange" }}>
                             <TableRow>
 
                                 <TableCell align='left'>Company name</TableCell>
@@ -206,7 +220,7 @@ console.log('2')
 
                             </TableRow>
                         </TableHead>
-                        {!loading ? <StocksHeld operations={array} valori={arrayPrezzi}/> : <p>You don't have any stock</p>}
+                        {!loading ? <StocksHeld operations={array} valori={arrayPrezzi} /> : <p>You don't have any stock</p>}
                     </Table>
                 </TableContainer>
             </div>
