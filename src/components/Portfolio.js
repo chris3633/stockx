@@ -36,7 +36,7 @@ export default function Portfolio() {
     const [rtPrice, setRtPrice] = useState([])
     var actualPrice = []
     var currentInfo = []
-    var acquisti=[]
+    var acquisti = []
     const [portfolioValue, setPortfolioValue] = useState(0)
     //console.log(dataArray)
     /* useEffect(() => {
@@ -91,9 +91,9 @@ console.log('2')
         currentInfo && currentInfo.map((azione) => {
             actualPrice[azione.quote.symbol] = azione.quote.delayedPrice
             setArrayPrezzi(actualPrice)
-            
+
         })
-        
+
     }
 
     var fetchData = (snapshot) => {
@@ -101,18 +101,16 @@ console.log('2')
             dataArray.push(element.val())
             console.log(dataArray)
             dataSymbol.push(element.val().symbol)
-            acquisti.push(element.val().quantity*element.val().price)
+            acquisti.push(element.val().quantity * element.val().price)
             console.log(acquisti)
         })
         setArray(dataArray)
-        //setRtPrice(acquisti)
         fetchPrice(dataSymbol)
-        //getPortfolioValue()
     }
 
-    const getPortfolioValue=()=>{
+    const getPortfolioValue = () => {
         console.log(rtPrice)
-    
+
         /* array.forEach(operation => {
             
             arrayPrezzi.map((prezzo) => {
@@ -126,7 +124,7 @@ console.log('2')
 
                 }
             })
-        }); */ 
+        }); */
     }
 
     /*const fetchData = async () => {
@@ -199,7 +197,6 @@ console.log('2')
         <div>
             <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
                 My Portfolio
-                <div>prova:{portfolioValue}</div>
             </Header>
             <div style={divStyle}>
                 <TableContainer component={Paper} >

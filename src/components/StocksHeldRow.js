@@ -22,8 +22,8 @@ const StocksHeldRow = (props) => {
     var currentInfo = null
     var actualPrice = {}
     const currentUser = useAuth();
-    const [portfolioValue, setPortfolioValue] = useState(0)
     var price
+    const [visibility, setVisibility] = useState("visible")
     /*const fetchData = async () => {
         currentInfo = await getStockInfo([orders.symbol]);
         currentInfo && currentInfo.map((element) => {
@@ -47,7 +47,7 @@ const StocksHeldRow = (props) => {
         return () => {
             window.clearInterval(interval);
         }*/
-    }, [prezzo, orders])
+    })
     //price=portfolioValue
     //console.log((prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2) + price)
     //setPortfolioValue((prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2) + price)
@@ -67,7 +67,7 @@ const StocksHeldRow = (props) => {
     const classes = useRowStyles();
 
     return (
-        <TableRow className={classes.root}>
+        <TableRow className={classes.root} style={{ visibility: visibility }}>
             <TableCell align='left'>
                 {orders.companyName}
             </TableCell>
@@ -96,7 +96,16 @@ const StocksHeldRow = (props) => {
                 {(orders.operationType === "buy") ? ((prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2)) : (orders.price * orders.quantity - prezzo * orders.quantity).toFixed(2)} $
                 </TableCell>
             <TableCell>
-                <Button onClick={() => closePosition(currentUser, orders.symbol, orders.date)}>Close position</Button>
+                <Button onClick={() => {
+                    var profit
+                    if (orders.operationType === "buy") {
+                        profit = (prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2)
+                    } else {
+                        profit = (orders.price * orders.quantity - prezzo * orders.quantity).toFixed(2)
+                    }
+                    closePosition(currentUser, orders.symbol, orders.date, profit)
+                    setVisibility("collapse")
+                }}>Close position</Button>
             </TableCell>
         </TableRow>
     )
