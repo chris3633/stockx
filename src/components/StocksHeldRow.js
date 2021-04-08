@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import getStockInfo from "../StockAPI";
 import { useAuth } from "../contexts/AuthContext"
 import closePosition from './ClosePosition'
+import firebase from "firebase"
 
 const useRowStyles = makeStyles({
     root: {
@@ -15,6 +16,7 @@ const useRowStyles = makeStyles({
     },
 });
 
+
 const StocksHeldRow = (props) => {
     const [orders, setOrders] = useState(props.data)
     const [prezzo, setPrezzo] = useState(props.prezzo)
@@ -22,8 +24,10 @@ const StocksHeldRow = (props) => {
     var currentInfo = null
     var actualPrice = {}
     const currentUser = useAuth();
-    var price
+    const [credit, setCredit] = useState(props.credito);
     const [visibility, setVisibility] = useState("visible")
+    var userRef = firebase.database().ref('users/' + window.btoa(currentUser.email));
+    const [loading, setLoading] = useState(true)
     /*const fetchData = async () => {
         currentInfo = await getStockInfo([orders.symbol]);
         currentInfo && currentInfo.map((element) => {
@@ -38,16 +42,34 @@ const StocksHeldRow = (props) => {
     }
     */
 
+    /*userRef.on('value', (snapshot) => {
+        setCredit(snapshot.exportVal().credit);
+    })*/
+
+    /*userRef.on('value', (snapshot) =>{
+      credit=snapshot.exportVal().credit
+      console.log(credit)
+    })
+console.log(GetCredit())*/
+
     useEffect(() => {
-        //fetchData();
-        /*const interval = setInterval(() => {
-            fetchData();
-            
+
+        const interval = setInterval(async () => {
+            setLoading(true)
+
+            userRef.child('credit').on('value', (snapshot) => {
+                setCredit(snapshot.exportVal());
+            })
+            setLoading(false)
+
         }, 1000);
         return () => {
             window.clearInterval(interval);
-        }*/
-    })
+        }
+    }, [credit, loading, userRef])
+
+
+
     //price=portfolioValue
     //console.log((prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2) + price)
     //setPortfolioValue((prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2) + price)
@@ -62,7 +84,9 @@ const StocksHeldRow = (props) => {
         //setPortfolioValue(price)
     } */
 
-    console.log(orders)
+
+
+    console.log(credit)
 
     const classes = useRowStyles();
 
@@ -87,13 +111,13 @@ const StocksHeldRow = (props) => {
                 {orders.operationType}
             </TableCell>
             <TableCell align='left'>
-                {orders.price} $
+                {orders.price.toFixed(2)} $
                 </TableCell>
             <TableCell align='left'>
                 {prezzo} $
                 </TableCell>
-            <TableCell style={{ color: ((orders.operationType === "buy") ? ((prezzo - orders.price >= 0) ? "green" : "red") : (prezzo - orders.price >= 0) ? "red" : "green") }} align='left'>
-                {(orders.operationType === "buy") ? ((prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2)) : (orders.price * orders.quantity - prezzo * orders.quantity).toFixed(2)} $
+            <TableCell style={{ color: ((orders.operationType === "buy") ? ((prezzo - orders.price.toFixed(2) >= 0) ? "green" : "red") : (prezzo - orders.price.toFixed(2) > 0) ? "red" : "green") }} align='left'>
+                {(orders.operationType === "buy") ? ((prezzo * orders.quantity - orders.price.toFixed(2) * orders.quantity).toFixed(3)) : (orders.price.toFixed(2) * orders.quantity - prezzo * orders.quantity).toFixed(3)} $
                 </TableCell>
             <TableCell>
                 <Button onClick={() => {
@@ -103,8 +127,19 @@ const StocksHeldRow = (props) => {
                     } else {
                         profit = (orders.price * orders.quantity - prezzo * orders.quantity).toFixed(2)
                     }
-                    closePosition(currentUser, orders.symbol, orders.date, profit)
-                    setVisibility("collapse")
+
+                    if(+profit < 0){
+                        if (+credit >= +profit) {
+                            closePosition(currentUser, orders.symbol, orders.date, profit)
+                            setVisibility("collapse")
+                        } else {
+                            window.confirm("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
+                        }
+                    }else{
+                        closePosition(currentUser, orders.symbol, orders.date, profit)
+                        setVisibility("collapse")
+                    }
+
                 }}>Close position</Button>
             </TableCell>
         </TableRow>

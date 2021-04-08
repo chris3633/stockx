@@ -10,6 +10,8 @@ import StocksHeld from './StocksHeld'
 
 import getStockInfo from "../stockAPIPortfolio";
 
+import GetCredit from "./Credit"
+
 
 
 
@@ -22,9 +24,11 @@ export default function Portfolio() {
     };
     const { currentUser } = useAuth()
     const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email) + '/orders')
+    const userRefCredit = firebase.database().ref('users/' + window.btoa(currentUser.email))
     const [orders, setOrders] = useState()
     const [loading, setLoading] = useState(true)
     const [pageIndex, setPageIndex] = useState(0)
+    const [currentCredit, setCurrentCredit] = useState(0)
     var dataArray = []
     //var arrayPrezzi = []
 
@@ -75,6 +79,11 @@ console.log('2')
             setArray([])
             userRef.on('value', (snapshot) => fetchData(snapshot))
             //fetchPrice(dataSymbol)
+
+
+            userRefCredit.child('credit').on('value', (snapshot) => {
+                setCurrentCredit(snapshot.exportVal());
+            })
             setLoading(false)
 
         }, 1000);
@@ -82,11 +91,10 @@ console.log('2')
             window.clearInterval(interval);
         }
 
-    }, [loading])
+    }, [loading, currentCredit])
 
 
     const fetchPrice = async (simbolo) => {
-
         currentInfo = await getStockInfo(simbolo)
         currentInfo && currentInfo.map((azione) => {
             actualPrice[azione.quote.symbol] = azione.quote.delayedPrice
@@ -97,6 +105,7 @@ console.log('2')
     }
 
     var fetchData = (snapshot) => {
+        setArray([])
         snapshot.forEach((element) => {
             dataArray.push(element.val())
             console.log(dataArray)
@@ -199,6 +208,7 @@ console.log('2')
                 My Portfolio
             </Header>
             <div style={divStyle}>
+                Current credit: {currentCredit.toFixed(2)} $
                 <TableContainer component={Paper} >
                     <Table >
                         <TableHead style={{ backgroundColor: "orange" }}>
@@ -217,7 +227,7 @@ console.log('2')
 
                             </TableRow>
                         </TableHead>
-                        {!loading ? <StocksHeld operations={array} valori={arrayPrezzi} /> : <p>You don't have any stock</p>}
+                        {!loading ? <StocksHeld operations={array} valori={arrayPrezzi} credito={currentCredit.toFixed(2)}/> : <p>You don't have any stock</p>}
                     </Table>
                 </TableContainer>
             </div>

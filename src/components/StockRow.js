@@ -7,7 +7,7 @@ import { Box, FormControlLabel, FormGroup, IconButton, Radio, RadioGroup, Table,
 import Collapse from '@material-ui/core/Collapse';
 import { useAuth } from "../contexts/AuthContext"
 import addOperation from './NewOperation'
-import { Alert, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import { Form, Grid } from 'semantic-ui-react';
 import firebase from 'firebase'
 import { FormatColorResetOutlined } from '@material-ui/icons';
@@ -24,7 +24,7 @@ const useRowStyles = makeStyles({
 
 
 const StockRow = (props) => {
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
   let quantity = useRef();
   const operationType = useRef()
 
@@ -38,9 +38,9 @@ const StockRow = (props) => {
   const [size, setSize] = React.useState(0.1);
 
   var userRef = firebase.database().ref('users/' + window.btoa(currentUser.email));
-var credit
-  userRef.on('value', (snapshot) =>{
-    credit=snapshot.exportVal().credit
+  var credit
+  userRef.on('value', (snapshot) => {
+    credit = snapshot.exportVal().credit
     console.log(credit)
   })
 
@@ -139,7 +139,7 @@ var credit
                         <label style={{ fontSize: '20px' }}> {(size * stock.quote.delayedPrice).toFixed(2)} $</label>
                       </TableCell>
                       <TableCell align="center" style={{ verticalAlign: 'middle' }}>
-                        <Button variant="success" onClick={() => {  (window.confirm('Are you sure?') && checkCredit(size * stock.quote.delayedPrice)) ? addOperation(currentUser, document.getElementById("quantity").value, value, stock) : window.confirm("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under User->Add funds.")  }} type="submit"> Confirm</Button>
+                        <Button variant="success" onClick={() => { (window.confirm('Are you sure?') && checkCredit(size * stock.quote.delayedPrice)) ? addOperation(currentUser, document.getElementById("quantity").value, value, stock) : window.confirm("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.") }} type="submit"> Confirm</Button>
                       </TableCell>
                     </TableRow>
                   </TableBody>

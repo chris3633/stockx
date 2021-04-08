@@ -1,12 +1,15 @@
 import { Box, Button, TableCell, TableContainer, withStyles } from "@material-ui/core";
 import TableHead from '@material-ui/core/TableHead';
-import { Component } from "react";
+import { Component, useState } from "react";
 import { Container, Header, Table, TableBody, TableRow } from "semantic-ui-react";
 import getStockInfo from "../StockAPI";
 import Paper from '@material-ui/core/Paper';
 import StockRows from './StockRows'
 import SearchBar from "./SearchBar";
 import LinearIndeterminate from './LoadingBar'
+import firebase from 'firebase';
+import { useAuth } from "../contexts/AuthContext";
+import GetCredit from "./Credit"
 
 
 
@@ -33,11 +36,11 @@ class Stocks extends Component {
     }
 
 
-
     async componentDidMount() {
         this.setState({ loading: true });
-        this.setState({stocksInfo:[]})
-
+        this.setState({ stocksInfo: [] });
+        //this.setState({currentCredit: this.getCredit()});
+        //this.setState({currentCredit: 120});
         try {
             const response = await getStockInfo();
             this.setState({ stocksInfo: response, loading: false });
@@ -90,17 +93,20 @@ class Stocks extends Component {
         const { stocksInfo, apiError, pageIndex, stocks, searchParam } = this.state;
         console.log(stocksInfo)
         console.log(stocks)
+        //const credit=this.getCredit();
         const page = searchParam !== null ? stocks.slice(pageIndex * 10, pageIndex * 10 + 10) : stocksInfo.slice(pageIndex * 10, pageIndex * 10 + 10);
         return (
             <div>
                 <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
                     Trading area
                 </Header>
-
+                {/*<div align="left" style={{ margin: 20 }}>Current credit: {this.currentCredit} $</div>*/}
+                <div align="left" style={{ margin: 20 }}>Current credit: <GetCredit /> $</div>
+                
                 <div style={divStyle}>
                     <TableContainer component={Paper} >
                         <Table aria-label="collapsible table">
-                            <TableHead style={{backgroundColor:"orange"}}>
+                            <TableHead style={{ backgroundColor: "orange" }}>
                                 <TableRow>
                                     <TableCell>
                                         <p style={{ textAlign: "left", margin: 0 }}>
@@ -123,7 +129,7 @@ class Stocks extends Component {
                             {apiError && <p>Could not fetch any stock. Please try again.</p>}
 
                         </Table>
-                        {this.state.loading ? <div><p>Loading...</p><LinearIndeterminate /></div> : null}
+                        {this.state.loading && !apiError ? <div><p>Loading...</p><LinearIndeterminate /></div> : null}
 
                     </TableContainer>
 

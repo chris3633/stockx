@@ -27,5 +27,15 @@ export default function closePosition(currentUser, symbol, date, profit) {
         credit = snapshot.exportVal().credit
     })
 
-    userRef.child('credit').set(+credit + +profit) //il + prima delle varibili serve a farli considerarli come numeri
+    console.log(credit)
+    if(+profit < 0){
+        if (+credit >= +profit) {
+            userRef.child('credit').set(+credit + +profit) //il + prima delle varibili serve a farli considerarli come numeri
+        } else {
+            window.confirm("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
+        }
+    }else{
+        userRef.child('credit').set(+credit + +profit)
+    }
+    
 }

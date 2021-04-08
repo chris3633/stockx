@@ -70,10 +70,9 @@ export default function UpdateProfile() {
   });
 
   return (
-    <>
       <div className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}>
-        <Card className="w-100" style={{ maxWidth: "400px" }}>
+        <Card className="w-100" style={{ marginTop:"30px",marginBottom:"30px", maxWidth: "400px" }}>
           <Card.Body>
             <h2 className="text-center mb-4">Update Profile</h2>
             {error && <Alert variant="danger">{error}</Alert>}
@@ -149,7 +148,7 @@ export default function UpdateProfile() {
         </Card>
 
       </div>
-    </>
+    
   );
 
 }

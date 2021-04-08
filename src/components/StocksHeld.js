@@ -9,9 +9,10 @@ function StocksHeld(props) {
 
     const [orders, setOrders] = useState(props.operations)
     const [valori, setValori] = useState(props.valori)//json con prezzi attuali
+    const [credito,setCredito]=useState(props.credito)
     const [currentInfo, setCurrentInfo] = useState()
     const [portfolioValue, setPortfolioValue] = useState(0)
-    var totalValue=0;
+    var totalValue = 0;
 
     console.log(orders)
     console.log(valori)
@@ -59,25 +60,25 @@ function StocksHeld(props) {
     return (
         <TableBody>
             {orders.map((stock) => {
-            if (stock.operationType === "buy") {
+                if (stock.operationType === "buy") {
 
-                totalValue += +((stock.quantity * valori[stock.symbol] - stock.quantity * stock.price).toFixed(2))
+                    totalValue += +((stock.quantity * valori[stock.symbol] - stock.quantity * stock.price).toFixed(2))
 
-            } else {
+                } else {
 
-                totalValue += +((stock.quantity * stock.price - stock.quantity * valori[stock.symbol]).toFixed(2))
+                    totalValue += +((stock.quantity * stock.price - stock.quantity * valori[stock.symbol]).toFixed(2))
 
-            }
-            console.log(totalValue)
-                return <StocksHeldRow data={stock} prezzo={valori[stock.symbol]}/>
+                }
+                console.log(totalValue)
+                return <StocksHeldRow data={stock} prezzo={valori[stock.symbol]} credito={credito} />
             })}
-            <TableRow className={classes.root} style={{alignContent:"right",backgroundColor: (totalValue>=0) ? "green":"red"}}>
+            <TableRow className={classes.root} style={{ alignContent: "right", backgroundColor: (totalValue >= 0) ? "green" : "red" }}>
                 <TableCell colspan="10" align="center" fontSize="25px">
-            Total positions:{" "+(totalValue).toFixed(2)}$
+                    Total positions:{" " + (totalValue).toFixed(2)}$
             </TableCell>
             </TableRow>
         </TableBody>
-        
+
     )
 }
 

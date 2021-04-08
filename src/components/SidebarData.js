@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 
 export const SidebarData = [
   {
-    title: 'User',
+    title: 'My account',
     //path: '/update-profile',
     icon: <IoIcons.IoMdPerson/>,
 
