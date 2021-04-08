@@ -67,7 +67,8 @@ export default function Signup() {
       surname: surnameRef,
       zipCode: zipCodeRef,
       address: addressRef,
-      city: cityRef
+      city: cityRef,
+      credit: 0,
     })
     //}
     //console.log(found)

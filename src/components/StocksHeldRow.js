@@ -20,6 +20,7 @@ const useRowStyles = makeStyles({
 const StocksHeldRow = (props) => {
     const [orders, setOrders] = useState(props.data)
     const [prezzo, setPrezzo] = useState(props.prezzo)
+    const [guadagno, setGuadagno]=useState(props.guadagno)
     const [rtPrice, setRtPrice] = useState([])
     var currentInfo = null
     var actualPrice = {}
@@ -117,7 +118,7 @@ console.log(GetCredit())*/
                 {prezzo} $
                 </TableCell>
             <TableCell style={{ color: ((orders.operationType === "buy") ? ((prezzo - orders.price.toFixed(2) >= 0) ? "green" : "red") : (prezzo - orders.price.toFixed(2) > 0) ? "red" : "green") }} align='left'>
-                {(orders.operationType === "buy") ? ((prezzo * orders.quantity - orders.price.toFixed(2) * orders.quantity).toFixed(3)) : (orders.price.toFixed(2) * orders.quantity - prezzo * orders.quantity).toFixed(3)} $
+                {(orders.operationType === "buy") ? ((prezzo * orders.quantity - orders.price.toFixed(2) * orders.quantity).toFixed(2)) : (orders.price.toFixed(2) * orders.quantity - prezzo * orders.quantity).toFixed(2)} $
                 </TableCell>
             <TableCell>
                 <Button onClick={() => {
@@ -130,14 +131,14 @@ console.log(GetCredit())*/
 
                     if(+profit < 0){
                         if (+credit >= +profit) {
-                            closePosition(currentUser, orders.symbol, orders.date, profit)
                             setVisibility("collapse")
+                            closePosition(currentUser, orders.symbol, orders.date, profit)
                         } else {
                             window.confirm("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
                         }
                     }else{
-                        closePosition(currentUser, orders.symbol, orders.date, profit)
                         setVisibility("collapse")
+                        closePosition(currentUser, orders.symbol, orders.date, guadagno)
                     }
 
                 }}>Close position</Button>

@@ -70,7 +70,7 @@ function StocksHeld(props) {
 
                 }
                 console.log(totalValue)
-                return <StocksHeldRow data={stock} prezzo={valori[stock.symbol]} credito={credito} />
+                return <StocksHeldRow data={stock} prezzo={valori[stock.symbol]} credito={credito} guadagno={totalValue}/>
             })}
             <TableRow className={classes.root} style={{ alignContent: "right", backgroundColor: (totalValue >= 0) ? "green" : "red" }}>
                 <TableCell colspan="10" align="center" fontSize="25px">

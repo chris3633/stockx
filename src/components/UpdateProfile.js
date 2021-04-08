@@ -21,7 +21,7 @@ export default function UpdateProfile() {
   const { currentUser } = useAuth()
   console.log(currentUser)
   const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email))
-  var userData = { name: '', surname: '', address: '', city: '', zipCode: '', orders: {} }
+  var userData = { name: "a", surname: "a", address: "a", city: "a", zipCode: "a", credit: 0 };
   //const [userData,setUserdata] =useState({ name: '', surname: '', address: '', city: '', zipCode: '', orders: {} })
   //console.log(userEmail)
   /*userRef.child('name').on('value', (snapshot) => {
@@ -49,15 +49,23 @@ export default function UpdateProfile() {
   });*/
 
   var loadForm = (snapshot) => {
+    
     console.log(snapshot.exportVal())
+    console.log(snapshot.hasChild("orders"))
+    if(snapshot.hasChild("orders")){
+      userData = { name: "a", surname: "a", address: "a", city: "a", zipCode: "a", orders:{}, credit: 0 }
+      userData.orders = snapshot.exportVal().orders;
+    }
     userData.name = snapshot.exportVal().name;
     userData.surname = snapshot.exportVal().surname;
     userData.address = snapshot.exportVal().address;
     userData.city = snapshot.exportVal().city;
     userData.zipCode = snapshot.exportVal().zipCode;
-    userData.orders = snapshot.exportVal().orders;
+    
+    //userData.orders = snapshot.exportVal().orders;
+    userData.credit = snapshot.exportVal().credit;
     //setUserdata({name: name, surname: surname, address: address, city: city, zipCode: zipCode, orders: orders })
-    document.getElementById('name').defaultValue = userData.name;
+    document.getElementById("name").defaultValue = userData.name;
     document.getElementById("surname").defaultValue = userData.surname;
     document.getElementById("address").defaultValue = userData.address;
     document.getElementById("city").defaultValue = userData.city;

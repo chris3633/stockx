@@ -2,20 +2,34 @@ import firebase from 'firebase'
 import { Alert } from 'react-bootstrap';
 
 
-export default function handleUpdate(userEmail, name, surname, addressRef, cityRef, zipCodeRef, operations) {
+export default function handleUpdate(userEmail, name, surname, addressRef, cityRef, zipCodeRef, credit, operations) {
 
   try {
     var userRef = firebase.database().ref('users/' + window.btoa(userEmail))
-
+console.log('entrato');
     if (addressRef !== '' && cityRef !== '' && zipCodeRef !== '') {
-      userRef.set({
-        name: name,
-        surname: surname,
-        address: addressRef,
-        city: cityRef,
-        zipCode: zipCodeRef,
-        orders: operations
-      })
+      if(operations){
+        userRef.set({
+          name: name,
+          surname: surname,
+          address: addressRef,
+          city: cityRef,
+          zipCode: zipCodeRef,
+          orders: operations,
+          credit: credit
+        })
+      }
+      else{
+        userRef.set({
+          name: name,
+          surname: surname,
+          address: addressRef,
+          city: cityRef,
+          zipCode: zipCodeRef,
+          credit: credit
+        })
+      }
+      
       return true
     }
   }

@@ -1,8 +1,10 @@
 import firebase from 'firebase'
 import { Alert } from 'react-bootstrap';
+import { useState } from 'react'
 
-export default function closePosition(currentUser, symbol, date, profit) {
+export default function closePosition(currentUser, symbol, date, pl) {
     const userEmail = currentUser.currentUser.email;
+    var loading = true;
 
     var userRef = firebase.database().ref('users/' + window.btoa(userEmail));
     var credit
@@ -24,18 +26,21 @@ export default function closePosition(currentUser, symbol, date, profit) {
         })
     })
     userRef.on('value', (snapshot) => {
-        credit = snapshot.exportVal().credit
+        credit = snapshot.exportVal().credit;
+        loading = false;
     })
 
     console.log(credit)
-    if(+profit < 0){
-        if (+credit >= +profit) {
-            userRef.child('credit').set(+credit + +profit) //il + prima delle varibili serve a farli considerarli come numeri
+    if (!loading) {
+        if (pl < 0) {
+            if (+credit >= pl) {
+                userRef.child("credit").set(+credit + +pl) //il + prima delle varibili serve a farli considerarli come numeri
+            } else {
+                window.confirm("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
+            }
         } else {
-            window.confirm("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
+            userRef.child("credit").set(+credit + +pl)
         }
-    }else{
-        userRef.child('credit').set(+credit + +profit)
     }
-    
+
 }

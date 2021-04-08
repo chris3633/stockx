@@ -40,9 +40,13 @@ const UpdateForm = (props) => {
             promises.push(updatePassword(passwordRef.current.value))
         }
         if (addressRef.current.value && cityRef.current.value && zipCodeRef.current.value) {
-            promises.push(handleUpdate(currentUser.email, props.value.name, props.value.surname, addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, props.value.orders))
+            if(props.value.orders){
+                promises.push(handleUpdate(currentUser.email, props.value.name, props.value.surname, addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, props.value.credit, props.value.orders))
+            }else{
+                promises.push(handleUpdate(currentUser.email, props.value.name, props.value.surname, addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, props.value.credit))
+            }
         }
-
+console.log(promises)
         Promise.all(promises)
             .then(() => {
                 history.push("/update-profile")
@@ -125,11 +129,10 @@ const UpdateForm = (props) => {
                     />
                 </Form.Group>
                 {error && <Alert variant="danger">{error}</Alert>}
-                <Button type='submit' onSubmit={() => handleSubmit()} disabled={loading} className="w-100" >{/*={() => handleUpdate(currentUser,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations,passwordRef,passwordConfirmRef)}*/}
-                Update
+                <Button type="submit" onClick={() => handleSubmit()} disabled={loading} className="w-100" >{/*={() => handleUpdate(currentUser,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations,passwordRef,passwordConfirmRef)}*/}
+                Update 
             </Button>
             </Form>
-
         </>
     )
 }
