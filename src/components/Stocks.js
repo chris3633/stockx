@@ -93,17 +93,15 @@ class Stocks extends Component {
         const { stocksInfo, apiError, pageIndex, stocks, searchParam } = this.state;
         console.log(stocksInfo)
         console.log(stocks)
-        //const credit=this.getCredit();
         const page = searchParam !== null ? stocks.slice(pageIndex * 10, pageIndex * 10 + 10) : stocksInfo.slice(pageIndex * 10, pageIndex * 10 + 10);
         return (
             <div>
                 <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
                     Trading area
                 </Header>
-                {/*<div align="left" style={{ margin: 20 }}>Current credit: {this.currentCredit} $</div>*/}
-                <div align="left" style={{ margin: 20 }}>Current credit: <GetCredit /> $</div>
-                
+
                 <div style={divStyle}>
+                Current credit: <GetCredit /> $
                     <TableContainer component={Paper} >
                         <Table aria-label="collapsible table">
                             <TableHead style={{ backgroundColor: "orange" }}>
@@ -125,7 +123,7 @@ class Stocks extends Component {
                                 </TableRow>
                             </TableHead>
 
-                            {!this.state.loading ? <StockRows stocksInfo={page} /> : null}
+                            {!this.state.loading ? <StockRows stocksInfo={page}/> : null}
                             {apiError && <p>Could not fetch any stock. Please try again.</p>}
 
                         </Table>
@@ -134,8 +132,7 @@ class Stocks extends Component {
                     </TableContainer>
 
                     {pageIndex > 0 ? <Button onClick={this.prevPage}>Indietro</Button> : null}
-                    {(pageIndex + 1) * 10 < stocksInfo.length ? <Button onClick={this.nextPage}>Avanti</Button> : null}
-
+                    {(pageIndex + 1) * 10 < stocksInfo.length ? <Button onClick={this.nextPage} >Avanti</Button> : null}
 
                 </div>
             </div>

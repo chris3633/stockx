@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect} from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
@@ -17,16 +17,17 @@ const UpdateForm = (props) => {
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const history = useHistory()
-    
-/* useEffect(()=>{
-    addressRef.current=props.value.address
-  }); */
+
+    /* useEffect(()=>{
+        addressRef.current=props.value.address
+      }); */
     console.log(currentUser)
 
     function handleSubmit() {
         console.log('3')
         //e.preventDefault()
         console.log(addressRef.current.value)
+
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             setError("Passwords do not match")
             return false
@@ -35,18 +36,20 @@ const UpdateForm = (props) => {
         const promises = []
         setLoading(true)
         setError("")
-        console.log(passwordRef.current.value)
-        if (passwordRef.current.value!=="") {
+
+        if (passwordRef.current.value) {
             promises.push(updatePassword(passwordRef.current.value))
         }
+
+
         if (addressRef.current.value && cityRef.current.value && zipCodeRef.current.value) {
-            if(props.value.orders){
+            if (props.value.orders) {
                 promises.push(handleUpdate(currentUser.email, props.value.name, props.value.surname, addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, props.value.credit, props.value.orders))
-            }else{
+            } else {
                 promises.push(handleUpdate(currentUser.email, props.value.name, props.value.surname, addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, props.value.credit))
             }
         }
-console.log(promises)
+        console.log(promises)
         Promise.all(promises)
             .then(() => {
                 history.push("/update-profile")
@@ -74,18 +77,18 @@ console.log(promises)
                 </Form.Group>
                 <Form.Group >
                     <Form.Label>Name</Form.Label>
-                    <Form.Control 
+                    <Form.Control
                         id="name"
                         disabled={true}
-                        //defaultValue={props.value.name}
+                    //defaultValue={props.value.name}
                     />
                 </Form.Group>
                 <Form.Group >
                     <Form.Label>Surname</Form.Label>
-                    <Form.Control 
+                    <Form.Control
                         id="surname"
                         disabled={true}
-                        //defaultValue={props.value.surname}
+                    //defaultValue={props.value.surname}
                     />
                 </Form.Group>
                 <Form.Group >
@@ -129,8 +132,8 @@ console.log(promises)
                     />
                 </Form.Group>
                 {error && <Alert variant="danger">{error}</Alert>}
-                <Button type="submit" onClick={() => handleSubmit()} disabled={loading} className="w-100" >{/*={() => handleUpdate(currentUser,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations,passwordRef,passwordConfirmRef)}*/}
-                Update 
+                <Button onClick={() => handleSubmit()} disabled={loading} className="w-100" >{/*={() => handleUpdate(currentUser,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations,passwordRef,passwordConfirmRef)}*/}
+                Update
             </Button>
             </Form>
         </>

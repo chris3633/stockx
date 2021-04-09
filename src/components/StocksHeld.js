@@ -70,11 +70,11 @@ function StocksHeld(props) {
 
                 }
                 console.log(totalValue)
-                return <StocksHeldRow data={stock} prezzo={valori[stock.symbol]} credito={credito} guadagno={totalValue}/>
+                return <StocksHeldRow data={stock} prezzo={valori[stock.symbol]} credito={credito} guadagno={stock.quantity*valori[stock.symbol]}/>
             })}
             <TableRow className={classes.root} style={{ alignContent: "right", backgroundColor: (totalValue >= 0) ? "green" : "red" }}>
                 <TableCell colspan="10" align="center" fontSize="25px">
-                    Total positions:{" " + (totalValue).toFixed(2)}$
+                    Total positions:{" " + ( (orders.length) ? ((totalValue) ? (totalValue).toFixed(2) : "Loading...") : "0.00") }$
             </TableCell>
             </TableRow>
         </TableBody>

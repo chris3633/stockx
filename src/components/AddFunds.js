@@ -30,7 +30,7 @@ export default function AddFunds() {
 
   return (
     <Container
-      className="d-flex align-items-center justify-content-center"
+      className="d-flex align-items-center justify-content-center aboutcontainer"
       style={{ minHeight: "100vh" }}
     >
       <div className="w-100" style={{ maxWidth: "400px" }}>
@@ -48,7 +48,7 @@ export default function AddFunds() {
                 <TextField value={size} onChange={(e) => setSize(e.target.value)} type="number" id="quantity" label="quantity" InputProps={{ inputProps: { min: 50, step: 50 } }} required />
               </div>
               <div align='right'>
-                <Button type="submit" class="btn btn-primary">Confirm</Button>
+                <Button onClick={() => updateCredit()} class="btn btn-primary">Confirm</Button>
               </div>
             </Form>
           </Card.Body>

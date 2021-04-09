@@ -2,11 +2,7 @@ import React, { useState } from "react"
 import { useAuth } from "../contexts/AuthContext"
 import { useHistory } from "react-router-dom"
 
-import News from './News'
-import logo from '../assets/navbarlogo.png'
 
-
-import Sidebar from '../components/Sidebar'
 
 import 'react-sidebar-ui/dist/index.css'
 import '../components/Dashboard.css'
@@ -32,6 +28,7 @@ function Dashboard() {
   return (
     <>
       <div>
+    
         {/* <Container
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}

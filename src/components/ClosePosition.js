@@ -30,13 +30,13 @@ export default function closePosition(currentUser, symbol, date, pl) {
         loading = false;
     })
 
-    console.log(credit)
+    console.log(credit) 
     if (!loading) {
         if (pl < 0) {
             if (+credit >= pl) {
                 userRef.child("credit").set(+credit + +pl) //il + prima delle varibili serve a farli considerarli come numeri
             } else {
-                window.confirm("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
+                alert("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
             }
         } else {
             userRef.child("credit").set(+credit + +pl)

@@ -1,8 +1,15 @@
 import React from 'react'
 import { Header } from "semantic-ui-react";
+import { Container } from "react-bootstrap";
+import "../pages/HomePage.css"
+
+
+
 
 function AboutPage() {
     return (
+        <Container className="aboutcontainer"
+        style={{ minHeight: "100vh" }}>
         <div>
         <Header as="h2" style={{ textAlign: "center", margin: 100 }}>
             Progetto di Tecnologie internet
@@ -18,6 +25,7 @@ function AboutPage() {
             Samuele Dallospedale - matr. 299948
         </Header>
         </div>
+        </Container>
     )
 }
 

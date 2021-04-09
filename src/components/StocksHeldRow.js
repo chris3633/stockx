@@ -90,7 +90,6 @@ console.log(GetCredit())*/
     console.log(credit)
 
     const classes = useRowStyles();
-
     return (
         <TableRow className={classes.root} style={{ visibility: visibility }}>
             <TableCell align='left'>
@@ -117,8 +116,8 @@ console.log(GetCredit())*/
             <TableCell align='left'>
                 {prezzo} $
                 </TableCell>
-            <TableCell style={{ color: ((orders.operationType === "buy") ? ((prezzo - orders.price.toFixed(2) >= 0) ? "green" : "red") : (prezzo - orders.price.toFixed(2) > 0) ? "red" : "green") }} align='left'>
-                {(orders.operationType === "buy") ? ((prezzo * orders.quantity - orders.price.toFixed(2) * orders.quantity).toFixed(2)) : (orders.price.toFixed(2) * orders.quantity - prezzo * orders.quantity).toFixed(2)} $
+            <TableCell style={{ color: ((orders.operationType === "buy") ? ((prezzo) ? ((prezzo - orders.price.toFixed(2) >= 0) ? "green" : "red"): "black") : (prezzo) ? ((prezzo - orders.price.toFixed(2) > 0) ? "red" : "green"): "black") }} align='left'>
+                {(orders.operationType === "buy") ? ((prezzo) ? (prezzo * orders.quantity - orders.price.toFixed(2) * orders.quantity).toFixed(2) : "Loading...") :((prezzo) ? (orders.price.toFixed(2) * orders.quantity - prezzo * orders.quantity).toFixed(2) : "Loading...")} $
                 </TableCell>
             <TableCell>
                 <Button onClick={() => {
@@ -134,7 +133,7 @@ console.log(GetCredit())*/
                             setVisibility("collapse")
                             closePosition(currentUser, orders.symbol, orders.date, profit)
                         } else {
-                            window.confirm("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
+                            alert("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
                         }
                     }else{
                         setVisibility("collapse")

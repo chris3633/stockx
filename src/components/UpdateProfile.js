@@ -21,7 +21,7 @@ export default function UpdateProfile() {
   const { currentUser } = useAuth()
   console.log(currentUser)
   const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email))
-  var userData = { name: "a", surname: "a", address: "a", city: "a", zipCode: "a", credit: 0 };
+  var userData = { name: "", surname: "", address: "", city: "", zipCode: "", credit: 0 };
   //const [userData,setUserdata] =useState({ name: '', surname: '', address: '', city: '', zipCode: '', orders: {} })
   //console.log(userEmail)
   /*userRef.child('name').on('value', (snapshot) => {
@@ -49,28 +49,31 @@ export default function UpdateProfile() {
   });*/
 
   var loadForm = (snapshot) => {
-    
-    console.log(snapshot.exportVal())
-    console.log(snapshot.hasChild("orders"))
-    if(snapshot.hasChild("orders")){
-      userData = { name: "a", surname: "a", address: "a", city: "a", zipCode: "a", orders:{}, credit: 0 }
-      userData.orders = snapshot.exportVal().orders;
-    }
-    userData.name = snapshot.exportVal().name;
-    userData.surname = snapshot.exportVal().surname;
-    userData.address = snapshot.exportVal().address;
-    userData.city = snapshot.exportVal().city;
-    userData.zipCode = snapshot.exportVal().zipCode;
-    
-    //userData.orders = snapshot.exportVal().orders;
-    userData.credit = snapshot.exportVal().credit;
-    //setUserdata({name: name, surname: surname, address: address, city: city, zipCode: zipCode, orders: orders })
-    document.getElementById("name").defaultValue = userData.name;
-    document.getElementById("surname").defaultValue = userData.surname;
-    document.getElementById("address").defaultValue = userData.address;
-    document.getElementById("city").defaultValue = userData.city;
-    document.getElementById("zipCode").defaultValue = userData.zipCode;
 
+    try {
+      console.log(snapshot.exportVal())
+      console.log(snapshot.hasChild("orders"))
+      if (snapshot.hasChild("orders")) {
+        //userData = { name: "", surname: "", address: "", city: "", zipCode: "", orders: {}, credit: 0 }
+        userData.orders = snapshot.exportVal().orders;
+      }
+      userData.name = snapshot.exportVal().name;
+      userData.surname = snapshot.exportVal().surname;
+      userData.address = snapshot.exportVal().address;
+      userData.city = snapshot.exportVal().city;
+      userData.zipCode = snapshot.exportVal().zipCode;
+
+      //userData.orders = snapshot.exportVal().orders;
+      userData.credit = snapshot.exportVal().credit;
+      //setUserdata({name: name, surname: surname, address: address, city: city, zipCode: zipCode, orders: orders })
+      document.getElementById("name").defaultValue = userData.name;
+      document.getElementById("surname").defaultValue = userData.surname;
+      document.getElementById("address").defaultValue = userData.address;
+      document.getElementById("city").defaultValue = userData.city;
+      document.getElementById("zipCode").defaultValue = userData.zipCode;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   useEffect(() => {
@@ -78,14 +81,14 @@ export default function UpdateProfile() {
   });
 
   return (
-      <div className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}>
-        <Card className="w-100" style={{ marginTop:"30px",marginBottom:"30px", maxWidth: "400px" }}>
-          <Card.Body>
-            <h2 className="text-center mb-4">Update Profile</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <UpdateForm value={userData} />
-            {/* <Form >
+    <div className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "100vh" }}>
+      <Card className="w-100" style={{ marginTop: "30px", marginBottom: "30px", maxWidth: "400px" }}>
+        <Card.Body>
+          <h2 className="text-center mb-4">Update Profile</h2>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <UpdateForm value={userData} />
+          {/* <Form >
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
@@ -146,17 +149,17 @@ export default function UpdateProfile() {
                 />
               </Form.Group>
               <Button onClick={()=>handleSubmit()} disabled={loading} className="w-100" >{/*={() => handleUpdate(currentUser,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations,passwordRef,passwordConfirmRef)}*/}
-            {/*Update
+          {/*Update
             </Button>
             </Form> */}
-            <div className="w-100 text-center mt-2">
-              <Link to="/dashboard">Cancel</Link>
-            </div>
-          </Card.Body>
-        </Card>
+          <div className="w-100 text-center mt-2">
+            <Link to="/dashboard">Cancel</Link>
+          </div>
+        </Card.Body>
+      </Card>
 
-      </div>
-    
+    </div>
+
   );
 
 }

@@ -95,12 +95,14 @@ console.log('2')
 
 
     const fetchPrice = async (simbolo) => {
-        currentInfo = await getStockInfo(simbolo)
-        currentInfo && currentInfo.map((azione) => {
-            actualPrice[azione.quote.symbol] = azione.quote.delayedPrice.toFixed(2);
-            setArrayPrezzi(actualPrice)
-
-        })
+        try{
+            currentInfo = await getStockInfo(simbolo)
+            currentInfo && currentInfo.map((azione) => {
+                actualPrice[azione.quote.symbol] = azione.quote.delayedPrice.toFixed(2);
+                setArrayPrezzi(actualPrice)
+            })
+        }catch(e)
+        { console.log(e); }
 
     }
 
