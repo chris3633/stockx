@@ -12,13 +12,13 @@ import Text from 'react'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 350,
   },
   media: {
     height: 180,
   },
   text: {
-    height: 100,
+    height: 50,
   },
 
 });
@@ -48,7 +48,7 @@ const MediaCard = (props) => {
         <Typography >
           {article.dateLastPublished.split("T")[0]}
         </Typography>
-        <a href={article.url} target="_blank" > Read article </a>
+        <a href={article.url} target="_blank" rel="noreferrer"> Read article </a>
       </CardActions>
     </Card>
 

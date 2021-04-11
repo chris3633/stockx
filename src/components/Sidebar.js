@@ -57,7 +57,7 @@ const Sidebar = () => {
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
-        <Nav>
+        <Nav position="sticky" fixed="top">
           <NavIcon >{/*to='#' serve per reindirizzare alla pagina corrente*/}
             <FaIcons.FaBars onClick={showSidebar} />
           </NavIcon>

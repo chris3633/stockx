@@ -21,6 +21,7 @@ export default function Portfolio() {
     const divStyle = {
         marginLeft: '10px',
         marginRight: '10px',
+        textAlign: "center",
     };
     const { currentUser } = useAuth()
     const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email) + '/orders')

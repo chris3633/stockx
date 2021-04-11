@@ -16,6 +16,7 @@ import GetCredit from "./Credit"
 const divStyle = {
     marginLeft: '10px',
     marginRight: '10px',
+    textAlign: 'center',
 };
 
 
@@ -131,8 +132,8 @@ class Stocks extends Component {
 
                     </TableContainer>
 
-                    {pageIndex > 0 ? <Button onClick={this.prevPage}>Indietro</Button> : null}
-                    {(pageIndex + 1) * 10 < stocksInfo.length ? <Button onClick={this.nextPage} >Avanti</Button> : null}
+                    { (pageIndex > 0 ? <Button onClick={this.prevPage}>Prev</Button> : (stocksInfo.length)?<Button disabled="true" onClick={this.prevPage}>Prev</Button>:null)}
+                    {(stocksInfo.length)? ((pageIndex + 1) * 10 < stocksInfo.length ? <Button onClick={this.nextPage} >Next</Button> : <Button disabled="true" onClick={this.nextPage}>Next</Button>) : null}
 
                 </div>
             </div>

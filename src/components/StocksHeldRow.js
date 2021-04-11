@@ -20,7 +20,7 @@ const useRowStyles = makeStyles({
 const StocksHeldRow = (props) => {
     const [orders, setOrders] = useState(props.data)
     const [prezzo, setPrezzo] = useState(props.prezzo)
-    const [guadagno, setGuadagno]=useState(props.guadagno)
+    const [guadagno, setGuadagno] = useState(props.guadagno)
     const [rtPrice, setRtPrice] = useState([])
     var currentInfo = null
     var actualPrice = {}
@@ -116,28 +116,32 @@ console.log(GetCredit())*/
             <TableCell align='left'>
                 {prezzo} $
                 </TableCell>
-            <TableCell style={{ color: ((orders.operationType === "buy") ? ((prezzo) ? ((prezzo - orders.price.toFixed(2) >= 0) ? "green" : "red"): "black") : (prezzo) ? ((prezzo - orders.price.toFixed(2) > 0) ? "red" : "green"): "black") }} align='left'>
-                {(orders.operationType === "buy") ? ((prezzo) ? (prezzo * orders.quantity - orders.price.toFixed(2) * orders.quantity).toFixed(2) : "Loading...") :((prezzo) ? (orders.price.toFixed(2) * orders.quantity - prezzo * orders.quantity).toFixed(2) : "Loading...")} $
+            <TableCell style={{ color: ((orders.operationType === "buy") ? ((prezzo) ? ((prezzo - orders.price.toFixed(2) >= 0) ? "green" : "red") : "black") : (prezzo) ? ((prezzo - orders.price.toFixed(2) > 0) ? "red" : "green") : "black") }} align='left'>
+                {(orders.operationType === "buy") ? ((prezzo) ? (prezzo * orders.quantity - orders.price.toFixed(2) * orders.quantity).toFixed(2) : "Loading...") : ((prezzo) ? (orders.price.toFixed(2) * orders.quantity - prezzo * orders.quantity).toFixed(2) : "Loading...")} $
                 </TableCell>
             <TableCell>
                 <Button onClick={() => {
                     var profit
-                    if (orders.operationType === "buy") {
-                        profit = (prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2)
-                    } else {
-                        profit = (orders.price * orders.quantity - prezzo * orders.quantity).toFixed(2)
-                    }
-
-                    if(+profit < 0){
-                        if (+credit >= +profit) {
-                            setVisibility("collapse")
-                            closePosition(currentUser, orders.symbol, orders.date, profit)
+                    try {
+                        if (orders.operationType === "buy") {
+                            profit = (prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2)
                         } else {
-                            alert("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
+                            profit = (orders.price * orders.quantity - prezzo * orders.quantity).toFixed(2)
                         }
-                    }else{
-                        setVisibility("collapse")
-                        closePosition(currentUser, orders.symbol, orders.date, guadagno)
+
+                        if (+profit < 0) {
+                            if (+credit >= +profit) {
+                                setVisibility("collapse")
+                                closePosition(currentUser, orders.symbol, orders.date, profit)
+                            } else {
+                                alert("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
+                            }
+                        } else {
+                            setVisibility("collapse")
+                            closePosition(currentUser, orders.symbol, orders.date, guadagno)
+                        }
+                    } catch (e) {
+                        console.log(e)
                     }
 
                 }}>Close position</Button>

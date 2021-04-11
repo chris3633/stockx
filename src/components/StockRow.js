@@ -109,6 +109,7 @@ const StockRow = (props) => {
                       <TableCell>
                         Position size
                       </TableCell>
+                      <TableCell/>
                     </TableRow>
                   </TableHead>
                   <TableBody >

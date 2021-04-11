@@ -10,7 +10,7 @@ function Contactpage() {
         <Header as="h2" style={{ textAlign: "center", margin: 100 }}>
             Feel free to contact us!
         </Header>
-        <Header as="h5" style={{ textAlign: "center", margin: 100 }}>
+        <Header as="h5" style={{ textAlign: "center", margin: 100 }}>{/*300 con header senza maiuscola*/}
             Christian Morini: christian.morini@studenti.unipr.it
             <br/><br/>
             Samuele Dallospedale: samuele.dallospedale@studenti.unipr.it

@@ -1,6 +1,4 @@
 import firebase from 'firebase'
-import { Alert } from 'react-bootstrap';
-import { useState } from 'react'
 
 export default function closePosition(currentUser, symbol, date, pl) {
     const userEmail = currentUser.currentUser.email;
@@ -12,12 +10,6 @@ export default function closePosition(currentUser, symbol, date, pl) {
     userRef.child("orders").on('value', (snapshot) => {
         console.log(snapshot.exportVal())
         snapshot.forEach(element => {
-            /*console.log(element.val())
-            console.log(element)
-            console.log(element.val().date)
-                console.log(date)
-                console.log(element.val().symbol)
-                console.log(symbol)*/
             if (element.val().date === date && element.val().symbol === symbol) {
                 userRef.child("orders").child(element.key).remove()
                 console.log('entrato')
@@ -30,11 +22,11 @@ export default function closePosition(currentUser, symbol, date, pl) {
         loading = false;
     })
 
-    console.log(credit) 
+    console.log(credit)
     if (!loading) {
         if (pl < 0) {
             if (+credit >= pl) {
-                userRef.child("credit").set(+credit + +pl) //il + prima delle varibili serve a farli considerarli come numeri
+                userRef.child("credit").set(+credit + +pl) //il + prima delle varibili serve a farli considerare come numeri
             } else {
                 alert("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
             }
@@ -42,5 +34,4 @@ export default function closePosition(currentUser, symbol, date, pl) {
             userRef.child("credit").set(+credit + +pl)
         }
     }
-
 }

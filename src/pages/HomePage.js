@@ -13,9 +13,13 @@ function Home() {
     return (
             <Container
                 className="newscontainer"
-                style={{ minHeight: "100vh" }}
+                style={{ minHeight: "200vh" }}
             >
             <div>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
                 <h1 className="title"> "Buy and sell stocks as you never did before!"</h1>
                 <News />
             </div>

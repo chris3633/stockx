@@ -1,6 +1,5 @@
 import { Card, Container, Form, Button } from 'react-bootstrap'
 import React, { useState, useEffect } from 'react'
-import { Alert } from 'react-bootstrap'
 import { TextField } from '@material-ui/core';
 import { useAuth } from '../contexts/AuthContext'
 import firebase from 'firebase'
@@ -19,10 +18,7 @@ export default function AddFunds() {
 
   function updateCredit() {
     if (window.confirm(document.getElementById('quantity').value + '$ will be added to your funds')) {
-      console.log(currentCredit)
-      console.log(size)
       var newCredit = Number(currentCredit) + Number(size)
-      console.log(newCredit)
       userRef.child('credit').set(newCredit)
     }
   }

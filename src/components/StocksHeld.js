@@ -60,6 +60,7 @@ function StocksHeld(props) {
     return (
         <TableBody>
             {orders.map((stock) => {
+                try{
                 if (stock.operationType === "buy") {
 
                     totalValue += +((stock.quantity * valori[stock.symbol] - stock.quantity * stock.price).toFixed(2))
@@ -70,11 +71,14 @@ function StocksHeld(props) {
 
                 }
                 console.log(totalValue)
+            }catch(e){
+                console.log(e)
+            }
                 return <StocksHeldRow data={stock} prezzo={valori[stock.symbol]} credito={credito} guadagno={stock.quantity*valori[stock.symbol]}/>
             })}
             <TableRow className={classes.root} style={{ alignContent: "right", backgroundColor: (totalValue >= 0) ? "green" : "red" }}>
                 <TableCell colspan="10" align="center" fontSize="25px">
-                    Total positions:{" " + ( (orders.length) ? ((totalValue) ? (totalValue).toFixed(2) : "Loading...") : "0.00") }$
+                    Total positions:{" " +  ((orders.length) ? ((totalValue) ? totalValue.toFixed(2) : "0.00" ) : "Loading...") }$ {/*0.00*/}
             </TableCell>
             </TableRow>
         </TableBody>

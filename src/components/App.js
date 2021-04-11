@@ -1,6 +1,6 @@
 import '../App.css'
 import React from "react"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 import about from '../pages/AboutPage'
 import contacts from '../pages/ContactPage'
 import home from '../pages/HomePage'
@@ -57,12 +57,16 @@ function App() {
               <Route path="/register" exact component={Signup} />
               <Route path="/login" exact component={Login} />
               <Route path="/forgot-password" exact component={ForgotPassword} />
+
+              <Route path="/update-profile"><Redirect to={'/'} /></Route>
+              <Route path="/add-funds"><Redirect to={'/'} /></Route>
+              <Route exact path="/dashboard"><Redirect to={'/'} /></Route>
+              <Route path="/portfolio"><Redirect to={'/'} /></Route>
             </Switch>
           </Router>
         </AuthProvider>
       </>
     )
-
   }
 }
 

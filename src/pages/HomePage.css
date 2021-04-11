@@ -5,7 +5,7 @@
   /* Center and scale the image nicely */
   background-position:inherit;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position-y: 1.8cm;
   background-attachment: fixed;
 
@@ -30,8 +30,6 @@
   background-position:inherit;
   background-repeat: repeat;
   background-size: cover;
-
-
 
   min-height: 100%;
   min-width: 100%;
@@ -68,13 +66,14 @@
 
   .newscontainer{
     background-image: url(../assets/news.jpg);
-      height: auto;
+      height:inherit;
 
   /* Center and scale the image nicely */
-  background-position:inherit;
+  background-position:relative;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  background-position-y: top;
 
 
   min-height: 100%;
@@ -85,7 +84,7 @@
   height: 100%;
 	
   /* Set up positioning */
-  position: sticky;
+  position:sticky;
   }
 
 
@@ -94,9 +93,8 @@
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-style: oblique;
     color: rgba(0,0,0,1);/*rgba(255, 255, 255, 1)*/
-    font-size: xx-large;
-    text-align: center;
-    margin-top: 2cm;
+    font-size:xx-large;
+    text-align:center;
 }
 .box{
   position: relative;
