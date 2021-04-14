@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import { useAuth } from "../contexts/AuthContext"
 import closePosition from './ClosePosition'
 import firebase from "firebase"
+import { BsCreditCard } from 'react-icons/bs';
 
 const useRowStyles = makeStyles({
     root: {
@@ -92,13 +93,19 @@ const StocksHeldRow = (props) => {
                         if (+profit < 0) {
                             if (+credit >= +profit) {
                                 setVisibility("collapse")
-                                closePosition(currentUser, orders.symbol, orders.date, profit)
+                                closePosition(currentUser, orders.symbol, orders.date, profit, credit)
                             } else {
                                 alert("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds.")
                             }
                         } else {
-                            setVisibility("collapse")
-                            closePosition(currentUser, orders.symbol, orders.date, guadagno)
+                            if (orders.operationType === "buy") {
+                                setVisibility("collapse")
+
+                                closePosition(currentUser, orders.symbol, orders.date, prezzo * orders.quantity, credit)
+                            } else {
+                                setVisibility("collapse")
+                                closePosition(currentUser, orders.symbol, orders.date, (+profit + +orders.quantity * +orders.price), credit)
+                            }
                         }
                     } catch (e) {
                         console.log(e)

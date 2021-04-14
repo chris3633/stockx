@@ -67,7 +67,7 @@ function StocksHeld(props) {
             })}
             <TableRow className={classes.root} style={{ alignContent: "right", backgroundColor: (totalValue >= 0) ? "green" : "red" }}>
                 <TableCell colspan="10" align="center" fontSize="25px">
-                    Total positions:{" " + ((orders.length) ? ((totalValue) ? totalValue.toFixed(2) : "0.00") : "Loading...")}$ {/*0.00*/}
+                    Total positions:{" " + ((orders.length>0) ? ((totalValue) ? totalValue.toFixed(2) : "0.00") : ((orders.length===0) ? "0.00" :  "Loading..."))}$ {/*0.00*/}
                 </TableCell>
             </TableRow>
         </TableBody>
