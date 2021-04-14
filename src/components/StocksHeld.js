@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { TableBody, TableCell, TableRow } from "@material-ui/core";
 import StocksHeldRow from './StocksHeldRow'
 import { makeStyles } from '@material-ui/core/styles';
-import getStockInfo from '../StockAPI';
-import { Header } from 'semantic-ui-react';
 
 function StocksHeld(props) {
 
     const [orders, setOrders] = useState(props.operations)
-    const [valori, setValori] = useState(props.valori)//json con prezzi attuali
-    const [credito,setCredito]=useState(props.credito)
+    const [valori, setValori] = useState(props.valori) //json con prezzi attuali
+    const [credito, setCredito] = useState(props.credito)
     const [currentInfo, setCurrentInfo] = useState()
     const [portfolioValue, setPortfolioValue] = useState(0)
     var totalValue = 0;
@@ -17,21 +15,12 @@ function StocksHeld(props) {
     console.log(orders)
     console.log(valori)
     useEffect(() => {
-        /*const interval = setInterval(async () => {
-            await newRow();
-            
-        }, 3000);
-        return () => {
-            window.clearInterval(interval);
-        }*/
-        //newRow()
 
     })
 
 
     const newRow = () => {
         orders.map((stock) => {
-            //valori[stock.symbol]
             totalValue = portfolioValue
             if (stock.operationType === "buy") {
 
@@ -60,26 +49,26 @@ function StocksHeld(props) {
     return (
         <TableBody>
             {orders.map((stock) => {
-                try{
-                if (stock.operationType === "buy") {
+                try {
+                    if (stock.operationType === "buy") {
 
-                    totalValue += +((stock.quantity * valori[stock.symbol] - stock.quantity * stock.price).toFixed(2))
+                        totalValue += +((stock.quantity * valori[stock.symbol] - stock.quantity * stock.price).toFixed(2))
 
-                } else {
+                    } else {
 
-                    totalValue += +((stock.quantity * stock.price - stock.quantity * valori[stock.symbol]).toFixed(2))
+                        totalValue += +((stock.quantity * stock.price - stock.quantity * valori[stock.symbol]).toFixed(2))
 
+                    }
+                    console.log(totalValue)
+                } catch (e) {
+                    console.log(e)
                 }
-                console.log(totalValue)
-            }catch(e){
-                console.log(e)
-            }
-                return <StocksHeldRow data={stock} prezzo={valori[stock.symbol]} credito={credito} guadagno={stock.quantity*valori[stock.symbol]}/>
+                return <StocksHeldRow data={stock} prezzo={valori[stock.symbol]} credito={credito} guadagno={stock.quantity * valori[stock.symbol]} />
             })}
             <TableRow className={classes.root} style={{ alignContent: "right", backgroundColor: (totalValue >= 0) ? "green" : "red" }}>
                 <TableCell colspan="10" align="center" fontSize="25px">
-                    Total positions:{" " +  ((orders.length) ? ((totalValue) ? totalValue.toFixed(2) : "0.00" ) : "Loading...") }$ {/*0.00*/}
-            </TableCell>
+                    Total positions:{" " + ((orders.length) ? ((totalValue) ? totalValue.toFixed(2) : "0.00") : "Loading...")}$ {/*0.00*/}
+                </TableCell>
             </TableRow>
         </TableBody>
 

@@ -1,42 +1,3 @@
-/* import React from "react";
-import MediaCard from "./MediaCard";
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from "@material-ui/core/Grid";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    padding: theme.spacing(2)
-  },
-}));
-
-
-
-
-const StockTable = (props) => {
-  const classes = useStyles();
-  return (
-    <Grid
-      container
-      spacing={2}
-      direction="row"
-      justify="flex-start"
-      alignItems="flex-start"
-      className={classes.root}
-    >
-      {props.articles.map((article, index) => (
-        <Grid item xs={3} key={article.title + index}>
-          <MediaCard article={article} key={article.title + index} />
-        </Grid>
-      ))}
-    </Grid>
-  );
-};
-
-
-
-export default StockTable; */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -52,7 +13,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import StockRow from './StockRow';
 
 const useRowStyles = makeStyles({
   root: {
@@ -87,7 +47,7 @@ function Row(props) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
-              
+
             </Box>
           </Collapse>
         </TableCell>
@@ -135,9 +95,6 @@ export default function CollapsibleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {rows.map((row) => (
-            <StockRow key={row.name} row={row} />
-          ))} */}
         </TableBody>
       </Table>
     </TableContainer>

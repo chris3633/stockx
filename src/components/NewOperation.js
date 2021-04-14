@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import { Alert } from 'react-bootstrap';
+
 
 export default async function addOperation(currentUser, quantity, operationType, stock) {
   const userEmail = currentUser.email;
@@ -28,8 +28,6 @@ export default async function addOperation(currentUser, quantity, operationType,
 
   userRef.child('credit').set(credit - totalOperation)
 
-  //console.log(userRef)
-  //userRef.set()
 
   // inserisco l'ordine, ognugno avrà una chiave univoca
   userRef.child('orders').push().set({

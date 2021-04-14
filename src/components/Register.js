@@ -46,22 +46,7 @@ export default function Signup() {
   function saveUser(emailRef, nameRef, surnameRef, zipCodeRef, addressRef, cityRef) {
 
     var newUserRef = userRef.child(window.btoa(emailRef))
-    //var found = false;
 
-    /*     var query = userRef.orderByKey();
-    
-        query.once("value")
-          .then(function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
-              var key = childSnapshot.key;
-              if (key == window.btoa(emailRef)) {
-                found = true;
-              }
-            });
-    
-          });
-    
-        if (found == false) { */
     newUserRef.set({
       name: nameRef,
       surname: surnameRef,
@@ -70,9 +55,6 @@ export default function Signup() {
       city: cityRef,
       credit: 0,
     })
-    //}
-    //console.log(found)
-    //return found;
   }
 
 
@@ -80,9 +62,9 @@ export default function Signup() {
     <>
       <Container
         className="d-flex justify-content-center"
-        style={{ minHeight: "100vh"}}
+        style={{ minHeight: "100vh" }}
       >
-        <div className="w-100" style={{ marginTop:"100px",marginBottom:"30px", maxWidth: "400px" }}>
+        <div className="w-100" style={{ marginTop: "100px", marginBottom: "30px", maxWidth: "400px" }}>
           <Card>
             <Card.Body>
               <h2 className="text-center mb-4" >Sign Up</h2>

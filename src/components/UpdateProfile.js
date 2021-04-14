@@ -1,20 +1,15 @@
-import React, { useRef, useState, useEffect } from "react"
-import { Form, Button, Card, Alert, Container } from "react-bootstrap"
+import React, { useState, useEffect } from "react"
+import { Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 import firebase from 'firebase'
-import handleUpdate from './HandleUpdateProfile'
+
 import UpdateForm from './UpdateForm'
-import { Component } from "react"
-import { render } from "@testing-library/react"
+
 
 
 
 export default function UpdateProfile() {
-
-  //console.log(props.value.email)
-  //const userEmail=props.value.email
-
 
   const [error, setError] = useState("")
 
@@ -22,31 +17,7 @@ export default function UpdateProfile() {
   console.log(currentUser)
   const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email))
   var userData = { name: "", surname: "", address: "", city: "", zipCode: "", credit: 0 };
-  //const [userData,setUserdata] =useState({ name: '', surname: '', address: '', city: '', zipCode: '', orders: {} })
-  //console.log(userEmail)
-  /*userRef.child('name').on('value', (snapshot) => {
-    userData.name = snapshot.val();
-    document.getElementById('name').defaultValue=snapshot.val();
-  });
-  userRef.child('surname').on('value', (snapshot) => {
-    userData.surname = snapshot.val();
-    document.getElementById("surname").defaultValue=snapshot.val();
-  });
-  userRef.child('address').on('value', (snapshot) => {
-    userData.address = snapshot.val();
-    document.getElementById("address").defaultValue=snapshot.val();
-  });
-  userRef.child('city').on('value', (snapshot) => {
-    userData.city = snapshot.val();
-    document.getElementById("city").defaultValue=snapshot.val();
-  });
-  userRef.child('zipCode').on('value', (snapshot) => {
-    userData.zipCode = snapshot.val();
-    document.getElementById("zipCode").defaultValue=snapshot.val();
-  });
-  userRef.child('orders').on('value', (snapshot) => {
-    userData.orders = snapshot.val();
-  });*/
+
 
   var loadForm = (snapshot) => {
 
@@ -54,7 +25,6 @@ export default function UpdateProfile() {
       console.log(snapshot.exportVal())
       console.log(snapshot.hasChild("orders"))
       if (snapshot.hasChild("orders")) {
-        //userData = { name: "", surname: "", address: "", city: "", zipCode: "", orders: {}, credit: 0 }
         userData.orders = snapshot.exportVal().orders;
       }
       userData.name = snapshot.exportVal().name;
@@ -63,9 +33,9 @@ export default function UpdateProfile() {
       userData.city = snapshot.exportVal().city;
       userData.zipCode = snapshot.exportVal().zipCode;
 
-      //userData.orders = snapshot.exportVal().orders;
+
       userData.credit = snapshot.exportVal().credit;
-      //setUserdata({name: name, surname: surname, address: address, city: city, zipCode: zipCode, orders: orders })
+
       document.getElementById("name").defaultValue = userData.name;
       document.getElementById("surname").defaultValue = userData.surname;
       document.getElementById("address").defaultValue = userData.address;
@@ -88,70 +58,6 @@ export default function UpdateProfile() {
           <h2 className="text-center mb-4">Update Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <UpdateForm value={userData} />
-          {/* <Form >
-              <Form.Group id="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  disabled={true}
-                  defaultValue={currentUser.email}
-                />
-              </Form.Group>
-              <Form.Group id="name">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  disabled={true}
-                  value={userData.name}
-                />
-              </Form.Group>
-              <Form.Group id="surname">
-                <Form.Label>Surname</Form.Label>
-                <Form.Control
-                  disabled={true}
-                  defaultValue={userData.surname}
-                />
-              </Form.Group>
-              <Form.Group id="address">
-                <Form.Label>Address</Form.Label>
-                <Form.Control
-                  defaultValue={userData.address}
-                  ref={addressRef}
-                />
-              </Form.Group>
-              <Form.Group id="city">
-                <Form.Label>City</Form.Label>
-                <Form.Control
-                  defaultValue={userData.city}
-                  ref={cityRef}
-                />
-              </Form.Group>
-              <Form.Group id="zipCode">
-                <Form.Label>Zip code</Form.Label>
-                <Form.Control
-                  defaultValue={userData.zipCode}
-                  ref={zipCodeRef}
-                />
-              </Form.Group>
-              <Form.Group id="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  ref={passwordRef}
-                  placeholder="Leave blank to keep the same"
-                />
-              </Form.Group>
-              <Form.Group id="password-confirm">
-                <Form.Label>Password Confirmation</Form.Label>
-                <Form.Control
-                  type="password"
-                  ref={passwordConfirmRef}
-                  placeholder="Leave blank to keep the same"
-                />
-              </Form.Group>
-              <Button onClick={()=>handleSubmit()} disabled={loading} className="w-100" >{/*={() => handleUpdate(currentUser,addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, operations,passwordRef,passwordConfirmRef)}*/}
-          {/*Update
-            </Button>
-            </Form> */}
           <div className="w-100 text-center mt-2">
             <Link to="/dashboard">Cancel</Link>
           </div>

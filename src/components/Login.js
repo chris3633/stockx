@@ -3,7 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import { Container } from "react-bootstrap"
-import PrivateRoute from "./PrivateRoute"
+
 
 
 export default function Login() {
@@ -58,7 +58,7 @@ export default function Login() {
               </div>
             </Card.Body>
           </Card>
-          <div className="w-100 text-center mt-2"> 
+          <div className="w-100 text-center mt-2">
             Need an account? <Link to="/register">Sign Up</Link>
           </div>
         </div>

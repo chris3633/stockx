@@ -1,14 +1,12 @@
 import firebase from 'firebase'
-import { Alert } from 'react-bootstrap';
 
 
 export default function handleUpdate(userEmail, name, surname, addressRef, cityRef, zipCodeRef, credit, operations) {
 
   try {
     var userRef = firebase.database().ref('users/' + window.btoa(userEmail))
-console.log('entrato');
     if (addressRef !== '' && cityRef !== '' && zipCodeRef !== '') {
-      if(operations){
+      if (operations) {
         userRef.set({
           name: name,
           surname: surname,
@@ -19,7 +17,7 @@ console.log('entrato');
           credit: credit
         })
       }
-      else{
+      else {
         userRef.set({
           name: name,
           surname: surname,
@@ -29,7 +27,7 @@ console.log('entrato');
           credit: credit
         })
       }
-      
+
       return true
     }
   }
@@ -39,81 +37,3 @@ console.log('entrato');
   }
 }
 
-/* const handleSubmit(addressRef, cityRef, zipCodeRef,operations)=> {
-    e.preventDefault()
-    console.log(addressRef)
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
-    }
-    console.log('3')
-    const promises = []
-    setLoading(true)
-    setError("")
-
-    if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value))
-      console.log('4')
-    }
-    if (addressRef !== '' || cityRef !== '' || zipCodeRef !== '') {
-      setLoading(true)
-      console.log('6')
-
-      console.log(addressRef)
-      console.log(cityRef)
-      /* if (addressRef !== address) {//non funziona perché sovrascrive
-        userRef.set({
-          address: "via",
-        })
-      }
-      if (cityRef !== city) {//non funziona perché al campo city aggiunge un figlio city con contenuto
-        userRef.child('city').set({
-          city: cityRef
-        })
-      }
-      if (zipCodeRef !== zipCode) {
-        userRef.child('zipCode').set({
-          zipCode: zipCodeRef
-        })
-      }
-      setLoading(false)
-    }
-
-    Promise.all(promises)
-      .then(() => {
-        console.log('5')
-        history.push("/")
-      })
-      .catch(() => {
-        setError("Failed to update account")
-      })
-      .finally(() => {
-        setLoading(false)
-      }) */
-
-/* function handleUpdate(addressRef, cityRef, zipCodeRef,operations) {
-  // A post entry.
-  setLoading(true)
-  console.log('6')
-
-  console.log(addressRef)
-  console.log(cityRef)
-  /* if (addressRef !== address) {//non funziona perché sovrascrive
-    userRef.set({
-      address: "via",
-    })
-  }
-  if (cityRef !== city) {//non funziona perché al campo city aggiunge un figlio city con contenuto
-    userRef.child('city').set({
-      city: cityRef
-    })
-  }
-  if (zipCodeRef !== zipCode) {
-    userRef.child('zipCode').set({
-      zipCode: zipCodeRef
-    })
-  }
-  setLoading(false)
-  return true
-}
-
-} */

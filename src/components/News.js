@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { CardGroup } from "react-bootstrap";
-import { Container, Header } from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
 import { getLatestArticles } from "../NewsAPI";
 import MediaCards from './ArticleList'
 

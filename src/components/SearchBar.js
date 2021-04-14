@@ -1,7 +1,5 @@
 import React from "react";
 import { Form } from "semantic-ui-react";
-import searchForStock from './Stocks';
-import { Button } from "@material-ui/core";
 
 class SearchBar extends React.Component {
   constructor(props) {

@@ -1,8 +1,8 @@
 import { TableCell, TableRow } from '@material-ui/core';
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from 'react-bootstrap';
-import getStockInfo from "../StockAPI";
+
 import { useAuth } from "../contexts/AuthContext"
 import closePosition from './ClosePosition'
 import firebase from "firebase"
@@ -29,29 +29,7 @@ const StocksHeldRow = (props) => {
     const [visibility, setVisibility] = useState("visible")
     var userRef = firebase.database().ref('users/' + window.btoa(currentUser.email));
     const [loading, setLoading] = useState(true)
-    /*const fetchData = async () => {
-        currentInfo = await getStockInfo([orders.symbol]);
-        currentInfo && currentInfo.map((element) => {
-            actualPrice[element.quote.symbol] = element.quote.delayedPrice
-            //console.log(actualPrice[element.quote.symbol]-orders.price)        
-            setRtPrice(actualPrice[element.quote.symbol])
-            //setRtPrice((Math.random()*1000).toFixed(2))
-        })
 
-        //console.log(rtPrice)
-        //console.log(orders)
-    }
-    */
-
-    /*userRef.on('value', (snapshot) => {
-        setCredit(snapshot.exportVal().credit);
-    })*/
-
-    /*userRef.on('value', (snapshot) =>{
-      credit=snapshot.exportVal().credit
-      console.log(credit)
-    })
-console.log(GetCredit())*/
 
     useEffect(() => {
 
@@ -70,24 +48,6 @@ console.log(GetCredit())*/
     }, [credit, loading, userRef])
 
 
-
-    //price=portfolioValue
-    //console.log((prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2) + price)
-    //setPortfolioValue((prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2) + price)
-    /* if (orders.operationType === "buy") {
-        //console.log(prezzo*orders.quantity)
-        
-        setPortfolioValue((prezzo * orders.quantity - orders.price * orders.quantity).toFixed(2) + price)
-        //setPortfolioValue(portfolioValue+price)
-        //setPortfolioValue(price)
-    } else {
-        setPortfolioValue((orders.price * orders.quantity - prezzo * orders.quantity).toFixed(2) + price)
-        //setPortfolioValue(price)
-    } */
-
-
-
-    console.log(credit)
 
     const classes = useRowStyles();
     return (

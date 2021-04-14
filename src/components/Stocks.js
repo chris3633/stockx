@@ -1,14 +1,12 @@
-import { Box, Button, TableCell, TableContainer, withStyles } from "@material-ui/core";
+import { Button, TableCell, TableContainer } from "@material-ui/core";
 import TableHead from '@material-ui/core/TableHead';
-import { Component, useState } from "react";
-import { Container, Header, Table, TableBody, TableRow } from "semantic-ui-react";
+import { Component } from "react";
+import { Header, Table, TableRow } from "semantic-ui-react";
 import getStockInfo from "../StockAPI";
 import Paper from '@material-ui/core/Paper';
 import StockRows from './StockRows'
 import SearchBar from "./SearchBar";
 import LinearIndeterminate from './LoadingBar'
-import firebase from 'firebase';
-import { useAuth } from "../contexts/AuthContext";
 import GetCredit from "./Credit"
 
 
@@ -82,7 +80,6 @@ class Stocks extends Component {
             this.setState({
                 stocks: temp_array,
                 searchStock: stock,
-                //totalResults: response.totalResults
             });
         } catch (error) {
             this.setState({ error: "No stocks found!" });
@@ -102,7 +99,7 @@ class Stocks extends Component {
                 </Header>
 
                 <div style={divStyle}>
-                Current credit: <GetCredit /> $
+                    Current credit: <GetCredit /> $
                     <TableContainer component={Paper} >
                         <Table aria-label="collapsible table">
                             <TableHead style={{ backgroundColor: "orange" }}>
@@ -124,7 +121,7 @@ class Stocks extends Component {
                                 </TableRow>
                             </TableHead>
 
-                            {!this.state.loading ? <StockRows stocksInfo={page}/> : null}
+                            {!this.state.loading ? <StockRows stocksInfo={page} /> : null}
                             {apiError && <p>Could not fetch any stock. Please try again.</p>}
 
                         </Table>
@@ -132,8 +129,8 @@ class Stocks extends Component {
 
                     </TableContainer>
 
-                    { (pageIndex > 0 ? <Button onClick={this.prevPage}>Prev</Button> : (stocksInfo.length)?<Button disabled="true" onClick={this.prevPage}>Prev</Button>:null)}
-                    {(stocksInfo.length)? ((pageIndex + 1) * 10 < stocksInfo.length ? <Button onClick={this.nextPage} >Next</Button> : <Button disabled="true" onClick={this.nextPage}>Next</Button>) : null}
+                    {(pageIndex > 0 ? <Button onClick={this.prevPage}>Prev</Button> : (stocksInfo.length) ? <Button disabled="true" onClick={this.prevPage}>Prev</Button> : null)}
+                    {(stocksInfo.length) ? ((pageIndex + 1) * 10 < stocksInfo.length ? <Button onClick={this.nextPage} >Next</Button> : <Button disabled="true" onClick={this.nextPage}>Next</Button>) : null}
 
                 </div>
             </div>

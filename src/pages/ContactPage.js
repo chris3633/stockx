@@ -5,17 +5,17 @@ import { Container } from "react-bootstrap"
 function Contactpage() {
     return (
         <Container className="contactscontainer"
-        style={{ minHeight: "100vh" }}>
-        <div>
-        <Header as="h2" style={{ textAlign: "center", margin: 100 }}>
-            Feel free to contact us!
+            style={{ minHeight: "100vh" }}>
+            <div>
+                <Header as="h2" style={{ textAlign: "center", margin: 100 }}>
+                    Feel free to contact us!
         </Header>
-        <Header as="h5" style={{ textAlign: "center", margin: 100 }}>{/*300 con header senza maiuscola*/}
+                <Header as="h5" style={{ textAlign: "center", margin: 100 }}>
             Christian Morini: christian.morini@studenti.unipr.it
-            <br/><br/>
+            <br /><br />
             Samuele Dallospedale: samuele.dallospedale@studenti.unipr.it
         </Header>
-        </div>
+            </div>
         </Container>
     )
 }

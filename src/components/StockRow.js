@@ -3,14 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import { Box, FormControlLabel, FormGroup, IconButton, Radio, RadioGroup, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@material-ui/core';
+import { Box, FormControlLabel, IconButton, Radio, RadioGroup, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@material-ui/core';
 import Collapse from '@material-ui/core/Collapse';
 import { useAuth } from "../contexts/AuthContext"
 import addOperation from './NewOperation'
 import { Button } from 'react-bootstrap'
-import { Form, Grid } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
 import firebase from 'firebase'
-import { FormatColorResetOutlined } from '@material-ui/icons';
+
 
 const useRowStyles = makeStyles({
   root: {
@@ -41,26 +41,7 @@ const StockRow = (props) => {
   var credit
   userRef.on('value', (snapshot) => {
     credit = snapshot.exportVal().credit
-    console.log(credit)
   })
-
-
-  console.log(currentUser.email)
-
-
-
-
-
-  //addOperation(currentUser,symbol,date,quantity,operationType,stock);
-  /* const userEmail=currentUser.currentUser.email;
-  const symbol=stock.quote.symbol;
-
-  const date=new Date().toLocaleString();
-  //const totalOperation=stock.quote.delayedPrice*quantity.current.value
-  console.log(date)
-  console.log(userEmail)
-  console.log(symbol)
-  //console.log(totalOperation) */
 
 
   function checkCredit(total) {
@@ -109,7 +90,7 @@ const StockRow = (props) => {
                       <TableCell>
                         Position size
                       </TableCell>
-                      <TableCell/>
+                      <TableCell />
                     </TableRow>
                   </TableHead>
                   <TableBody >
@@ -149,7 +130,7 @@ const StockRow = (props) => {
             </Box>
           </Collapse>
         </TableCell>
-      </TableRow> 
+      </TableRow>
     </React.Fragment>
   );
 }

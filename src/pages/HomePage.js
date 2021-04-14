@@ -11,10 +11,10 @@ function Home() {
     const { currentUser } = useAuth()
 
     return (
-            <Container
-                className="newscontainer"
-                style={{ minHeight: "200vh" }}
-            >
+        <Container
+            className="newscontainer"
+            style={{ minHeight: "200vh" }}
+        >
             <div>
                 <br></br>
                 <br></br>
@@ -23,7 +23,7 @@ function Home() {
                 <h1 className="title"> "Buy and sell stocks as you never did before!"</h1>
                 <News />
             </div>
-            </Container>
+        </Container>
 
     )
 }

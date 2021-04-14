@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import StockRow from "./StockRow";
-import { TableBody, TableCell, TableRow } from "@material-ui/core";
+import { TableBody } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,14 +10,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function StockRows(props){
-  const {stocksInfo}=props;
+function StockRows(props) {
+  const { stocksInfo } = props;
   console.log(stocksInfo);
   const classes = useStyles();
- return( <TableBody>
-  {stocksInfo.map((stock) => <StockRow stock={stock}/>)}
-  </TableBody> ); 
-  
+  return (<TableBody>
+    {stocksInfo.map((stock) => <StockRow stock={stock} />)}
+  </TableBody>);
+
 };
 
 export default StockRows;
