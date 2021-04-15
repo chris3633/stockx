@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
 
 function StockRows(props) {
   const { stocksInfo } = props;
-  console.log(stocksInfo);
   const classes = useStyles();
   return (<TableBody>
     {stocksInfo.map((stock) => <StockRow stock={stock} />)}

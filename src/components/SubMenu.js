@@ -54,8 +54,8 @@ const SubMenu = ({ item }) => {
           {item.subNav && subnav
             ? item.iconOpened
             : item.subNav
-            ? item.iconClosed
-            : null}
+              ? item.iconClosed
+              : null}
         </div>
       </SidebarLink>
       {subnav &&

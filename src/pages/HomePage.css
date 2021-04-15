@@ -66,14 +66,14 @@
 
   .newscontainer{
     background-image: url(../assets/news.jpg);
-      height:inherit;
+    height:auto;
 
   /* Center and scale the image nicely */
-  background-position:relative;
+  background-position:inherit;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size:cover;
   background-attachment: fixed;
-  background-position-y: top;
+
 
 
   min-height: 100%;
@@ -92,7 +92,7 @@
     font-family:'Times New Roman', Times, serif;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-style: oblique;
-    color: rgba(0,0,0,1);/*rgba(255, 255, 255, 1)*/
+    color: rgb(66, 103, 178);/*rgba(255, 255, 255, 1)*/
     font-size:xx-large;
     text-align:center;
 }

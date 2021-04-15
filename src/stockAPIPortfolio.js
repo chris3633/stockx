@@ -12,7 +12,6 @@ async function getStockInfo(stocks) {
         })
         json = await response.json();
         lista.push(json);
-        console.log("Check API Portfolio");
     }
     return lista;
 

@@ -121,7 +121,7 @@ const StockRow = (props) => {
                         <label style={{ fontSize: '20px' }}> {(size * stock.quote.delayedPrice).toFixed(2)} $</label>
                       </TableCell>
                       <TableCell align="center" style={{ verticalAlign: 'middle' }}>
-                        <Button variant="success" onClick={() => { (window.confirm('Are you sure?')) ? ((checkCredit(size * stock.quote.delayedPrice)) ? (addOperation(currentUser, document.getElementById("quantity").value, value, stock) && setOpen(!open)) : (alert("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds."))) : alert("Operation aborted!") }} type="submit"> Confirm</Button>
+                        <Button variant="success" onClick={() => { (size > 0) ? ((window.confirm('Are you sure?')) ? ((checkCredit(size * stock.quote.delayedPrice)) ? (addOperation(currentUser, document.getElementById("quantity").value, value, stock) && setOpen(!open)) : (alert("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds."))) : alert("Operation aborted!")) : alert("Position size must be a positive number.") }} type="submit"> Confirm</Button>
                       </TableCell>
                     </TableRow>
                   </TableBody>

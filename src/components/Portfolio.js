@@ -32,7 +32,7 @@ export default function Portfolio() {
     var currentInfo = []
     var acquisti = []
 
-    
+
 
     useEffect(() => {
 
@@ -70,10 +70,8 @@ export default function Portfolio() {
         setArray([])
         snapshot.forEach((element) => {
             dataArray.push(element.val())
-            console.log(dataArray)
             dataSymbol.push(element.val().symbol)
             acquisti.push(element.val().quantity * element.val().price)
-            console.log(acquisti)
         })
         setArray(dataArray)
         fetchPrice(dataSymbol)

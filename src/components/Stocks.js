@@ -89,8 +89,6 @@ class Stocks extends Component {
 
     render() {
         const { stocksInfo, apiError, pageIndex, stocks, searchParam } = this.state;
-        console.log(stocksInfo)
-        console.log(stocks)
         const page = searchParam !== null ? stocks.slice(pageIndex * 10, pageIndex * 10 + 10) : stocksInfo.slice(pageIndex * 10, pageIndex * 10 + 10);
         return (
             <div>

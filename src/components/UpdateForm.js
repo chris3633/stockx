@@ -17,8 +17,7 @@ const UpdateForm = (props) => {
     const history = useHistory()
 
     function handleSubmit() {
-        console.log('3')
-        console.log(addressRef.current.value)
+
 
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             setError("Passwords do not match")
@@ -41,7 +40,7 @@ const UpdateForm = (props) => {
                 promises.push(handleUpdate(currentUser.email, props.value.name, props.value.surname, addressRef.current.value, cityRef.current.value, zipCodeRef.current.value, props.value.credit))
             }
         }
-        console.log(promises)
+
         Promise.all(promises)
             .then(() => {
                 history.push("/update-profile")

@@ -18,10 +18,7 @@ async function getStockInfo(stocks) {
             })
             json = await response.json();
             lista.push(json);
-            console.log("check API trading area");
         }
-        console.log(json);
-        console.log(lista)
         return lista;
     }
     else {
@@ -35,9 +32,7 @@ async function getStockInfo(stocks) {
             })
             json = await response.json();
             lista.push(json);
-            console.log("check API trading area");
         }
-        console.log('return');
         return lista;
     }
 

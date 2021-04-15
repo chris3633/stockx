@@ -12,8 +12,6 @@ function StocksHeld(props) {
     const [portfolioValue, setPortfolioValue] = useState(0)
     var totalValue = 0;
 
-    console.log(orders)
-    console.log(valori)
     useEffect(() => {
 
     })
@@ -59,7 +57,6 @@ function StocksHeld(props) {
                         totalValue += +((stock.quantity * stock.price - stock.quantity * valori[stock.symbol]).toFixed(2))
 
                     }
-                    console.log(totalValue)
                 } catch (e) {
                     console.log(e)
                 }
@@ -67,7 +64,7 @@ function StocksHeld(props) {
             })}
             <TableRow className={classes.root} style={{ alignContent: "right", backgroundColor: (totalValue >= 0) ? "green" : "red" }}>
                 <TableCell colspan="10" align="center" fontSize="25px">
-                    Total positions:{" " + ((orders.length>0) ? ((totalValue) ? totalValue.toFixed(2) : "0.00") : ((orders.length===0) ? "0.00" :  "Loading..."))}$ {/*0.00*/}
+                    Total positions:{" " + ((orders.length > 0) ? ((totalValue) ? totalValue.toFixed(2) : "0.00") : ((orders.length === 0) ? "0.00" : "Loading..."))}$ {/*0.00*/}
                 </TableCell>
             </TableRow>
         </TableBody>

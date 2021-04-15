@@ -44,7 +44,7 @@ export default function AddFunds() {
                 <TextField value={size} onChange={(e) => setSize(e.target.value)} type="number" id="quantity" label="quantity" InputProps={{ inputProps: { min: 50, step: 50 } }} required />
               </div>
               <div align='right'>
-                <Button onClick={() => updateCredit()} class="btn btn-primary">Confirm</Button>
+                <Button onClick={() => (size > 0) ? updateCredit() : alert("Credit must be greater than 0.")} class="btn btn-primary">Confirm</Button>
               </div>
             </Form>
           </Card.Body>

@@ -11,7 +11,7 @@ function Contactpage() {
                     Feel free to contact us!
         </Header>
                 <Header as="h5" style={{ textAlign: "center", margin: 100 }}>
-            Christian Morini: christian.morini@studenti.unipr.it
+                    Christian Morini: christian.morini@studenti.unipr.it
             <br /><br />
             Samuele Dallospedale: samuele.dallospedale@studenti.unipr.it
         </Header>

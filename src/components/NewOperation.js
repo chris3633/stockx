@@ -8,12 +8,7 @@ export default async function addOperation(currentUser, quantity, operationType,
   const sector = stock.quote.sector;
   const date = new Date().toLocaleString();
   const totalOperation = stock.quote.delayedPrice * quantity
-  console.log(date)
-  console.log(userEmail)
-  console.log(symbol)
-  console.log(quantity)
-  console.log(operationType)
-  console.log(totalOperation)
+
 
   var credit
 
@@ -23,7 +18,7 @@ export default async function addOperation(currentUser, quantity, operationType,
 
   userRef.on('value', (snapshot) => {
     credit = snapshot.exportVal().credit
-    console.log(credit)
+
   })
 
   userRef.child('credit').set(credit - totalOperation)

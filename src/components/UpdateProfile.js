@@ -14,7 +14,6 @@ export default function UpdateProfile() {
   const [error, setError] = useState("")
 
   const { currentUser } = useAuth()
-  console.log(currentUser)
   const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email))
   var userData = { name: "", surname: "", address: "", city: "", zipCode: "", credit: 0 };
 
@@ -22,8 +21,7 @@ export default function UpdateProfile() {
   var loadForm = (snapshot) => {
 
     try {
-      console.log(snapshot.exportVal())
-      console.log(snapshot.hasChild("orders"))
+
       if (snapshot.hasChild("orders")) {
         userData.orders = snapshot.exportVal().orders;
       }
