@@ -31,18 +31,19 @@ const StocksHeldRow = (props) => {
 
         const interval = setInterval(async () => {
             setLoading(true)
-
+            if(loading){
             userRef.child('credit').on('value', (snapshot) => {
                 setCredit(snapshot.exportVal());
             })
             setLoading(false)
+            }else console.log("Mi sono bloccato")
 
         }, 1000);
         return function cleanup() {
             window.clearInterval(interval);
             setLoading(false)
         }
-    }, [credit, loading, userRef])
+    }, [])
 
 
 

@@ -7,7 +7,8 @@ function StocksHeld(props) {
 
     const [orders, setOrders] = useState(props.operations)
     const [valori, setValori] = useState(props.valori) //json con prezzi attuali
-    const credito = useState(props.credito)
+    const [credito, setCredito] = useState(props.credito)
+
     var totalValue = 0;
 
 
