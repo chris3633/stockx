@@ -6,7 +6,6 @@ import { Button } from 'react-bootstrap';
 import { useAuth } from "../contexts/AuthContext"
 import closePosition from './ClosePosition'
 import firebase from "firebase"
-import { BsCreditCard } from 'react-icons/bs';
 
 const useRowStyles = makeStyles({
     root: {
@@ -21,10 +20,6 @@ const useRowStyles = makeStyles({
 const StocksHeldRow = (props) => {
     const [orders, setOrders] = useState(props.data)
     const [prezzo, setPrezzo] = useState(props.prezzo)
-    const [guadagno, setGuadagno] = useState(props.guadagno)
-    const [rtPrice, setRtPrice] = useState([])
-    var currentInfo = null
-    var actualPrice = {}
     const currentUser = useAuth();
     const [credit, setCredit] = useState(props.credito);
     const [visibility, setVisibility] = useState("visible")
@@ -43,8 +38,9 @@ const StocksHeldRow = (props) => {
             setLoading(false)
 
         }, 1000);
-        return () => {
+        return function cleanup() {
             window.clearInterval(interval);
+            setLoading(false)
         }
     }, [credit, loading, userRef])
 

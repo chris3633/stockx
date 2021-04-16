@@ -22,8 +22,8 @@ const MediaCards = (props) => {
       className={classes.root}
     >
       {props.articles.map((article, index) => (
-        <Grid item xs={3} key={article.title + index}>
-          <MediaCard article={article} key={article.title + index} />
+        <Grid item xs={3} key={article.shorterHeadline + index}>
+          <MediaCard article={article} key={article.shorterHeadline + index} />
         </Grid>
       ))}
     </Grid>

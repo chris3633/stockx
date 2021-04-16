@@ -31,7 +31,6 @@ class News extends Component {
     try {
       const response = await getLatestArticles();
       this.setState({ articles: response.data.mostPopular.assets });
-      //      console.log(response.data.mostPopular.assets);
     } catch (error) {
       this.setState({ apiError: "Could not find any articles" });
     }

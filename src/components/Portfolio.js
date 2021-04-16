@@ -18,9 +18,7 @@ export default function Portfolio() {
     const { currentUser } = useAuth()
     const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email) + '/orders')
     const userRefCredit = firebase.database().ref('users/' + window.btoa(currentUser.email))
-    const [orders, setOrders] = useState()
     const [loading, setLoading] = useState(true)
-    const [pageIndex, setPageIndex] = useState(0)
     const [currentCredit, setCurrentCredit] = useState(0)
     var dataArray = []
 
@@ -60,7 +58,7 @@ export default function Portfolio() {
             currentInfo = await getStockInfo(simbolo)
             currentInfo && currentInfo.map((azione) => {
                 actualPrice[azione.quote.symbol] = azione.quote.delayedPrice.toFixed(2);
-                setArrayPrezzi(actualPrice)
+                return setArrayPrezzi(actualPrice)
             })
         } catch (e) { console.log(e); }
 
@@ -106,7 +104,7 @@ export default function Portfolio() {
 
                             </TableRow>
                         </TableHead>
-                        {!loading ? <StocksHeld operations={array} valori={arrayPrezzi} credito={currentCredit.toFixed(2)} /> : <p>You don't have any stock</p>}
+                        {!loading ? <StocksHeld operations={array} valori={arrayPrezzi} credito={currentCredit.toFixed(2)} />:<p>You don't have any stock</p>}
                     </Table>
                 </TableContainer>
             </div>

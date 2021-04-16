@@ -1,12 +1,10 @@
-import React, { useState } from "react"
-import { useAuth } from "../contexts/AuthContext"
-import { useHistory } from "react-router-dom"
+import React from "react"
 import 'react-sidebar-ui/dist/index.css'
 import '../components/Dashboard.css'
 import Stocks from './Stocks'
 
 function Dashboard() {
-  const [error, setError] = useState("")
+  /*const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const history = useHistory()
 
@@ -21,7 +19,7 @@ function Dashboard() {
       setError("Failed to log out")
       console.log(error)
     }
-  }
+  }*/
 
   return (
     <>

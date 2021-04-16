@@ -6,9 +6,10 @@ var lista = [];
 var json;
 
 async function getStockInfo(stocks) {
+    var element
     if (!stocks) {
         lista = []
-        for (var element of stocksList) {
+        for (element of stocksList) {
             const response = await fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/" + element + "/book", {
                 "method": "GET",
                 "headers": {
@@ -22,7 +23,7 @@ async function getStockInfo(stocks) {
         return lista;
     }
     else {
-        for (var element of stocks) {
+        for (element of stocks) {
             const response = await fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/" + element + "/book", {
                 "method": "GET",
                 "headers": {

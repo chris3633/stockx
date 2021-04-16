@@ -3,7 +3,6 @@ import { Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
 import firebase from 'firebase'
-
 import UpdateForm from './UpdateForm'
 
 
@@ -11,7 +10,7 @@ import UpdateForm from './UpdateForm'
 
 export default function UpdateProfile() {
 
-  const [error, setError] = useState("")
+  const [error,setError] = useState("")
 
   const { currentUser } = useAuth()
   const userRef = firebase.database().ref('users/' + window.btoa(currentUser.email))

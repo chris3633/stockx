@@ -26,13 +26,10 @@ const useRowStyles = makeStyles({
 const StockRow = (props) => {
   const { currentUser } = useAuth();
   let quantity = useRef();
-  const operationType = useRef()
 
   const { stock } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-  const symbol = stock.quote.symbol;
-  const date = new Date().toLocaleString();
 
   const [value, setValue] = React.useState("buy")
   const [size, setSize] = React.useState(0.1);
@@ -56,12 +53,10 @@ const StockRow = (props) => {
       <TableRow className={classes.root}>
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
           </IconButton>
         </TableCell>
-        <TableCell >
-          {stock.quote.companyName}
-        </TableCell>
+        <TableCell>{stock.quote.companyName}</TableCell>
         <TableCell align="left">{stock.quote.primaryExchange}</TableCell>
         <TableCell align="left">{stock.quote.sector}</TableCell>
         <TableCell align="left">{stock.quote.symbol}</TableCell>
@@ -84,33 +79,33 @@ const StockRow = (props) => {
                       <TableCell>
                         Quantity
                       </TableCell>
-                      <TableCell >
+                      <TableCell>
                         Operation type
                       </TableCell>
                       <TableCell>
                         Position size
                       </TableCell>
-                      <TableCell />
+                      <TableCell/>
                     </TableRow>
                   </TableHead>
-                  <TableBody >
+                  <TableBody>
                     <TableRow align="center" style={{ verticalAlign: 'middle' }}>
                       <TableCell align="left" style={{ verticalAlign: 'middle' }}>
-                        <TextField value={size} onChange={(e) => setSize(e.target.value)} type="number" id="quantity" label="stock quantity" InputProps={{ inputProps: { min: 0.1, step: 0.1 } }} required ref={quantity} />
+                        <TextField value={size} onChange={(e) => setSize(e.target.value)} type="number" id="quantity" label="stock quantity" InputProps={{ inputProps: { min: 0.1, step: 0.1 } }} required ref={quantity}/>
                       </TableCell>
                       <TableCell align="left" style={{ verticalAlign: 'bottom' }}>
-                        <RadioGroup row aria-label="position" defaultValue="buy" align="center" style={{ verticalAlign: 'middle' }} required >
+                        <RadioGroup row aria-label="position" defaultValue="buy" align="center" style={{ verticalAlign: 'middle' }} required>
                           <FormControlLabel
                             align="left"
                             value="buy"
-                            control={<Radio id='buy' name='radioButton' color="primary" align="center" style={{ verticalAlign: 'middle' }} />}
+                            control={<Radio id='buy' name='radioButton' color="primary" align="center" style={{ verticalAlign: 'middle' }}/>}
                             label="Buy"
                             labelPlacement="start"
                             onChange={() => setValue("buy")}
                           />
                           <FormControlLabel
                             value="sell"
-                            control={<Radio id='sell' name='radioButton' color='secondary' align="center" style={{ verticalAlign: 'middle' }} />}
+                            control={<Radio id='sell' name='radioButton' color='secondary' align="center" style={{ verticalAlign: 'middle' }}/>}
                             label="Sell"
                             labelPlacement="start"
                             onChange={() => setValue("sell")}

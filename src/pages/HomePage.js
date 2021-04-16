@@ -1,11 +1,9 @@
 import React from 'react'
 import "../pages/HomePage.css"
-import MediaCard from '../components/MediaCard'
 import { useAuth } from '../contexts/AuthContext'
 import News from '../components/News'
 import { Container } from "react-bootstrap";
 import "../pages/HomePage.css"
-import { Header } from "semantic-ui-react";
 
 
 function Home() {

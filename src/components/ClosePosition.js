@@ -2,10 +2,8 @@ import firebase from 'firebase'
 
 export default function closePosition(currentUser, symbol, date, pl, credit) {
     const userEmail = currentUser.currentUser.email;
-    var loading = true;
 
     var userRef = firebase.database().ref('users/' + window.btoa(userEmail));
-    var credit
 
     userRef.child("orders").on('value', (snapshot) => {
         snapshot.forEach(element => {

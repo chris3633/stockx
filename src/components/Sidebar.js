@@ -7,7 +7,6 @@ import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons/lib';
 import { Navbar } from 'react-bootstrap'
 import logo from '../assets/navbarlogo.png'
-import { useAuth } from '../contexts/AuthContext'
 import SubMenu from '../components/SubMenu'
 import '../App.css'
 
@@ -49,7 +48,6 @@ const SidebarWrap = styled.div`
 
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
-  const { currentUser } = useAuth()
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -63,6 +61,7 @@ const Sidebar = () => {
           <Navbar.Brand href="/" className="navigation-brand ">
             <img
               src={logo}
+              alt="STOCKX"
               width="50"
               height="50"
               className="d-inline-block align-top"

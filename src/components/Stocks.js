@@ -38,8 +38,6 @@ class Stocks extends Component {
     async componentDidMount() {
         this.setState({ loading: true });
         this.setState({ stocksInfo: [] });
-        //this.setState({currentCredit: this.getCredit()});
-        //this.setState({currentCredit: 120});
         try {
             const response = await getStockInfo();
             this.setState({ stocksInfo: response, loading: false });
@@ -47,6 +45,10 @@ class Stocks extends Component {
             this.setState({ apiError: "Could not find any stock" });
         }
     }
+
+    componentWillUnmount() {
+        this.setState({ loading: false });
+      }
 
     prevPage() {
         if (this.state.pageIndex > 0) {
@@ -97,15 +99,13 @@ class Stocks extends Component {
                 </Header>
 
                 <div style={divStyle}>
-                    Current credit: <GetCredit /> $
+                    Current credit: <GetCredit/> $
                     <TableContainer component={Paper} >
                         <Table aria-label="collapsible table">
                             <TableHead style={{ backgroundColor: "orange" }}>
                                 <TableRow>
                                     <TableCell>
-                                        <p style={{ textAlign: "left", margin: 0 }}>
-                                            Search a company name
-                                        </p>
+                                        <p style={{ textAlign: "left", margin: 0 }}>Search a company name</p>
                                         <SearchBar onChange={this.handleChangeSearch} />
                                     </TableCell>
                                     <TableCell>Company name</TableCell>
@@ -119,16 +119,14 @@ class Stocks extends Component {
                                 </TableRow>
                             </TableHead>
 
-                            {!this.state.loading ? <StockRows stocksInfo={page} /> : null}
+                            {!this.state.loading ? <StockRows stocksInfo={page}/> : null}
                             {apiError && <p>Could not fetch any stock. Please try again.</p>}
-
                         </Table>
-                        {this.state.loading && !apiError ? <div><p>Loading...</p><LinearIndeterminate /></div> : null}
-
+                        {this.state.loading && !apiError ? <div><p>Loading...</p><LinearIndeterminate/></div> : null}
                     </TableContainer>
 
-                    {(pageIndex > 0 ? <Button onClick={this.prevPage}>Prev</Button> : (stocksInfo.length) ? <Button disabled="true" onClick={this.prevPage}>Prev</Button> : null)}
-                    {(stocksInfo.length) ? ((pageIndex + 1) * 10 < stocksInfo.length ? <Button onClick={this.nextPage} >Next</Button> : <Button disabled="true" onClick={this.nextPage}>Next</Button>) : null}
+                    {(pageIndex > 0 ? <Button onClick={this.prevPage}>Prev</Button> : (stocksInfo.length) ? <Button disabled={true} onClick={this.prevPage}>Prev</Button>:null)}
+                    {(stocksInfo.length) ? ((pageIndex + 1) * 10 < stocksInfo.length ? <Button onClick={this.nextPage}>Next</Button>:<Button disabled={true} onClick={this.nextPage}>Next</Button>) : null}
 
                 </div>
             </div>
