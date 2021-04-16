@@ -90,7 +90,6 @@ export default function Portfolio() {
                     <Table >
                         <TableHead style={{ backgroundColor: "orange" }}>
                             <TableRow>
-
                                 <TableCell align='left'>Company name</TableCell>
                                 <TableCell align="left">Symbol</TableCell>
                                 <TableCell align="left">Sector</TableCell>
@@ -101,7 +100,6 @@ export default function Portfolio() {
                                 <TableCell align='left'>Actual price</TableCell>
                                 <TableCell align='left'>Profit/Loss</TableCell>
                                 <TableCell></TableCell>
-
                             </TableRow>
                         </TableHead>
                         {!loading ? <StocksHeld operations={array} valori={arrayPrezzi} credito={currentCredit.toFixed(2)} />:<p>You don't have any stock</p>}

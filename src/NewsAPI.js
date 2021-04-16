@@ -7,7 +7,10 @@ export const getLatestArticles = async () => {
       "x-rapidapi-host": "cnbc.p.rapidapi.com"
     }
   })
-  const json = await response.json();
+  var json
+  if(response.ok){
+    json = await response.json();
+  }
   return json;
 
 };

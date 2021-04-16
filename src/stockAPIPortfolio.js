@@ -10,8 +10,10 @@ async function getStockInfo(stocks) {
                 "x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com"
             }
         })
-        json = await response.json();
-        lista.push(json);
+        if(response.ok){
+            json = await response.json();
+            lista.push(json);
+        }
     }
     return lista;
 

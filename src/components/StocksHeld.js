@@ -24,7 +24,7 @@ function StocksHeld(props) {
 
     return (
         <TableBody>
-            {orders.map((stock) => {
+            {orders.map((stock,index) => {
                 try {
                     if (stock.operationType === "buy") {
 
@@ -38,7 +38,7 @@ function StocksHeld(props) {
                 } catch (e) {
                     console.log(e)
                 }
-                return <StocksHeldRow data={stock} prezzo={valori[stock.symbol]} credito={credito} guadagno={stock.quantity * valori[stock.symbol]} />
+                return <StocksHeldRow data={stock} prezzo={valori[stock.symbol]} credito={credito} guadagno={stock.quantity * valori[stock.symbol]} key={index}/>
             })}
             <TableRow className={classes.root} style={{ alignContent: "right", backgroundColor: (totalValue >= 0) ? "green" : "red" }}>
                 <TableCell colSpan="10" align="center" fontSize="25px">

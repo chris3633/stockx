@@ -7,7 +7,7 @@ import { TableBody } from "@material-ui/core";
 function StockRows(props) {
   const { stocksInfo } = props;
   return (<TableBody>
-    {stocksInfo.map((stock) => <StockRow stock={stock}/>)}
+    {stocksInfo.map((stock,index) => <StockRow stock={stock} key={index}/> )}
   </TableBody>);
 
 };
