@@ -110,7 +110,7 @@ class Stocks extends Component {
                                     </TableCell>
                                     <TableCell>Company name</TableCell>
                                     <TableCell align="left">Primary exchange</TableCell>
-                                    <TableCell align="left">Sector</TableCell>
+                                    {/*<TableCell align="left">Sector</TableCell>*/}
                                     <TableCell align="left">Symbol</TableCell>
                                     <TableCell align="right">Price</TableCell>
                                     <TableCell align="right">Market cap</TableCell>

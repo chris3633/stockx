@@ -36,7 +36,7 @@ const StocksHeldRow = (props) => {
                 setCredit(snapshot.exportVal());
             })
             setLoading(false)
-            }else console.log("Mi sono bloccato")
+            }else console.log("Errore StockHeldRow.js")
 
         }, 1000);
         return function cleanup() {
@@ -56,9 +56,9 @@ const StocksHeldRow = (props) => {
             <TableCell align='left'>
                 {orders.symbol}
             </TableCell>
-            <TableCell align='left'>
+            {/*<TableCell align='left'>
                 {orders.sector}
-            </TableCell>
+    </TableCell>*/}
             <TableCell align='left'>
                 {orders.date}
             </TableCell>

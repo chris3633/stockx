@@ -57,7 +57,7 @@ export default function Portfolio() {
         try {
             currentInfo = await getStockInfo(simbolo)
             currentInfo && currentInfo.map((azione) => {
-                actualPrice[azione.quote.symbol] = azione.quote.delayedPrice.toFixed(2);
+                actualPrice[azione.quote.symbol] = azione.quote.iexRealtimePrice.toFixed(2); // al posto di iexRealtimePrice c'era delayedPrice
                 return setArrayPrezzi(actualPrice)
             })
         } catch (e) { console.log(e); }
@@ -92,7 +92,7 @@ export default function Portfolio() {
                             <TableRow>
                                 <TableCell align='left'>Company name</TableCell>
                                 <TableCell align="left">Symbol</TableCell>
-                                <TableCell align="left">Sector</TableCell>
+                                {/*<TableCell align="left">Sector</TableCell>*/}
                                 <TableCell align='left'>Purchase date</TableCell>
                                 <TableCell align='center'>Purchase quantity</TableCell>
                                 <TableCell align='center'>Operation type</TableCell>

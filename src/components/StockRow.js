@@ -58,9 +58,9 @@ const StockRow = (props) => {
         </TableCell>
         <TableCell>{stock.quote.companyName}</TableCell>
         <TableCell align="left">{stock.quote.primaryExchange}</TableCell>
-        <TableCell align="left">{stock.quote.sector}</TableCell>
+        {/*<TableCell align="left">{stock.quote.sector}</TableCell>*/}
         <TableCell align="left">{stock.quote.symbol}</TableCell>
-        <TableCell align="right">{stock.quote.delayedPrice} $</TableCell>
+        <TableCell align="right">{stock.quote.iexRealtimePrice} $</TableCell>
         <TableCell align="right">{stock.quote.marketCap} $</TableCell>
         <TableCell align="right">{stock.quote.week52High} $</TableCell>
         <TableCell align="right">{stock.quote.week52Low} $</TableCell>
@@ -113,10 +113,10 @@ const StockRow = (props) => {
                         </RadioGroup>
                       </TableCell>
                       <TableCell align="left" style={{ verticalAlign: 'middle' }}>
-                        <label style={{ fontSize: '20px' }}> {(size * stock.quote.delayedPrice).toFixed(2)} $</label>
+                        <label style={{ fontSize: '20px' }}> {(size * stock.quote.iexRealtimePrice).toFixed(2)} $</label> {/* al posto di iexRealtimePrice c'era delayedPrice*/}
                       </TableCell>
                       <TableCell align="center" style={{ verticalAlign: 'middle' }}>
-                        <Button variant="success" onClick={() => { (size > 0) ? ((window.confirm('Are you sure?')) ? ((checkCredit(size * stock.quote.delayedPrice)) ? (addOperation(currentUser, document.getElementById("quantity").value, value, stock) && setOpen(!open)) : (alert("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds."))) : alert("Operation aborted!")) : alert("Position size must be a positive number.") }} type="submit"> Confirm</Button>
+                        <Button variant="success" onClick={() => { (size > 0) ? ((window.confirm('Are you sure?')) ? ((checkCredit(size * stock.quote.iexRealtimePrice)) ? (addOperation(currentUser, document.getElementById("quantity").value, value, stock) && setOpen(!open)) : (alert("Ops! You don't have enough funds to proceed. You can top up your funds from the sidebar menu under My account->Add funds."))) : alert("Operation aborted!")) : alert("Position size must be a positive number.") }} type="submit"> Confirm</Button>
                       </TableCell>
                     </TableRow>
                   </TableBody>
